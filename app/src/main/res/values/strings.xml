@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Guiame</string>
+    <string name="action_settings">Configuración</string>
+
+    <string name="dni">Dni</string>
+    <string name="mail">Mail</string>
+    <string name="nombre">Nombre y Apellido</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="repetirContraseña">Repita la contraseña</string>
+    <string name="buscar">Buscar</string>
+
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrarse">Registrarse</string>
+
+    <string name="vista">Vista Rápida</string>
+    <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_pantalla_principal">Principal</string>
+    <string name="title_activity_vista">Vista</string>
+    <string name="title_activity_ingreso">Ingreso</string>
+    <string name="title_activity_lista">Lista</string>
+    <string name="title_activity_post">Post</string>
+    <string name="title_activity_incresoCopia">IngresoCopia</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_mapa">Mapa</string>
+    <string name="title_activity_mapa_v2">Map</string>
+    <string name="title_activity_mapa_v3">MapaV3</string>
+</resources>

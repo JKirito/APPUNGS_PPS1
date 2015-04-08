@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_login">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="80dip"
+        android:textColor="@color/white"
+        android:text="@string/registrarse"
+        android:id="@+id/btnRegistrarse"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/ingresar"
+        android:id="@+id/btnIngresar"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/vista"
+        android:id="@+id/btnVistaRapida"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="Mapa"
+        android:id="@+id/btnMapa"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
