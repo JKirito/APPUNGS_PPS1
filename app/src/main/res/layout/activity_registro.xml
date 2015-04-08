@@ -79,7 +79,6 @@
             android:textColor="@color/input_register"
             android:textColorHint="@color/hint_claro" />
 
-        <!-- Login Button -->
 
         <Button
             android:id="@+id/btnAceptar"

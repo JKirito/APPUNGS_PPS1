@@ -48,7 +48,7 @@ public class Listador
         ArrayList<String> listadoMaterias = obtDatosJSON(result); //Resultado con formato para lista
 
         //TODO: qué hago con el result?
-        Log.d("result post", result+" aaa");
+        Log.d("result post", result);
 
         return listadoMaterias; //Devolvemos lista de materias
     }
@@ -61,7 +61,8 @@ public class Listador
             String texto;
             for (int i=0; i<json.length();i++)
             {
-                texto = json.getJSONObject(i).getString("alias") +" - "+
+                texto = json.getJSONObject(i).getString("alias") +"- Aula: "+
+                        json.getJSONObject(i).getString("numero") +" - "+
                         json.getJSONObject(i).getString("comision") +" - "+
                         json.getJSONObject(i).getString("dia") +" de "+
                         json.getJSONObject(i).getString("horaInicio") +" a "+
