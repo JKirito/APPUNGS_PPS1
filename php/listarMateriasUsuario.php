@@ -7,7 +7,7 @@
 	
 	mysql_query("SET CHARACTER SET utf8");
 	mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
-	$sql = mysql_query("SELECT m.alias, c.comision, h.dia, h.horaInicio, h.horaFin, p.nombre  
+	$sql = mysql_query("SELECT m.alias, a.numero, c.comision, h.dia, h.horaInicio, h.horaFin, p.nombre  
 	FROM materias_registradas mr
 	JOIN cursos c 
 	ON c.id = mr.id_cursos 
@@ -23,6 +23,8 @@
 	ON p.id = cp.id_profesores
 	JOIN usuarios u
 	ON u.id = mr.id_usuarios
+	JOIN aulas a
+	ON a.id = c.id_aulas
 	WHERE u.dni=$dni");
 
 
