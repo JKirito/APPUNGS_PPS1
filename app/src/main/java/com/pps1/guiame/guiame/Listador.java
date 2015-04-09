@@ -15,7 +15,6 @@ import java.util.Map;
 public class Listador
 {
     private String dni;
-    ArrayAdapter<String> adaptador;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
     private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php";
 
