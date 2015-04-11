@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -64,13 +65,13 @@ public class Ingreso extends ActionBarActivity
                                 return;
                             }
 
-                            Bundle bundle = new Bundle();
-                            bundle.putString("dni", txtDni.getText().toString());
-
-                            Intent intent = new Intent(getApplicationContext(), ListaMateriasUsuario.class);
-                            intent.putExtras(bundle);
+                            Listador listador = new Listador(txtDni.getText().toString());
+                            final ArrayList<String> materias = listador.getListadoMateriasUsuario();
+                            Bundle bundleMaterias = new Bundle();
+                            bundleMaterias.putSerializable("Materias", materias);
+                            Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
+                            intent.putExtras(bundleMaterias);
                             startActivity(intent);
-
                         }
                         catch (Exception e)
                         {

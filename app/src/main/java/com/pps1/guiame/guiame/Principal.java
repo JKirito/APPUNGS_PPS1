@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class Principal extends Activity
 {
     private Button btnRegistrarse;
@@ -49,10 +51,21 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                //Creamos el Intent
-                Intent intent =
-                        new Intent(Principal.this, ListaMaterias.class);
-                startActivity(intent);
+                Thread tr = new Thread()
+                {
+                    @Override
+                    public void run(){
+                        Listador listador = new Listador();
+                        ArrayList<String> materias = listador.getListadoMaterias();
+                        Bundle bundleMaterias = new Bundle();
+                        bundleMaterias.putSerializable("Materias", materias);
+                        //Creamos el Intent
+                        Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
+                        intent.putExtras(bundleMaterias);
+                        startActivity(intent);
+                    }
+                };
+                tr.start();
             }
         });
         btnMapa.setOnClickListener(new View.OnClickListener()
