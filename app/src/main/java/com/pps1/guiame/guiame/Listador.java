@@ -47,7 +47,7 @@ public class Listador
         ArrayList<String> listadoMaterias = obtDatosJSON(result); //Resultado con formato para lista
 
         //TODO: qué hago con el result?
-        Log.d("result post", result);
+        Log.d("result post", result == null ? "null :(": result);
 
         return listadoMaterias; //Devolvemos lista de materias
     }

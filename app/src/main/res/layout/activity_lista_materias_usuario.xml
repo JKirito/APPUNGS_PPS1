@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".ListadoActivity" >
+    tools:context=".ListadoActivity">
 
     <EditText
         android:id="@+id/searchBox"
@@ -24,7 +24,7 @@
         android:id="@+id/listaMaterias"
         android:background="@color/bg_login"
         android:choiceMode="singleChoice"
-        android:listSelector="#003366"
+        android:listSelector="@color/azul"
         android:layout_width="wrap_content"
         android:layout_height="434dp">
     </ListView>

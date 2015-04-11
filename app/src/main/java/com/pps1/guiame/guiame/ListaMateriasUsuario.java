@@ -29,15 +29,13 @@ public class ListaMateriasUsuario extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_materias_usuario);
+        setContentView(R.layout.activity_lista_materias);
         Thread tr = new Thread()
         {
             @Override
             public void run(){
-                String dni = getIntent().getExtras().get("dni") != null ? getIntent().getExtras().get("dni").toString() : "";
+                final ArrayList<String> materias = (ArrayList<String>) getIntent().getExtras().get("Materias");
                 getIntent().getExtras().clear();
-                Listador listador = new Listador(dni);
-                final ArrayList<String> materias = listador.getListadoMateriasUsuario();
                 runOnUiThread(
                         new Runnable() {
                             @Override
