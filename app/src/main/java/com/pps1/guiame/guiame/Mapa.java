@@ -45,7 +45,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
 
         //Agrego marcador en el aula
         mapa.addMarker(new MarkerOptions().position(latLngAula)
-                .title("AULA "+aula.getNumAula())
+                .title("AULA "+aula.getNumAula() + "\n" + Utils.ubicacionAula(aula.getNumAula()))
                 .icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 

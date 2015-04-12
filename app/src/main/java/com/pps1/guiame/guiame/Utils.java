@@ -77,4 +77,36 @@ public class Utils
 
         return resultado;
     }
+
+    public static String ubicacionAula(String aula)
+    {
+        String ubicacion = "";
+        Boolean numAsignado= false;
+        int i = 1; //No es la posicion sino el entero
+        while(!numAsignado)
+        {
+            if(aula.startsWith(String.valueOf(i))) //Si el aula empieza con el numero... (1 al 7)
+            {
+                ubicacion = "Modulo " + i;
+                numAsignado = true;
+            }
+            i++;
+        }
+
+        if(aula.charAt(1) == '0')
+        {
+            ubicacion+= " en planta baja";
+        }
+        else if(aula.charAt(1) == '1')
+        {
+            ubicacion+= " en el primer piso";
+        }
+        else
+        {
+            ubicacion += " en el segundo piso";
+        }
+
+        return ubicacion;
+    }
 }
+

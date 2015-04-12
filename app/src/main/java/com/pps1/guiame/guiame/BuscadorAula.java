@@ -29,7 +29,8 @@ public class BuscadorAula{
      * geográficas de esa aula
      * @param itemSeleccionado
      */
-    public BuscadorAula(String itemSeleccionado) {
+    public BuscadorAula(String itemSeleccionado)
+    {
         this.numAula = obtenerAula(itemSeleccionado);
         String[] coordenada = obtenerCoordenada();
         if(coordenada.length == 2)
@@ -106,5 +107,10 @@ public class BuscadorAula{
             Log.d("EXCEP obtDatJSONBusAula", e+"");
         }
         return coordenadas;
+    }
+
+    public String getNumAula()
+    {
+        return this.numAula;
     }
 }
