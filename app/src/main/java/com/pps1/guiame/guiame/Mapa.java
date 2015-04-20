@@ -74,7 +74,6 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     {
         mapa.addMarker(new MarkerOptions().position(new LatLng(mapa.getCameraPosition().target.latitude,
         mapa.getCameraPosition().target.longitude)));
-
     }
 
     @Override
