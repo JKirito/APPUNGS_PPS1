@@ -13,7 +13,6 @@ public class Principal extends Activity
     private Button btnRegistrarse;
     private Button btnIngresar;
     private Button btnVistaRapida;
-    private Button btnMapa;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -22,7 +21,6 @@ public class Principal extends Activity
         btnRegistrarse = (Button)findViewById(R.id.btnRegistrarse);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         btnVistaRapida = (Button)findViewById(R.id.btnVistaRapida );
-        btnMapa = (Button)findViewById(R.id.btnMapa);
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener()
         {
@@ -66,17 +64,6 @@ public class Principal extends Activity
                     }
                 };
                 tr.start();
-            }
-        });
-        btnMapa.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Creamos el Intent
-                Intent intent =
-                        new Intent(Principal.this, Mapa.class);
-                startActivity(intent);
             }
         });
     }
