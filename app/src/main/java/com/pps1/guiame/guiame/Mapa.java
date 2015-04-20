@@ -79,8 +79,8 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     @Override
     public void onMapClick(LatLng puntoPulsado)
     {
-        mapa.addMarker(new MarkerOptions().position(puntoPulsado).
+       /* mapa.addMarker(new MarkerOptions().position(puntoPulsado).
                 icon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));*/
     }
 }
