@@ -25,7 +25,13 @@ import java.util.Map;
 public class Utils
 {
 
-    private static final String URL = "http://10.0.2.2/guiame/";
+    // IP localhost
+    //private static final String URL = "http://10.0.2.2/guiame/";
+    // ip Agus
+    //private static final String URL = "http://181.192.48.34/guiame/";
+
+    //IP hostinger
+    private static final String URL = "http://pps1ungs.esy.es/guiame/";
 
     public static String getPHPResult(String phpName)
     {
