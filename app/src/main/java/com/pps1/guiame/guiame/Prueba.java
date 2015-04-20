@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pps1.guiame.guiame.entities.Aula;
+
 
 public class Prueba extends ActionBarActivity
 {
@@ -17,9 +19,11 @@ public class Prueba extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prueba);
-        elemento = getIntent().getExtras().getString("elementoSeleccionado");
+        Aula aula = (Aula) getIntent().getSerializableExtra("Aula");
+       // elemento = getIntent().getExtras().getString("Aula");
         //elementoAMostrar.findViewById(R.id.txtPrueba);
         TextView elementoAMostrar = (TextView) findViewById(R.id.txtPrueba);
-        elementoAMostrar.setText(elemento);
+
+        elementoAMostrar.setText("AULA "+aula.getNumAula() + "\n" + Utils.ubicacionAula(aula.getNumAula()));
     }
 }

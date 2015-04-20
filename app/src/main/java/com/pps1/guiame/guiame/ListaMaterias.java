@@ -1,6 +1,7 @@
 package com.pps1.guiame.guiame;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 public class ListaMaterias extends Activity
 {
     private ListView listaMaterias;
+    private ProgressDialog pDialog;
     ArrayAdapter<String> adaptador;
     EditText searchBox;
 
@@ -69,6 +71,17 @@ public class ListaMaterias extends Activity
         });
     }
 
+   // @Override
+    protected void onPreExecute()
+    {
+       // super.onPreExecute();
+        pDialog = new ProgressDialog(ListaMaterias.this);
+        pDialog.setMessage("Attempting for login...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(true);
+        pDialog.show();
+    }
+
     public void getSelected(View view)
     {
         int posicion = listaMaterias.getCheckedItemPosition(); //Devuelve la posición del item seleccionado
@@ -84,10 +97,12 @@ public class ListaMaterias extends Activity
             Thread tr = new Thread()
             {
                 @Override
-                public void run(){
+                public void run()
+                {
                     BuscadorAula buscadorAula = new BuscadorAula(itemSeleccionado);
 
-                       if(buscadorAula.getAula() == null) {
+                       if(buscadorAula.getAula() == null)
+                       {
                            runOnUiThread(
                                    new Runnable() {
                                        @Override
@@ -105,6 +120,8 @@ public class ListaMaterias extends Activity
                     Intent intent = new Intent(getApplicationContext(), Mapa.class);
                     intent.putExtras(bundleBuscAula);
                     startActivity(intent);
+
+
                 }
             };
             tr.start();

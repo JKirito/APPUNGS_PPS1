@@ -70,10 +70,15 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!--key release-->
+        <!--<meta-data-->
+            <!--android:name="com.google.android.maps.v2.API_KEY"-->
+            <!--android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />-->
+
+        <!--key debug-->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC1-ANEqeuuVDZdLhRZi33YKpsgz6lGFJQ" />
-
+            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
         <activity
             android:name=".Prueba"
             android:label="@string/title_activity_prueba" >
