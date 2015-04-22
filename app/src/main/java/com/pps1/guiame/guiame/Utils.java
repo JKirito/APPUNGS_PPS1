@@ -26,7 +26,7 @@ public class Utils
 {
 
     // IP localhost
-    //private static final String URL = "http://10.0.2.2/guiame/";
+   // private static final String URL = "http://10.0.2.2/guiame/";
     // ip Agus
     // private static final String URL = "http://181.16.65.149/guiame/";
 

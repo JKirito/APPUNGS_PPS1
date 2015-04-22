@@ -64,7 +64,7 @@ public class Ingreso extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         errores.get(0), Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss(); //Cierra el dialog()
+                                                dialog.dismiss();
                                             }
                                         });
 
