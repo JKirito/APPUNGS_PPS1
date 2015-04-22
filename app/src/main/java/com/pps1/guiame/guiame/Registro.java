@@ -78,6 +78,7 @@ public class Registro extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         todosErrores.toString(), Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss(); //Cierra el dialog
                                             }
                                         });
 
@@ -88,6 +89,7 @@ public class Registro extends ActionBarActivity
 
                             Intent intent = new Intent(Registro.this, Ingreso.class);
                             startActivity(intent);
+                            dialog.dismiss(); //Cierra el dialog
                         }
                         catch (Exception e)
                         {
