@@ -23,6 +23,7 @@ public class Registrador
     private final String MSJ_NOM_APELLINVALIDO = "Nombre y Apellido inválido";
     private final String MSJ_NOM_APELL_CORTO = "Nombre y Apellido demasiado corto";
     private final String MSJ_DNI_INVALIDO = "DNI invalido";
+    private final String MSJ_DNI_INVALIDO_SOLONUM = "El DNI sólo puede contener números";
     private final String MSJ_MAIL_INVALIDO = "Mail invalido";
     private final String MSJ_PASS_CORTA = "La contraseña debe tener al menos 4 caracteres";
     private final String MSJ_PASS_NULL = "Debe ingresar la contraseña";
@@ -57,13 +58,16 @@ public class Registrador
         {
             errores.add(MSJ_DNI_INVALIDO);
         }
-        if(this.mail == null){
+
+        try {
+            new Integer(dni);
+        } catch (Exception e) {
+            errores.add(MSJ_DNI_INVALIDO_SOLONUM);
+        }
+
+        if(this.mail == null || !MailValidator.validateEmail(this.mail))
+        {
             errores.add(MSJ_MAIL_INVALIDO);
-        }else{
-            if(!MailValidator.validateEmail(this.mail))
-            {
-                errores.add(MSJ_MAIL_INVALIDO);
-            }
         }
 
         if(this.pass == null)
