@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -50,6 +51,12 @@ public class ListaMaterias extends Activity
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3)
             {
+                if(adaptador == null){
+                    return;
+                }
+                Log.d("adapter","adaptador"+adaptador);
+                Log.d("adapter","adaptadorFiltro"+adaptador.getFilter());
+
                 // When user changed the Text
                 ListaMaterias.this.adaptador.getFilter().filter(cs);
             }
@@ -139,5 +146,12 @@ public class ListaMaterias extends Activity
         adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
         listaMaterias = (ListView) findViewById(R.id.listaMaterias);
         listaMaterias.setAdapter(adaptador);
+    }
+
+    @Override
+    protected void onResume() {
+        ArrayAdapter<String> a = adaptador;
+        super.onResume();
+        adaptador = a;
     }
 }

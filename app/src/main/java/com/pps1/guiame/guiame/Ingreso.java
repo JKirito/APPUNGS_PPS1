@@ -45,8 +45,7 @@ public class Ingreso extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                dialog.setTitle("Actualizando");
-                dialog.setMessage("Actualizando datos, por favor espere");
+                dialog.setMessage("Verificando usuario...");
                 dialog.show();
                 final Ingresador ingresador = new Ingresador(txtDni.getText().toString(), txtContraseña.getText().toString());
                 Thread thread = new Thread(new Runnable(){
@@ -65,6 +64,7 @@ public class Ingreso extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         errores.get(0), Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss(); //Cierra el dialog()
                                             }
                                         });
 
