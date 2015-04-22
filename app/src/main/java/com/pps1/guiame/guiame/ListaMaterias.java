@@ -18,7 +18,6 @@ import android.widget.Toast;
 public class ListaMaterias extends Activity
 {
     private ListView listaMaterias;
-    private ProgressDialog pDialog;
     ArrayAdapter<String> adaptador;
     EditText searchBox;
 
@@ -71,16 +70,7 @@ public class ListaMaterias extends Activity
         });
     }
 
-   // @Override
-    protected void onPreExecute()
-    {
-       // super.onPreExecute();
-        pDialog = new ProgressDialog(ListaMaterias.this);
-        pDialog.setMessage("Attempting for login...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
-    }
+
 
     public void getSelected(View view)
     {
@@ -128,6 +118,21 @@ public class ListaMaterias extends Activity
         }
     }
 
+  /*  protected void onPostExecute(String message)
+    {
+        pDialog.dismiss();
+    }
+
+    // @Override
+    protected void onPreExecute()
+    {
+        super.onPreExecute();
+        pDialog = new ProgressDialog(ListaMaterias.this);
+        pDialog.setMessage("Attempting for login...");
+        pDialog.setIndeterminate(false);
+        pDialog.setCancelable(true);
+        pDialog.show();
+    }*/
     //Esto tambien deberia ir a Listador pero no se puede pasar el ListView
     public void mostrarItems(ArrayList<String> datos)
     {
