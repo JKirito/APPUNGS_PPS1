@@ -86,6 +86,10 @@ public class Utils
 
     public static String ubicacionAula(String aula)
     {
+        if(aula == null || aula.isEmpty()){
+            return "Numero aula no disponible";
+        }
+
         String ubicacion = "";
         Boolean numAsignado= false;
         int i = 1; //No es la posicion sino el entero
@@ -107,9 +111,13 @@ public class Utils
         {
             ubicacion+= " en el primer piso";
         }
-        else
+        else if(aula.charAt(1) == '2')
         {
             ubicacion += " en el segundo piso";
+        }
+        //Si no tiene número, asumo que es una del estilo "oficina docente"
+        else if(Character.isLetter(aula.charAt(0))){
+            ubicacion = aula;
         }
 
         return ubicacion;
