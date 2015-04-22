@@ -4,6 +4,7 @@ package com.pps1.guiame.guiame;
  * Created by Agustina on 25/03/2015.
  */
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,6 +24,7 @@ public class Ingreso extends ActionBarActivity
     private EditText txtContraseña;
     private Button btnAceptar;
     private Button btnCancelar;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,6 +37,7 @@ public class Ingreso extends ActionBarActivity
         txtContraseña = (EditText)findViewById(R.id.txtContraseña);
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
+        dialog = new ProgressDialog(this);
 
         //Implementamos el evento “click” del botón
         btnAceptar.setOnClickListener(new View.OnClickListener()
@@ -42,6 +45,9 @@ public class Ingreso extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                dialog.setTitle("Actualizando");
+                dialog.setMessage("Actualizando datos, por favor espere");
+                dialog.show();
                 final Ingresador ingresador = new Ingresador(txtDni.getText().toString(), txtContraseña.getText().toString());
                 Thread thread = new Thread(new Runnable(){
                     @Override
@@ -72,6 +78,7 @@ public class Ingreso extends ActionBarActivity
                             Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
+                            dialog.dismiss(); //Cierra el dialog
                         }
                         catch (Exception e)
                         {
