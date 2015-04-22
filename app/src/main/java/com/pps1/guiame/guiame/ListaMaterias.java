@@ -29,6 +29,7 @@ public class ListaMaterias extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_materias);
+        dialog = new ProgressDialog(this);
 
         Thread tr = new Thread()
         {
