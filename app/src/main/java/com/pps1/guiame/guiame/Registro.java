@@ -93,4 +93,16 @@ public class Registro extends ActionBarActivity
             }
         });
     }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+
+        nombreApellido.setText("");
+        dni.setText("");
+        mail.setText("");
+        pass.setText("");
+        pass2.setText("");
+    }
 }
