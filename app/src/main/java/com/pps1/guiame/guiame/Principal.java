@@ -52,8 +52,7 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                dialog.setTitle("Actualizando");
-                dialog.setMessage("Actualizando datos, por favor espere");
+                dialog.setMessage("Actualizando datos...");
                 dialog.show();
                 Thread tr = new Thread()
                 {
