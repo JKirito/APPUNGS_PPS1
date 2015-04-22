@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,6 +20,7 @@ public class Registro extends ActionBarActivity
     private EditText mail;
     private EditText pass;
     private EditText pass2;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +35,8 @@ public class Registro extends ActionBarActivity
 
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
+
+        dialog = new ProgressDialog(this);
 
         btnCancelar.setOnClickListener(new View.OnClickListener()
         {
@@ -52,6 +56,8 @@ public class Registro extends ActionBarActivity
             public void onClick(View v)
             {
                 final Registrador registrador = new Registrador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
+                dialog.setMessage("Registrando usuario...");
+                dialog.show();
                 Thread thread = new Thread(new Runnable(){
                     @Override
                     public void run()
