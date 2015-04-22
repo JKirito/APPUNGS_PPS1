@@ -53,6 +53,10 @@ public class Ingresador extends ActionBarActivity
     public List<String> ingresarUsuario()
     {
         List<String> errores = this.validarDatos();
+        if(errores.size() > 0){
+            return errores;
+        }
+
         Boolean isUsuarioValido = this.validarUsuario();
         if(!isUsuarioValido)
             errores.add("Usuario inválido. Revise sus datos");
