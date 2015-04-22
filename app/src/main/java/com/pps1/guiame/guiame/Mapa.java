@@ -32,7 +32,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         mapa = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
         mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE); //tipo de mapa, elegido: satelital
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UNGS,19)); //se ubica en el mapa segun UNGS con zoom de 19. min=2 max=21
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UNGS,17)); //se ubica en el mapa segun UNGS con zoom de 19. min=2 max=21
         mapa.setMyLocationEnabled(true); //visualizacion de la posicion con un triangulo azul
         mapa.getUiSettings().setZoomControlsEnabled(true); //configurar las acciones del interfaz de usuario
         mapa.getUiSettings().setCompassEnabled(true);
@@ -40,7 +40,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         mapa.addMarker(new MarkerOptions()
                 .position(UNGS)
                 .title("UNGS")
-                .snippet("UNGS")
+                .snippet("Entrada Principal")
                 .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ungs)).anchor(0.5f, 0.5f));
 
         //Agrego marcador en el aula
@@ -52,29 +52,28 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
                 .showInfoWindow();
 
 
-
         mapa.setOnMapClickListener(this); //escucha pulsaciones en la pantalla
     }
 
     public void moveCamera(View view)
     {
         //mapa.moveCamera(CameraUpdateFactory.newLatLng(UNGS));
-        //se ubica en el mapa segun UNGS con zoom de 10. min=2 max=21
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UNGS,18));
+        //se ubica en el mapa segun UNGS con zoom de 17. min=2 max=21
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UNGS,17));
     }
 
-    public void animateCamera(View view)
+    /* public void animateCamera(View view)
     {
         if (mapa.getMyLocation() != null)
             mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(
                     new LatLng( mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 15));
-    }
+    } */
 
-    public void addMarker(View view)
+    /* public void addMarker(View view)
     {
         mapa.addMarker(new MarkerOptions().position(new LatLng(mapa.getCameraPosition().target.latitude,
         mapa.getCameraPosition().target.longitude)));
-    }
+    } */
 
     @Override
     public void onMapClick(LatLng puntoPulsado)

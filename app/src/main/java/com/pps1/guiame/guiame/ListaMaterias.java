@@ -1,6 +1,7 @@
 package com.pps1.guiame.guiame;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class ListaMaterias extends Activity
     private ListView listaMaterias;
     ArrayAdapter<String> adaptador;
     EditText searchBox;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -90,7 +92,8 @@ public class ListaMaterias extends Activity
         else
         {
             final String itemSeleccionado = listaMaterias.getItemAtPosition(posicion).toString();
-
+            dialog.setMessage("Buscando Aula...");
+            dialog.show();
             Thread tr = new Thread()
             {
                 @Override
@@ -106,6 +109,7 @@ public class ListaMaterias extends Activity
                                        public void run() {
                                            Toast.makeText(getApplicationContext(),
                                                    "No se ha podido localizar el aula =(", Toast.LENGTH_SHORT).show();
+                                           dialog.dismiss();
                                        }
                                    });
                            return;
@@ -117,8 +121,7 @@ public class ListaMaterias extends Activity
                     Intent intent = new Intent(getApplicationContext(), Mapa.class);
                     intent.putExtras(bundleBuscAula);
                     startActivity(intent);
-
-
+                    dialog.dismiss();
                 }
             };
             tr.start();
