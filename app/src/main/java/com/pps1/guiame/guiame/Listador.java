@@ -34,8 +34,8 @@ public class Listador
 
         String result = Utils.enviarPost(datos, PHP_NAME_LISTADOR);
         ArrayList<String> listadoMaterias = obtDatosJSON(result);
-        //TODO: qué hago con el result?
-        Log.d("result post", result);
+
+        Log.d("resultPostListadoMatUS", result);
 
         return listadoMaterias;
     }
@@ -47,7 +47,7 @@ public class Listador
         ArrayList<String> listadoMaterias = obtDatosJSON(result); //Resultado con formato para lista
 
         //TODO: qué hago con el result?
-        Log.d("result post", result == null ? "null :(": result);
+        Log.d("resultPostListadoMat", result == null ? "null :(": result);
 
         return listadoMaterias; //Devolvemos lista de materias
     }

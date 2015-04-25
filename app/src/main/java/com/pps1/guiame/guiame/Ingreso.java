@@ -8,12 +8,15 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -47,7 +50,10 @@ public class Ingreso extends ActionBarActivity
             {
                 dialog.setMessage("Verificando usuario...");
                 dialog.show();
-                final Ingresador ingresador = new Ingresador(txtDni.getText().toString(), txtContraseña.getText().toString());
+
+                final String dni = txtDni.getText().toString();
+                final String pass = txtContraseña.getText().toString();
+                final Ingresador ingresador = new Ingresador(dni, pass);
                 Thread thread = new Thread(new Runnable(){
                     @Override
                     public void run()
@@ -64,12 +70,17 @@ public class Ingreso extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         errores.get(0), Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss(); //Cierra el dialog()
+                                                dialog.dismiss(); //Cierra el dialog
                                             }
                                         });
 
                                 return;
                             }
+
+                            // Guardo el user y pass
+                            SessionManager.setUser(dni);
+                            SessionManager.setPassword(pass);
+                            SessionManager.setInitSession(new Date());
 
                             Listador listador = new Listador(txtDni.getText().toString());
                             final ArrayList<String> materias = listador.getListadoMateriasUsuario();
@@ -96,8 +107,7 @@ public class Ingreso extends ActionBarActivity
             public void onClick(View v)
             {
                 //Creamos el Intent
-                Intent intent =
-                        new Intent(Ingreso.this, Principal.class);
+                Intent intent = new Intent(Ingreso.this, Principal.class);
                 startActivity(intent);
             }
         });
