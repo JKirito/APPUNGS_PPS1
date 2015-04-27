@@ -34,8 +34,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:configChanges="orientation|keyboardHidden|screenSize"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -61,10 +61,6 @@
             android:label="@string/title_activity_lista" >
         </activity>
         <activity
-            android:name=".ListaMateriasUsuario"
-            android:label="@string/title_activity_lista" >
-        </activity>
-        <activity
             android:name=".Mapa"
             android:label="@string/title_activity_mapa" >
         </activity>
@@ -75,6 +71,7 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyC1-ANEqeuuVDZdLhRZi33YKpsgz6lGFJQ" />
+
     </application>
 
 </manifest>
