@@ -16,6 +16,7 @@ public class Principal extends Activity
     private Button btnRegistrarse;
     private Button btnIngresar;
     private Button btnVistaRapida;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

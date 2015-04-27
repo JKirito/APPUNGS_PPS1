@@ -1,7 +1,7 @@
 package com.pps1.guiame.guiame;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,7 +12,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pps1.guiame.guiame.entities.Aula;
 
-//TUTORIAL: http://www.androidcurso.com/index.php/tutoriales-android-fundamentos/41-unidad-7-seguridad-y-posicionamiento/223-google-maps-api-v2
 public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListener
 {
     private final LatLng UNGS = new LatLng(-34.521712, -58.701063);

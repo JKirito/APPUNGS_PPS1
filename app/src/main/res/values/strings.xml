@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Guiame</string>
-    <string name="action_settings">Configuración</string>
+    <string name="Logout">Salir</string>
+    <string name="IniciarSesion">Iniciar Sesión</string>
 
     <string name="dni">Dni</string>
     <string name="mail">Mail</string>
@@ -15,16 +16,11 @@
     <string name="registrarse">Registrarse</string>
 
     <string name="vista">Vista Rápida</string>
-    <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_registro">Registrar cuenta</string>
     <string name="title_activity_pantalla_principal">Principal</string>
     <string name="title_activity_vista">Vista</string>
-    <string name="title_activity_ingreso">Ingreso</string>
-    <string name="title_activity_lista">Lista</string>
-    <string name="title_activity_post">Post</string>
-    <string name="title_activity_incresoCopia">IngresoCopia</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_ingreso">Ingresar cuenta</string>
+    <string name="title_activity_lista">Bienvenido!</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_mapa">Mapa</string>
-    <string name="title_activity_prueba">Prueba</string>
 </resources>

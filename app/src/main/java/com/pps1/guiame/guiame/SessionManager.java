@@ -1,12 +1,9 @@
 package com.pps1.guiame.guiame;
 
-import java.security.Timestamp;
 import java.util.Date;
 
-/**
- * Created by javi on 25/04/15.
- */
-public class SessionManager {
+public class SessionManager
+{
 
     private static String user;
     private static String password;
@@ -58,6 +55,15 @@ public class SessionManager {
     {
         user = null;
         password = null;
+    }
+
+    public static boolean isUserOn()
+    {
+        if(user != null && password != null)
+        {
+            return true;
+        }
+        return false;
     }
 
 }
