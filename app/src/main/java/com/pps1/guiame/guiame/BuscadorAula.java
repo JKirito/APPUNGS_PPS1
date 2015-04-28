@@ -6,15 +6,11 @@ import com.pps1.guiame.guiame.entities.Aula;
 
 import org.json.JSONArray;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by javi on 11/04/15.
- */
-public class BuscadorAula{
+public class BuscadorAula
+{
 
     private Aula aula;
     private String numAula;
@@ -76,7 +72,8 @@ public class BuscadorAula{
      * @return array con latitud en primera posicion y longitud en segunda posicion o array vacío
      * si no encuentra nada
      */
-    private String[] obtenerCoordenada() {
+    private String[] obtenerCoordenada()
+    {
         Map<String, String> data = new HashMap<String, String>();
         data.put("aula", this.numAula);
 

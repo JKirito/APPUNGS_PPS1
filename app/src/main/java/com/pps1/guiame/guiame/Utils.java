@@ -19,14 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by javi on 25/03/15.
- */
 public class Utils
 {
 
     // IP localhost
-    //private static final String URL = "http://10.0.2.2/guiame/";
+   // private static final String URL = "http://10.0.2.2/guiame/";
     // ip Agus
     // private static final String URL = "http://181.16.65.149/guiame/";
 

@@ -1,7 +1,6 @@
 package com.pps1.guiame.guiame;
 
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import org.json.JSONArray;
 
@@ -9,9 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Agustina on 30/03/2015.
- */
 public class Listador
 {
     private String dni;

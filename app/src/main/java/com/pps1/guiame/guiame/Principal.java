@@ -16,6 +16,7 @@ public class Principal extends Activity
     private Button btnRegistrarse;
     private Button btnIngresar;
     private Button btnVistaRapida;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -86,7 +87,8 @@ public class Principal extends Activity
                 Thread tr = new Thread()
                 {
                     @Override
-                    public void run(){
+                    public void run()
+                    {
                         Listador listador = new Listador();
                         ArrayList<String> materias = listador.getListadoMaterias();
                         Bundle bundleMaterias = new Bundle();

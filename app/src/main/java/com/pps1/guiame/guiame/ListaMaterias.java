@@ -1,10 +1,10 @@
 package com.pps1.guiame.guiame;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,12 +14,12 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import java.util.ArrayList;
-
 import android.widget.Toast;
 
+import java.util.ArrayList;
 
-public class ListaMaterias extends Activity
+
+public class ListaMaterias extends ActionBarActivity
 {
     private ListView listaMaterias;
     ArrayAdapter<String> adaptador;
@@ -83,24 +83,42 @@ public class ListaMaterias extends Activity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.menu_lista, menu);
+        //Verificamos si el usuario está logeado
+        if(SessionManager.isUserOn())
+        {
+            menu.getItem(0).setVisible(false); //Si el usuario está logeado, desactivar la opción de Iniciar sesión
+        }
+        else
+        {
+            menu.getItem(1).setVisible(false); //Si el usuario no está logeado, desactivar la opción de Salir
+        }
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        //Si se elige Salir, mandamos al usuario a la pantalla principal
+        if (id == R.id.Logout)
+        {
+            SessionManager.logout();
+            Toast.makeText(this, "Usuario Deslogeado", Toast.LENGTH_SHORT).show();
+            Intent intent =
+                    new Intent(ListaMaterias.this, Principal.class);
+            startActivity(intent);
         }
-
+        else if(id == R.id.IniciarSesion)
+        {
+            //Si se elige iniciar sesión, mandamos al usuario a Ingreso para que ponga su cuenta
+            Intent intent =
+                    new Intent(ListaMaterias.this, Ingreso.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -151,21 +169,6 @@ public class ListaMaterias extends Activity
         }
     }
 
-  /*  protected void onPostExecute(String message)
-    {
-        pDialog.dismiss();
-    }
-
-    // @Override
-    protected void onPreExecute()
-    {
-        super.onPreExecute();
-        pDialog = new ProgressDialog(ListaMaterias.this);
-        pDialog.setMessage("Attempting for login...");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
-    }*/
     //Esto tambien deberia ir a Listador pero no se puede pasar el ListView
     public void mostrarItems(ArrayList<String> datos)
     {
@@ -175,7 +178,8 @@ public class ListaMaterias extends Activity
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         ArrayAdapter<String> a = adaptador;
         super.onResume();
         adaptador = a;
