@@ -71,11 +71,6 @@ public class Ingreso extends ActionBarActivity
                                 return;
                             }
 
-                            // Guardo el user y pass
-                            SessionManager.setUser(dni);
-                            SessionManager.setPassword(pass);
-                            SessionManager.setInitSession(new Date());
-
                             Listador listador = new Listador(txtDni.getText().toString());
                             final ArrayList<String> materias = listador.getListadoMateriasUsuario();
                             Bundle bundleMaterias = new Bundle();
