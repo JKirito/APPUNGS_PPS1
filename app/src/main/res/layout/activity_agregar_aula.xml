@@ -29,8 +29,7 @@
             android:layout_marginTop="10dip"
             android:textColor="@color/white"
             android:text="@string/AgregarAula"
-            android:id="@+id/btnLocalizar"
-            android:onClick="localizarAula"/>
+            android:id="@+id/btnAgregar"/>
     </LinearLayout>
 
 

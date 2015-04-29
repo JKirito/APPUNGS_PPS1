@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Utils  extends ActionBarActivity
+public class Utils
 {
 
     // IP localhost

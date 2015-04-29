@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Guiame</string>
-    <string name="Logout">Salir</string>
+    <string name="Salir">Salir</string>
     <string name="IniciarSesion">Iniciar Sesión</string>
     <string name="AgregarAula">Agregar Aula</string>
 
@@ -23,7 +23,7 @@
     <string name="title_activity_ingreso">Ingresar cuenta</string>
     <string name="title_activity_lista">Bienvenid@</string>
     <string name="title_activity_mapa">Mapa</string>
-    <string name="title_activity_localizar">Localizar</string>
+    <string name="title_activity_agregar_aula">Agregar aula</string>
     <string name="title_activity_registro">Registro de cuenta</string>
 
 </resources>

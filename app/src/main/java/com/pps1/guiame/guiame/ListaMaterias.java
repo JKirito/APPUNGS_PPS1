@@ -83,41 +83,51 @@ public class ListaMaterias extends ActionBarActivity
         });
     }
 
+    /*
+     * Si el usuario está logeado, desactivamos las opciones de Iniciar sesión y Registrarse del menu
+     * Si el usuario no está logeado, desactivar la opción de Salir
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_lista, menu);
-        //Verificamos si el usuario está logeado
         if(SessionManager.isUserOn())
         {
-            menu.getItem(0).setVisible(false); //Si el usuario está logeado, desactivar la opción de Iniciar sesión
+            menu.getItem(0).setVisible(false); //Iniciar Sesion
+            menu.getItem(1).setVisible(false); //Registrarse
         }
         else
         {
-            menu.getItem(1).setVisible(false); //Si el usuario no está logeado, desactivar la opción de Salir
+            menu.getItem(2).setVisible(false); //Salir
         }
         return true;
     }
 
+    /* Si se eligió la opción:
+      "IniciarSesion", vamos a Ingreso
+      "Registrarse", vamos a Registro
+      "Salir", cerramos la sesión actual y vuelve a Principal
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         int id = item.getItemId();
 
-        //Si se elige Salir, mandamos al usuario a la pantalla principal
-        if (id == R.id.Logout)
+        if(id == R.id.IniciarSesion)
         {
-            SessionManager.logout();
-            Toast.makeText(this, "Usuario Deslogeado", Toast.LENGTH_SHORT).show();
-            Intent intent =
-                    new Intent(ListaMaterias.this, Principal.class);
+            Intent intent = new Intent(ListaMaterias.this, Ingreso.class);
             startActivity(intent);
         }
-        else if(id == R.id.IniciarSesion)
+        else if(id == R.id.Registrarse)
         {
-            //Si se elige iniciar sesión, mandamos al usuario a Ingreso para que ponga su cuenta
-            Intent intent =
-                    new Intent(ListaMaterias.this, Ingreso.class);
+            Intent intent = new Intent(ListaMaterias.this, Registro.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.Salir)
+        {
+            SessionManager.logout();
+            Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ListaMaterias.this, Principal.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

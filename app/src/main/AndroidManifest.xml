@@ -83,7 +83,7 @@
 
         <activity
             android:name=".AulaAAgregar"
-            android:label="@string/title_activity_localizar" >
+            android:label="@string/title_activity_agregar_aula" >
         </activity>
     </application>
 
