@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame;
+package com.pps1.guiame.guiame.persistencia.dao;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
