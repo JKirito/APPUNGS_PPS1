@@ -1,10 +1,6 @@
 package com.pps1.guiame.guiame;
 
-import com.pps1.guiame.guiame.dao.UsuarioDAO;
-
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class SessionManager
 {
@@ -12,6 +8,7 @@ public class SessionManager
     private static String user;
     private static String nombre;
     private static String password;
+    private static int admin;
     private static Date initSession;
     private static Date finSession;
 
@@ -43,6 +40,14 @@ public class SessionManager
         SessionManager.nombre = nombre;
     }
 
+    public static int getAdmin()
+    {
+        return admin;
+    }
+
+    public static void setAdmin(int admin){
+        SessionManager.admin = admin;}
+
     public static Date getInitSession()
     {
         return initSession;
@@ -68,6 +73,7 @@ public class SessionManager
         user = null;
         password = null;
         nombre = null;
+        admin = 0;
     }
 
     public static boolean isUserOn()
@@ -79,4 +85,10 @@ public class SessionManager
         return false;
     }
 
+    public static Boolean isAdministrador()
+    {
+        if(admin == 1)
+            return true;
+        return false;
+    }
 }

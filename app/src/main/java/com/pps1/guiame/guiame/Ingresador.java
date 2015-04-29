@@ -79,6 +79,7 @@ public class Ingresador extends ActionBarActivity
             String cantidadRegistrados="";
             cantidadRegistrados = json.getJSONObject(0).getString("COUNT(*)");
             String nombre = json.getJSONObject(0).getString("nombre");
+            int admin = json.getJSONObject(0).getInt("admin");
 
            isValido = cantidadRegistrados.toString().equals("1");//Si hay un registrado que tiene ese dni
             Log.d("valido", isValido.toString());
@@ -91,7 +92,8 @@ public class Ingresador extends ActionBarActivity
                 SessionManager.setUser(dni);
                 SessionManager.setPassword(pass);
                 SessionManager.setNombre(nombre);
-                Log.d("nombreeeee", nombre);
+                SessionManager.setAdmin(admin);
+                Log.d("ADMIN",Integer.toString(admin));
             }
         }
         catch (Exception e)

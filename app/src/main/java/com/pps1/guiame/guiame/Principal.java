@@ -16,6 +16,7 @@ public class Principal extends Activity
     private Button btnRegistrarse;
     private Button btnIngresar;
     private Button btnVistaRapida;
+    private Button btnAgregarAula;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,8 +25,10 @@ public class Principal extends Activity
         setContentView(R.layout.activity_pantalla_principal);
         btnRegistrarse = (Button)findViewById(R.id.btnRegistrarse);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
-        btnVistaRapida = (Button)findViewById(R.id.btnVistaRapida );
+        btnVistaRapida = (Button)findViewById(R.id.btnVistaRapida);
+        btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
         dialog = new ProgressDialog(this);
+        habilitarBtnLocalizacion();
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener()
         {
@@ -103,6 +106,32 @@ public class Principal extends Activity
                 tr.start();
             }
         });
-
+        btnAgregarAula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread tr = new Thread() {
+                    @Override
+                    public void run() {
+                        //Creamos el Intent
+                        Intent intent = new Intent(getApplicationContext(), AulaAAgregar.class);
+                        startActivity(intent);
+                    }
+                };
+                tr.start();
+            }
+        });
     }
+
+    private void habilitarBtnLocalizacion()
+    {
+        if(SessionManager.isAdministrador())
+        {
+            btnAgregarAula.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            btnAgregarAula.setVisibility(View.INVISIBLE);
+        }
+    }
+
 }

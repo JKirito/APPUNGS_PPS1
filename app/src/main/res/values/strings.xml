@@ -2,6 +2,7 @@
     <string name="app_name">Guiame</string>
     <string name="Logout">Salir</string>
     <string name="IniciarSesion">Iniciar Sesión</string>
+    <string name="AgregarAula">Agregar Aula</string>
 
     <string name="dni">Dni</string>
     <string name="mail">Mail</string>
@@ -9,18 +10,20 @@
     <string name="contraseña">Contraseña</string>
     <string name="repetirContraseña">Repita la contraseña</string>
     <string name="buscar">Buscar</string>
+    <string name="numeroAula">Número de aula</string>
 
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
-
     <string name="vista">Vista Rápida</string>
-    <string name="title_activity_registro">Registrar cuenta</string>
+
     <string name="title_activity_pantalla_principal">Principal</string>
-    <string name="title_activity_vista">Vista</string>
     <string name="title_activity_ingreso">Ingresar cuenta</string>
     <string name="title_activity_lista">Bienvenid@</string>
-
     <string name="title_activity_mapa">Mapa</string>
+    <string name="title_activity_localizar">Localizar</string>
+    <string name="title_activity_registro">Registro de cuenta</string>
+
 </resources>

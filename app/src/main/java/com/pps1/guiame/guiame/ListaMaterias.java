@@ -1,6 +1,5 @@
 package com.pps1.guiame.guiame;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -151,7 +150,7 @@ public class ListaMaterias extends ActionBarActivity
                                        @Override
                                        public void run() {
                                            Toast.makeText(getApplicationContext(),
-                                                   "No se ha podido localizar el aula =(", Toast.LENGTH_SHORT).show();
+                                                   "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
                                            dialog.dismiss();
                                        }
                                    });

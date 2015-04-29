@@ -35,4 +35,15 @@
         android:id="@+id/btnVistaRapida"
         android:layout_gravity="center_horizontal" />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/AgregarAula"
+        android:id="@+id/btnAgregarAula"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

@@ -81,6 +81,10 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
+        <activity
+            android:name=".AulaAAgregar"
+            android:label="@string/title_activity_localizar" >
+        </activity>
     </application>
 
 </manifest>

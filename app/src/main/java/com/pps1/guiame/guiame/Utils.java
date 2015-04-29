@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame;
 
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Utils
+public class Utils  extends ActionBarActivity
 {
 
     // IP localhost
@@ -113,7 +114,8 @@ public class Utils
             ubicacion += " en el segundo piso";
         }
         //Si no tiene número, asumo que es una del estilo "oficina docente"
-        else if(Character.isLetter(aula.charAt(0))){
+        else if(Character.isLetter(aula.charAt(0)))
+        {
             ubicacion = aula;
         }
 
