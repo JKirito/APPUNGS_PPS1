@@ -35,7 +35,7 @@
     <application
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -68,9 +68,18 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <!-- key release -->
+        <!--
+            <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />
+        -->
+
+
+        <!-- key debug -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC1-ANEqeuuVDZdLhRZi33YKpsgz6lGFJQ" />
+            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
     </application>
 

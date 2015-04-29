@@ -31,6 +31,8 @@ public class ListaMaterias extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_materias);
+        String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
+        setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
         dialog = new ProgressDialog(this);
 
         Thread tr = new Thread()

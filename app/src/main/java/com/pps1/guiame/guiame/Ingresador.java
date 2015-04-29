@@ -6,6 +6,7 @@ import android.util.Log;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,14 +78,20 @@ public class Ingresador extends ActionBarActivity
             JSONArray json= new JSONArray(response);
             String cantidadRegistrados="";
             cantidadRegistrados = json.getJSONObject(0).getString("COUNT(*)");
+            String nombre = json.getJSONObject(0).getString("nombre");
 
-            if( cantidadRegistrados.toString().equals("1"))//Si hay un registrado que tiene ese dni
-            {                                               //y contraseña, entonces es valido
-                isValido = true;
-            }
-            else
+           isValido = cantidadRegistrados.toString().equals("1");//Si hay un registrado que tiene ese dni
+            Log.d("valido", isValido.toString());
+
+            if(isValido)
             {
-                isValido = false;
+                nombre = nombre != null ? nombre.split(" ")[0] : "";
+                // Guardo datos en sessionManager
+                SessionManager.setInitSession(new Date());
+                SessionManager.setUser(dni);
+                SessionManager.setPassword(pass);
+                SessionManager.setNombre(nombre);
+                Log.d("nombreeeee", nombre);
             }
         }
         catch (Exception e)

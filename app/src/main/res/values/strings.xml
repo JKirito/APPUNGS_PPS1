@@ -20,7 +20,7 @@
     <string name="title_activity_pantalla_principal">Principal</string>
     <string name="title_activity_vista">Vista</string>
     <string name="title_activity_ingreso">Ingresar cuenta</string>
-    <string name="title_activity_lista">Bienvenido!</string>
+    <string name="title_activity_lista">Bienvenid@</string>
 
     <string name="title_activity_mapa">Mapa</string>
 </resources>
