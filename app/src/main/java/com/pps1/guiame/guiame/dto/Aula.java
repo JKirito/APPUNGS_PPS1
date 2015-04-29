@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame.entities;
+package com.pps1.guiame.guiame.dto;
 
 import java.io.Serializable;
 

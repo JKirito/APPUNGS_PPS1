@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class SessionManager
 {
-
     private static String user;
     private static String nombre;
     private static String password;
@@ -68,6 +67,7 @@ public class SessionManager
         SessionManager.finSession = finSession;
     }
 
+    //Cerramos sesión del usuario conectado
     public static void logout()
     {
         user = null;
@@ -76,6 +76,7 @@ public class SessionManager
         admin = 0;
     }
 
+    //Verificamos si el usuario ha iniciado sesion
     public static boolean isUserOn()
     {
         if(user != null && password != null)
@@ -85,6 +86,7 @@ public class SessionManager
         return false;
     }
 
+    //Verificamos si el usuario conectado es administrador o no
     public static Boolean isAdministrador()
     {
         if(admin == 1)

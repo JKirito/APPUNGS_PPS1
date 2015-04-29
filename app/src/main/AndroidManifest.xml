@@ -39,7 +39,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Principal"
+            android:name=".presentacion.controlador.Principal"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,20 +48,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Registro"
+            android:name=".presentacion.controlador.Registro"
             android:label="@string/title_activity_registro" >
         </activity>
         <activity
-            android:name=".Ingreso"
+            android:name=".presentacion.controlador.Ingreso"
             android:label="@string/title_activity_ingreso" >
         </activity>
         <activity
-            android:name=".ListaMaterias"
+            android:name=".presentacion.controlador.ListaMaterias"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_lista" >
         </activity>
         <activity
-            android:name=".Mapa"
+            android:name=".presentacion.controlador.Mapa"
             android:label="@string/title_activity_mapa" >
         </activity>
 
@@ -82,7 +82,7 @@
             android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
         <activity
-            android:name=".AulaAAgregar"
+            android:name=".presentacion.controlador.AulaAAgregar"
             android:label="@string/title_activity_agregar_aula" >
         </activity>
     </application>

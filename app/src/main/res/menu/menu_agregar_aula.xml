@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.pps1.guiame.guiame.AulaAAgregar">
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.pps1.guiame.guiame.presentacion.controlador.AulaAAgregar">
     <item android:id="@+id/Salir" android:title="@string/Salir"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
