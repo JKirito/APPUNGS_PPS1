@@ -2,7 +2,6 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
-import com.pps1.guiame.guiame.MailValidator;
 import com.pps1.guiame.guiame.persistencia.conexion.Utils;
 
 import org.json.JSONArray;
