@@ -2,8 +2,8 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
-import com.pps1.guiame.guiame.MailValidator;
-import com.pps1.guiame.guiame.persistencia.conexion.Utils;
+import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
+import com.pps1.guiame.guiame.utils.MailValidator;
 
 import org.json.JSONArray;
 
@@ -90,7 +90,7 @@ public class Registrador
         if(errores.size() == 0){
             Map<String, String> datos = new HashMap<String, String>();
             datos.put("dni",dni);
-            String result = Utils.enviarPost(datos, PHP_NAME_VERIFICARUSUARIO);
+            String result = Conexion.enviarPost(datos, PHP_NAME_VERIFICARUSUARIO);
 
             if(isUsuarioExistente(result)){
                 errores.add("Ya existe un usuario con ese dni");
@@ -134,7 +134,7 @@ public class Registrador
         datos.put("dni",dni);
         datos.put("contrasena",pass);
 
-        String result = Utils.enviarPost(datos, PHP_NAME_REGISTRADOR);
+        String result = Conexion.enviarPost(datos, PHP_NAME_REGISTRADOR);
 
         //TODO: qué hago con el result?
         Log.d("result post regisdatos", result);

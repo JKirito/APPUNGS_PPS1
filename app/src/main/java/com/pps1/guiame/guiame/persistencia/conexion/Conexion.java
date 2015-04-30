@@ -1,6 +1,5 @@
-package com.pps1.guiame.guiame;
+package com.pps1.guiame.guiame.persistencia.conexion;
 
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -20,11 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Utils
+/**
+ * Created by javi on 29/04/15.
+ */
+public class Conexion
 {
 
     // IP localhost
-   // private static final String URL = "http://10.0.2.2/guiame/";
+    // private static final String URL = "http://10.0.2.2/guiame/";
     // ip Agus
     // private static final String URL = "http://181.16.65.149/guiame/";
 
@@ -42,7 +44,7 @@ public class Utils
             HttpResponse response = cliente.execute(httpget,contexto);
             HttpEntity entity = response.getEntity();
             resultado = EntityUtils.toString(entity, "UTF-8");
-            Log.d("RESULTADO",resultado);
+            Log.d("RESULTADO", resultado);
         }
         catch (Exception e)
         {
@@ -82,44 +84,4 @@ public class Utils
         return resultado;
     }
 
-    public static String ubicacionAula(String aula)
-    {
-        if(aula == null || aula.isEmpty()){
-            return "Numero aula no disponible";
-        }
-
-        String ubicacion = "";
-        Boolean numAsignado= false;
-        int i = 1; //No es la posicion sino el entero
-        while(!numAsignado)
-        {
-            if(aula.startsWith(String.valueOf(i))) //Si el aula empieza con el numero... (1 al 7)
-            {
-                ubicacion = "Modulo " + i;
-                numAsignado = true;
-            }
-            i++;
-        }
-
-        if(aula.charAt(1) == '0')
-        {
-            ubicacion+= " en planta baja";
-        }
-        else if(aula.charAt(1) == '1')
-        {
-            ubicacion+= " en el primer piso";
-        }
-        else if(aula.charAt(1) == '2')
-        {
-            ubicacion += " en el segundo piso";
-        }
-        //Si no tiene número, asumo que es una del estilo "oficina docente"
-        else if(Character.isLetter(aula.charAt(0)))
-        {
-            ubicacion = aula;
-        }
-
-        return ubicacion;
-    }
 }
-

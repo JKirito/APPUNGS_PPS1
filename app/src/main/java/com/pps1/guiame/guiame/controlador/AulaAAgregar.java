@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame.presentacion.controlador;
+package com.pps1.guiame.guiame.controlador;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,10 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.pps1.guiame.guiame.persistencia.dao.AgregadorAula;
 import com.pps1.guiame.guiame.R;
-import com.pps1.guiame.guiame.SessionManager;
 import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 
 
 public class AulaAAgregar extends ActionBarActivity
@@ -50,7 +49,6 @@ public class AulaAAgregar extends ActionBarActivity
                 final String numeroAula = txtAula.getText().toString();
                 final Location posicion = getPosicionAdmin();
                 final Aula aulaNueva = new Aula(numeroAula,posicion.getLatitude(),posicion.getLongitude());
-                final AgregadorAula agregador = new AgregadorAula(aulaNueva);
 
                 Thread thread = new Thread(new Runnable(){
                     @Override
@@ -58,7 +56,7 @@ public class AulaAAgregar extends ActionBarActivity
                     {
                         try
                         {
-                            agregador.registrarAula();
+                            new AulaDAO().registrarAula(aulaNueva);
                                 runOnUiThread(
                                         new Runnable()
                                         {

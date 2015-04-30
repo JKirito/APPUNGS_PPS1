@@ -2,7 +2,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
-import com.pps1.guiame.guiame.persistencia.conexion.Utils;
+import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
@@ -30,7 +30,7 @@ public class Listador
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("dni",dni);
 
-        String result = Utils.enviarPost(datos, PHP_NAME_LISTADOR);
+        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR);
         ArrayList<String> listadoMaterias = obtDatosJSON(result);
 
         Log.d("resultPostListadoMatUS", result);
@@ -40,7 +40,7 @@ public class Listador
 
     public ArrayList<String> getListadoMaterias()
     {
-        String result = Utils.getPHPResult(PHP_NAME_LISTADOR_TODO); //Obtenemos el resultado del query
+        String result = Conexion.getPHPResult(PHP_NAME_LISTADOR_TODO); //Obtenemos el resultado del query
 
         ArrayList<String> listadoMaterias = obtDatosJSON(result); //Resultado con formato para lista
 

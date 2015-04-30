@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame.presentacion.controlador;
+package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -8,9 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.R;
-import com.pps1.guiame.guiame.SessionManager;
+import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
 import java.util.ArrayList;
 
