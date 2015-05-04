@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
+import com.pps1.guiame.guiame.utils.Utils;
 
 
 public class AulaAAgregar extends ActionBarActivity
@@ -27,6 +30,7 @@ public class AulaAAgregar extends ActionBarActivity
     private Button btnLocalizar;
     private LocationManager locManager;
     private LocationListener locListener;
+    private Object Settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -136,15 +140,23 @@ public class AulaAAgregar extends ActionBarActivity
                 Log.i("", "Provider Status: " + status);
             }
         };
-        locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,locListener);
-        Location loc=locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (loc == null)
+        boolean gpsStatus = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!gpsStatus)
         {
-            locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,locListener);
-            loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            Utils.displayPromptForEnablingGPS(AulaAAgregar.this);
         }
-        return loc;
+        else
+        {
+            locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+            Location loc=locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (loc == null)
+            {
+                locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
+                loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            }
+            return loc;
+        }
+        return null;
     }
-
 }
