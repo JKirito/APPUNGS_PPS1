@@ -1,8 +1,5 @@
 package com.pps1.guiame.guiame.utils;
 
-import android.content.Intent;
-import android.view.KeyEvent;
-
 /**
  * Created by javi on 29/04/15.
  */
