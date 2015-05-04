@@ -63,12 +63,10 @@ public class ListaMaterias extends ActionBarActivity
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3)
             {
-                if(adaptador == null){
+                if(adaptador == null)
+                {
                     return;
                 }
-                Log.d("adapter","adaptador"+adaptador);
-                Log.d("adapter","adaptadorFiltro"+adaptador.getFilter());
-
                 // When user changed the Text
                 ListaMaterias.this.adaptador.getFilter().filter(cs);
             }
