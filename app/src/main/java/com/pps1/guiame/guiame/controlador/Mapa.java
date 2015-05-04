@@ -81,11 +81,4 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         //mapa.addMarker(new MarkerOptions().position(puntoPulsado).icon(BitmapDescriptorFactory
         //.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
     }
-    @Override
-    public void onBackPressed()
-    {
-        Intent start = new Intent(Mapa.this,Principal.class);
-        startActivity(start);
-        finishActivity(0);
-    }
 }
