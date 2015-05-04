@@ -8,8 +8,8 @@ import java.io.Serializable;
 public class Aula implements Serializable
 {
     private String numAula;
-    private double latitud;
-    private double longitud;
+    private Double latitud;
+    private Double longitud;
 
     public Aula(String numAula, double latitud, double longitud)
     {
@@ -18,15 +18,19 @@ public class Aula implements Serializable
         this.longitud = longitud;
     }
 
-    public String getNumAula() {
+    public String getNumAula()
+    {
         return numAula;
     }
 
-    public double getLatitud() {
+    public double getLatitud()
+    {
         return latitud;
     }
 
-    public double getLongitud() {
+    public double getLongitud()
+    {
         return longitud;
     }
+
 }

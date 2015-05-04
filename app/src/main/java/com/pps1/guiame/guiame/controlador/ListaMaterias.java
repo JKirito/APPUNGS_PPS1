@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -62,12 +63,10 @@ public class ListaMaterias extends ActionBarActivity
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3)
             {
-                if(adaptador == null){
+                if(adaptador == null)
+                {
                     return;
                 }
-                Log.d("adapter","adaptador"+adaptador);
-                Log.d("adapter","adaptadorFiltro"+adaptador.getFilter());
-
                 // When user changed the Text
                 ListaMaterias.this.adaptador.getFilter().filter(cs);
             }
@@ -84,6 +83,48 @@ public class ListaMaterias extends ActionBarActivity
             {
                 // TODO Auto-generated method stub
 
+            }
+        });
+
+        // Registra callback si se selecciona un item de este AdaptView
+        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final String itemSeleccionado = (String) listaMaterias.getAdapter().getItem(position);
+                dialog.setMessage("Buscando Aula...");
+                dialog.show();
+                Thread tr = new Thread()
+                {
+                    @Override
+                    public void run()
+                    {
+                        String numAula = Utils.getNumAula(itemSeleccionado);
+                        Aula aula = new AulaDAO().getAula(numAula);
+
+                        if(aula == null)
+                        {
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            return;
+                        }
+
+                        Bundle bundleBuscAula = new Bundle();
+                        bundleBuscAula.putSerializable("Aula", aula);
+
+                        Intent intent = new Intent(getApplicationContext(), Mapa.class);
+                        intent.putExtras(bundleBuscAula);
+                        startActivity(intent);
+                        dialog.dismiss();
+                    }
+                };
+                tr.start();
             }
         });
     }
@@ -138,53 +179,6 @@ public class ListaMaterias extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void getSelected(View view)
-    {
-        int posicion = listaMaterias.getCheckedItemPosition(); //Devuelve la posición del item seleccionado
-        if(posicion<0)
-        {
-            //Si no hay elemento seleccionado...
-            Toast.makeText(this, "No hay elementos seleccionados", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            final String itemSeleccionado = listaMaterias.getItemAtPosition(posicion).toString();
-            dialog.setMessage("Buscando Aula...");
-            dialog.show();
-            Thread tr = new Thread()
-            {
-                @Override
-                public void run()
-                {
-                    String numAula = Utils.getNumAula(itemSeleccionado);
-                    Aula aula = new AulaDAO().getAula(numAula);
-
-                       if(aula == null)
-                       {
-                           runOnUiThread(
-                                   new Runnable() {
-                                       @Override
-                                       public void run() {
-                                           Toast.makeText(getApplicationContext(),
-                                                   "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
-                                           dialog.dismiss();
-                                       }
-                                   });
-                           return;
-                       }
-
-                    Bundle bundleBuscAula = new Bundle();
-                    bundleBuscAula.putSerializable("Aula", aula);
-
-                    Intent intent = new Intent(getApplicationContext(), Mapa.class);
-                    intent.putExtras(bundleBuscAula);
-                    startActivity(intent);
-                    dialog.dismiss();
-                }
-            };
-            tr.start();
-        }
-    }
 
     //Esto tambien deberia ir a Listador pero no se puede pasar el ListView
     public void mostrarItems(ArrayList<String> datos)

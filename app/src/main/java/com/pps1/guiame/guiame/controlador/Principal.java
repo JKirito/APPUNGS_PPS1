@@ -137,4 +137,11 @@ public class Principal extends Activity
         }
     }
 
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        this.habilitarBtnLocalizacion();
+    }
+
 }
