@@ -91,7 +91,7 @@ public class ListaMaterias extends ActionBarActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final String itemSeleccionado = (String) listaMaterias.getAdapter().getItem(position);
-                dialog.setMessage("Buscando Aula...");
+                dialog.setMessage("Buscando aula...");
                 dialog.show();
                 Thread tr = new Thread()
                 {
@@ -194,5 +194,15 @@ public class ListaMaterias extends ActionBarActivity
         ArrayAdapter<String> a = adaptador;
         super.onResume();
         adaptador = a;
+    }
+
+
+    //Al presionar el botón Atrás vuelve a la clase Principal
+    @Override
+    public void onBackPressed()
+    {
+        Intent start = new Intent(ListaMaterias.this,Principal.class);
+        startActivity(start);
+        finishActivity(0);
     }
 }

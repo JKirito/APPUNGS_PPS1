@@ -31,7 +31,7 @@ public class Principal extends Activity
         btnVistaRapida = (Button)findViewById(R.id.btnVistaRapida);
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
         dialog = new ProgressDialog(this);
-        habilitarBtnLocalizacion();
+        habilitarBotones();
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener()
         {
@@ -125,23 +125,35 @@ public class Principal extends Activity
         });
     }
 
-    private void habilitarBtnLocalizacion()
+    /*Si el usuario esta conectado y en Principal, sacamos el boton de Registrarse, si es Admin
+    ponemos el boton de AgregarAula
+     */
+    private void habilitarBotones()
     {
-        if(SessionManager.isAdministrador())
+
+        if(SessionManager.isUserOn())
         {
-            btnAgregarAula.setVisibility(View.VISIBLE);
+            btnRegistrarse.setVisibility(View.INVISIBLE);
+
+            if(SessionManager.isAdministrador())
+            {
+                btnAgregarAula.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                btnAgregarAula.setVisibility(View.INVISIBLE);
+            }
         }
         else
         {
-            btnAgregarAula.setVisibility(View.INVISIBLE);
+            btnRegistrarse.setVisibility(View.VISIBLE);
         }
     }
 
-    @Override
+   /* @Override
     protected void onResume()
     {
         super.onResume();
-        this.habilitarBtnLocalizacion();
-    }
+    }*/
 
 }

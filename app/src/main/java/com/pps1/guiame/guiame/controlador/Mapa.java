@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -75,9 +76,16 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     } */
 
     @Override
-    public void onMapClick(LatLng puntoPulsado) {
+    public void onMapClick(LatLng puntoPulsado)
+    {
         //mapa.addMarker(new MarkerOptions().position(puntoPulsado).icon(BitmapDescriptorFactory
         //.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
     }
-
+    @Override
+    public void onBackPressed()
+    {
+        Intent start = new Intent(Mapa.this,Principal.class);
+        startActivity(start);
+        finishActivity(0);
+    }
 }

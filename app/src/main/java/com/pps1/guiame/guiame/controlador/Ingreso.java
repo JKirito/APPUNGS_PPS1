@@ -105,16 +105,22 @@ public class Ingreso extends ActionBarActivity
         });
     }
 
-    @Override
+    /*@Override
     public void onResume()
    {
        super.onResume();
 
        txtDni.setText("");
        txtContraseña.setText("");
+    }*/
+
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent start = new Intent(Ingreso.this,Principal.class);
+        startActivity(start);
+        finishActivity(0);
     }
-
-
-
 
 }

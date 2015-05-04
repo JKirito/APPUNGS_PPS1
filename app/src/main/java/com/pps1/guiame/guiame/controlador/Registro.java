@@ -105,7 +105,7 @@ public class Registro extends ActionBarActivity
         });
     }
 
-    @Override
+   /* @Override
     public void onResume()
     {
         super.onResume();
@@ -115,5 +115,5 @@ public class Registro extends ActionBarActivity
         mail.setText("");
         pass.setText("");
         pass2.setText("");
-    }
+    }*/
 }
