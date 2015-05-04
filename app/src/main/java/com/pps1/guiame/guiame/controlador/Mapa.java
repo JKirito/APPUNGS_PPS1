@@ -56,36 +56,17 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         mapa.setOnMapClickListener(this); //escucha pulsaciones en la pantalla
     }
 
-    public void moveCamera(View view) {
+    public void moveCamera(View view)
+    {
         //mapa.moveCamera(CameraUpdateFactory.newLatLng(UNGS));
         //se ubica en el mapa segun UNGS con zoom de 17. min=2 max=21
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UNGS, 17));
     }
-
-    /* public void animateCamera(View view)
-    {
-        if (mapa.getMyLocation() != null)
-            mapa.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                    new LatLng( mapa.getMyLocation().getLatitude(), mapa.getMyLocation().getLongitude()), 15));
-    } */
-
-    /* public void addMarker(View view)
-    {
-        mapa.addMarker(new MarkerOptions().position(new LatLng(mapa.getCameraPosition().target.latitude,
-        mapa.getCameraPosition().target.longitude)));
-    } */
 
     @Override
     public void onMapClick(LatLng puntoPulsado)
     {
         //mapa.addMarker(new MarkerOptions().position(puntoPulsado).icon(BitmapDescriptorFactory
         //.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-    }
-    @Override
-    public void onBackPressed()
-    {
-        Intent start = new Intent(Mapa.this,Principal.class);
-        startActivity(start);
-        finishActivity(0);
     }
 }
