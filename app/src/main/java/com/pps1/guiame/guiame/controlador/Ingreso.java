@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame;
+package com.pps1.guiame.guiame.controlador;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,75 +9,64 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.persistencia.dao.Ingresador;
+import com.pps1.guiame.guiame.persistencia.dao.Listador;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Registro extends ActionBarActivity
+
+public class Ingreso extends ActionBarActivity
 {
+
+    private EditText txtDni;
+    private EditText txtContraseña;
     private Button btnAceptar;
     private Button btnCancelar;
-    private EditText nombreApellido;
-    private EditText dni;
-    private EditText mail;
-    private EditText pass;
-    private EditText pass2;
     ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
-        nombreApellido = (EditText) findViewById(R.id.txtNombre);
-        dni = (EditText) findViewById(R.id.txtDni);
-        mail = (EditText) findViewById(R.id.txtMail);
-        pass = (EditText) findViewById(R.id.txtContraseña);
-        pass2 = (EditText) findViewById(R.id.txtRepetirContraseña);
+        setContentView(R.layout.activity_ingreso);
 
+        //Obtenemos una referencia a los controles de la interfaz
+        txtDni = (EditText)findViewById(R.id.txtDni);
+        txtContraseña = (EditText)findViewById(R.id.txtContraseña);
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
-
         dialog = new ProgressDialog(this);
 
-        btnCancelar.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                //Creamos el Intent
-                Intent intent =
-                        new Intent(Registro.this, Principal.class);
-                startActivity(intent);
-            }
-        });
-
+        //Implementamos el evento “click” del botón
         btnAceptar.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                final Registrador registrador = new Registrador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
-                dialog.setMessage("Registrando usuario...");
+                dialog.setMessage("Verificando usuario...");
                 dialog.show();
+
+                final String dni = txtDni.getText().toString();
+                final String pass = txtContraseña.getText().toString();
+                final Ingresador ingresador = new Ingresador(dni, pass);
                 Thread thread = new Thread(new Runnable(){
                     @Override
                     public void run()
                     {
                         try
                         {
-                            final List<String> errores = registrador.validarDatos();
+                            final List<String> errores = ingresador.ingresarUsuario();
 
                             if(errores.size() > 0)
                             {
-                                final StringBuilder todosErrores = new StringBuilder();
-                                for(String e : errores){
-                                    todosErrores.append(e+"\n");
-                                }
                                 runOnUiThread(
                                         new Runnable() {
                                             @Override
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
-                                                        todosErrores.toString(), Toast.LENGTH_SHORT).show();
+                                                        errores.get(0), Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss(); //Cierra el dialog
                                             }
                                         });
@@ -85,9 +74,12 @@ public class Registro extends ActionBarActivity
                                 return;
                             }
 
-                            registrador.registrarDatos();
-
-                            Intent intent = new Intent(Registro.this, Ingreso.class);
+                            Listador listador = new Listador(txtDni.getText().toString());
+                            final ArrayList<String> materias = listador.getListadoMateriasUsuario();
+                            Bundle bundleMaterias = new Bundle();
+                            bundleMaterias.putSerializable("Materias", materias);
+                            Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
+                            intent.putExtras(bundleMaterias);
                             startActivity(intent);
                             dialog.dismiss(); //Cierra el dialog
                         }
@@ -100,17 +92,29 @@ public class Registro extends ActionBarActivity
                 thread.start();
             }
         });
+
+        btnCancelar.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Creamos el Intent
+                Intent intent = new Intent(Ingreso.this, Principal.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onResume()
-    {
-        super.onResume();
+   {
+       super.onResume();
 
-        nombreApellido.setText("");
-        dni.setText("");
-        mail.setText("");
-        pass.setText("");
-        pass2.setText("");
+       txtDni.setText("");
+       txtContraseña.setText("");
     }
+
+
+
+
 }

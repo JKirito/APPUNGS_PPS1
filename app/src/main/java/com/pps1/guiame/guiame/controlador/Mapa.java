@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame;
+package com.pps1.guiame.guiame.controlador;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -10,7 +10,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.pps1.guiame.guiame.entities.Aula;
+import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.utils.Utils;
 
 public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListener {
     private final LatLng UNGS = new LatLng(-34.521712, -58.701063);

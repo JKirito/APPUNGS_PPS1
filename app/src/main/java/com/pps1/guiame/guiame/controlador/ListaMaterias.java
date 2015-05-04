@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame.presentacion.controlador;
+package com.pps1.guiame.guiame.controlador;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,9 +15,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.pps1.guiame.guiame.persistencia.dao.BuscadorAula;
 import com.pps1.guiame.guiame.R;
-import com.pps1.guiame.guiame.SessionManager;
+import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
+import com.pps1.guiame.guiame.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -155,9 +156,10 @@ public class ListaMaterias extends ActionBarActivity
                 @Override
                 public void run()
                 {
-                    BuscadorAula buscadorAula = new BuscadorAula(itemSeleccionado);
+                    String numAula = Utils.getNumAula(itemSeleccionado);
+                    Aula aula = new AulaDAO().getAula(numAula);
 
-                       if(buscadorAula.getAula() == null)
+                       if(aula == null)
                        {
                            runOnUiThread(
                                    new Runnable() {
@@ -172,7 +174,7 @@ public class ListaMaterias extends ActionBarActivity
                        }
 
                     Bundle bundleBuscAula = new Bundle();
-                    bundleBuscAula.putSerializable("Aula", buscadorAula.getAula());
+                    bundleBuscAula.putSerializable("Aula", aula);
 
                     Intent intent = new Intent(getApplicationContext(), Mapa.class);
                     intent.putExtras(bundleBuscAula);

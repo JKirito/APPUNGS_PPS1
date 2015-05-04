@@ -1,4 +1,4 @@
-package com.pps1.guiame.guiame;
+package com.pps1.guiame.guiame.controlador;
 
 import java.util.Date;
 

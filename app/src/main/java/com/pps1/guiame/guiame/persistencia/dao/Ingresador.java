@@ -3,8 +3,8 @@ package com.pps1.guiame.guiame.persistencia.dao;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.pps1.guiame.guiame.SessionManager;
-import com.pps1.guiame.guiame.persistencia.conexion.Utils;
+import com.pps1.guiame.guiame.controlador.SessionManager;
+import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
@@ -113,7 +113,7 @@ public class Ingresador extends ActionBarActivity
                 Map<String,String> datos = new HashMap<String,String>();
                 datos.put("dni", dni);
                 datos.put("contrasena",pass);
-                final String resultado = Utils.enviarPost(datos, PHP_NAME_INGRESADOR);
+                final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
                 Log.d("Resultado count", resultado);
                 estadoUsuario = isUsuarioValido(resultado);
         return estadoUsuario;
