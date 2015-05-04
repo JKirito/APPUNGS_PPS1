@@ -71,16 +71,19 @@ public class Registro extends ActionBarActivity
 
                             if(errores.size() > 0)
                             {
-                                final StringBuilder todosErrores = new StringBuilder();
-                                for(String e : errores){
+                                StringBuilder todosErrores = new StringBuilder();
+                                for(String e : errores)
+                                {
                                     todosErrores.append(e+"\n");
                                 }
+                                final String errors = todosErrores.toString();
                                 runOnUiThread(
                                         new Runnable() {
                                             @Override
-                                            public void run() {
+                                            public void run()
+                                            {
                                                 Toast.makeText(getApplicationContext(),
-                                                        todosErrores.toString(), Toast.LENGTH_SHORT).show();
+                                                        errors, Toast.LENGTH_SHORT).show();
                                                 dialog.dismiss(); //Cierra el dialog
                                             }
                                         });
@@ -89,10 +92,16 @@ public class Registro extends ActionBarActivity
                             }
 
                             registrador.registrarDatos();
-
                             Intent intent = new Intent(Registro.this, Ingreso.class);
                             startActivity(intent);
-                            dialog.dismiss(); //Cierra el dialog
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
+                                            dialog.dismiss(); //Cierra el dialog
+                                        }
+                                    });
                         }
                         catch (Exception e)
                         {
