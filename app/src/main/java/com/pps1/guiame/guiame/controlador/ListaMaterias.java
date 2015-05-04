@@ -148,6 +148,7 @@ public class ListaMaterias extends ActionBarActivity
         }
         return true;
     }
+    
 
     /* Si se eligió la opción:
       "IniciarSesion", vamos a Ingreso
@@ -186,14 +187,6 @@ public class ListaMaterias extends ActionBarActivity
         adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
         listaMaterias = (ListView) findViewById(R.id.listaMaterias);
         listaMaterias.setAdapter(adaptador);
-    }
-
-    @Override
-    protected void onResume()
-    {
-        ArrayAdapter<String> a = adaptador;
-        super.onResume();
-        adaptador = a;
     }
 
 
