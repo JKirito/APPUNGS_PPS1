@@ -188,14 +188,6 @@ public class ListaMaterias extends ActionBarActivity
         listaMaterias.setAdapter(adaptador);
     }
 
-    @Override
-    protected void onResume()
-    {
-        ArrayAdapter<String> a = adaptador;
-        super.onResume();
-        adaptador = a;
-    }
-
 
     //Al presionar el botón Atrás vuelve a la clase Principal
     @Override
