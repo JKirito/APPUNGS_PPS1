@@ -48,6 +48,17 @@ public class AulaAAgregar extends ActionBarActivity
 
                 final String numeroAula = txtAula.getText().toString();
                 final Location posicion = getPosicionAdmin();
+
+                if(numeroAula == null || numeroAula.isEmpty())
+                {
+                    Toast.makeText(getApplicationContext(),"Ingrese aula", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(posicion == null)
+                {
+                    Toast.makeText(getApplicationContext(),"No se pudo obtener las coordenadas. Verifique que tiene activado el GPS", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 final Aula aulaNueva = new Aula(numeroAula,posicion.getLatitude(),posicion.getLongitude());
 
                 Thread thread = new Thread(new Runnable(){
