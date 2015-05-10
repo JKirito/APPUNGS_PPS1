@@ -37,6 +37,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         mapa.setMyLocationEnabled(true); //visualizacion de la posicion con un triangulo azul
         mapa.getUiSettings().setZoomControlsEnabled(true); //configurar las acciones del interfaz de usuario
         mapa.getUiSettings().setCompassEnabled(true);
+
         //Agrego marcador de la UNGS
         mapa.addMarker(new MarkerOptions()
                 .position(UNGS)
