@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
-import android.view.KeyEvent;
 
 /**
  * Created by javi on 29/04/15.

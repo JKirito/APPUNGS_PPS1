@@ -42,6 +42,9 @@ public class Principal extends Activity
                 Intent intent =
                         new Intent(Principal.this, Registro.class);
                 startActivity(intent);
+                finish(); //Agregamos esto para hacer que se cierre este activity al crear otro,
+                          // sino quedan solapados
+
             }
         });
 
@@ -58,6 +61,7 @@ public class Principal extends Activity
                 {
                     Intent intent = new Intent(Principal.this, Ingreso.class);
                     startActivity(intent);
+                    finish();
                 }
                 // Si está logeado lo mando a la pantalla con las materias
                 else
@@ -76,6 +80,7 @@ public class Principal extends Activity
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
                             dialog.dismiss(); //Cierra el dialog
+                            finish();
                         }
                     };
                     tr.start();
@@ -104,6 +109,7 @@ public class Principal extends Activity
                         intent.putExtras(bundleMaterias);
                         startActivity(intent);
                         dialog.dismiss(); //Cierra el dialog
+                        finish();
                     }
                 };
                 tr.start();
@@ -118,6 +124,7 @@ public class Principal extends Activity
                         //Creamos el Intent
                         Intent intent = new Intent(getApplicationContext(), AulaAAgregar.class);
                         startActivity(intent);
+                        finish();
                     }
                 };
                 tr.start();
@@ -130,11 +137,10 @@ public class Principal extends Activity
      */
     private void habilitarBotones()
     {
-
         if(SessionManager.isUserOn())
         {
             btnRegistrarse.setVisibility(View.INVISIBLE);
-
+            btnIngresar.setText(R.string.misCursos);
             if(SessionManager.isAdministrador())
             {
                 btnAgregarAula.setVisibility(View.VISIBLE);
@@ -147,6 +153,7 @@ public class Principal extends Activity
         else
         {
             btnRegistrarse.setVisibility(View.VISIBLE);
+            btnIngresar.setText(R.string.ingresar);
         }
     }
 
@@ -156,4 +163,12 @@ public class Principal extends Activity
         super.onResume();
     }*/
 
+
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }

@@ -82,6 +82,7 @@ public class Ingreso extends ActionBarActivity
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
                             dialog.dismiss(); //Cierra el dialog
+                            finish();
                         }
                         catch (Exception e)
                         {
@@ -101,6 +102,7 @@ public class Ingreso extends ActionBarActivity
                 //Creamos el Intent
                 Intent intent = new Intent(Ingreso.this, Principal.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
