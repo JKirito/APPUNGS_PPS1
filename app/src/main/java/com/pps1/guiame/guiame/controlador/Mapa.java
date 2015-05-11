@@ -128,6 +128,25 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
+            mapa.addMarker(new MarkerOptions()
+                    .position(CoordenadasEdificiosUNGS.ANFITEATRO)
+                    .title("Anfiteatro")
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+            mapa.addMarker(new MarkerOptions()
+                    .position(CoordenadasEdificiosUNGS.CAMPO_DEPORTES)
+                    .title("Campo de deportes de la UNGS")
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+            mapa.addMarker(new MarkerOptions()
+                    .position(CoordenadasEdificiosUNGS.JARDIN)
+                    .title("Jardín")
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+
             this.btnModulos.setText(getString(R.string.ocultarModulos));
             this.verInfoModulos = false;
         }
