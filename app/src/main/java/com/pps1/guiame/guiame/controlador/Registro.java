@@ -102,6 +102,7 @@ public class Registro extends ActionBarActivity
                                             dialog.dismiss(); //Cierra el dialog
                                         }
                                     });
+                            finish();
                         }
                         catch (Exception e)
                         {

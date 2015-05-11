@@ -17,7 +17,8 @@
 
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
-    <string name="vista">Vista Rápida</string>
+    <string name="cursosDisponibles">Cursos disponibles</string>
+    <string name="misCursos">Ver mis cursos</string>
 
     <string name="title_activity_pantalla_principal">Principal</string>
     <string name="title_activity_ingreso">Ingresar cuenta</string>

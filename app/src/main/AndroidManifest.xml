@@ -79,7 +79,7 @@
         <!-- key debug -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
+            android:value="AIzaSyC1-ANEqeuuVDZdLhRZi33YKpsgz6lGFJQ" />
 
 
         <activity

@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -84,6 +82,7 @@ public class AulaAAgregar extends ActionBarActivity
 
                             Intent intent = new Intent(AulaAAgregar.this, Principal.class);
                             startActivity(intent);
+                            finish();
                         }
                         catch (Exception e)
                         {
@@ -116,6 +115,7 @@ public class AulaAAgregar extends ActionBarActivity
             Intent intent =
                     new Intent(AulaAAgregar.this, Principal.class);
             startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

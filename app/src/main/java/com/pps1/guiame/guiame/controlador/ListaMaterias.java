@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -122,6 +121,7 @@ public class ListaMaterias extends ActionBarActivity
                         intent.putExtras(bundleBuscAula);
                         startActivity(intent);
                         dialog.dismiss();
+                        //TODO: Ponemos finish() acá? como hay un ida y vuelta entre mapa y lista tal vez es mejor no cerrar la lista.
                     }
                 };
                 tr.start();
@@ -177,6 +177,7 @@ public class ListaMaterias extends ActionBarActivity
             Intent intent = new Intent(ListaMaterias.this, Principal.class);
             startActivity(intent);
         }
+        finish();
         return super.onOptionsItemSelected(item);
     }
 
