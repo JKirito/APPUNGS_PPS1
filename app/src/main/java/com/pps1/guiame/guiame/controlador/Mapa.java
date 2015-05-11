@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pps1.guiame.guiame.R;
-import com.pps1.guiame.guiame.datos.Coordenadas;
+import com.pps1.guiame.guiame.Datos.CoordenadasEdificiosUNGS;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.utils.Utils;
 
@@ -23,17 +23,21 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     private int cantPulsaciones;
     private Aula aula;
     private LatLng latLngAula;
+    private Button btnModulos;
+    private boolean verInfoModulos = true;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
 
+        btnModulos = (Button)findViewById(R.id.btnModulos);
+
         aula = (Aula) getIntent().getSerializableExtra("Aula");
         getIntent().getExtras().clear();
 
         // Si tengo la coordenada del aula, muestro
-        latLngAula = aula != null ? new LatLng(aula.getLatitud(), aula.getLongitud()) : Coordenadas.UNGS;
+        latLngAula = aula != null ? new LatLng(aula.getLatitud(), aula.getLongitud()) : CoordenadasEdificiosUNGS.UNGS;
 
         mapa = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
@@ -42,7 +46,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
         mapa.getUiSettings().setZoomControlsEnabled(true); //configurar las acciones del interfaz de usuario
         mapa.getUiSettings().setCompassEnabled(true);
         CameraPosition posicionCamara = new CameraPosition.Builder()
-                .target(Coordenadas.UNGS) //Centra el mapa según posicion UNGS
+                .target(CoordenadasEdificiosUNGS.UNGS) //Centra el mapa según posicion UNGS
                 .zoom(17)                   //zoom min=2 max=21
                 .bearing(150) // Orientaciòn de la camara al norte
                 .build();    // Crea la nueva posición de la camara
@@ -56,80 +60,83 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
 
     public void agregarMarcadoresInformativos(View view)
     {
-        cantPulsaciones++;
-        if(cantPulsaciones <=1 )
+        if(verInfoModulos)
         {
             //Agrego marcador de la UNGS
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.UNGS)
+                    .position(CoordenadasEdificiosUNGS.UNGS)
                     .title("UNGS")
                     .snippet("Entrada Principal")
-                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ungs)).anchor(0.5f, 0.5f));
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ungs)).anchor(0.2f, 0.2f));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.BIBLIO)
+                    .position(CoordenadasEdificiosUNGS.BIBLIO)
                     .title("Biblioteca (Ubyd)")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.ICI)
+                    .position(CoordenadasEdificiosUNGS.ICI)
                     .title("ICI - Módulo 2b")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.IDEI)
+                    .position(CoordenadasEdificiosUNGS.IDEI)
                     .title("IDEI - Módulo 4")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.IDH)
+                    .position(CoordenadasEdificiosUNGS.IDH)
                     .title("IDH - Módulo 5")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.ICO)
+                    .position(CoordenadasEdificiosUNGS.ICO)
                     .title("ICO - Módulo 6")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.MOD_1)
+                    .position(CoordenadasEdificiosUNGS.MOD_1)
                     .title("Módulo 1")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.MOD_2a)
+                    .position(CoordenadasEdificiosUNGS.MOD_2a)
                     .title("Módulo 2a")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.MOD_3)
+                    .position(CoordenadasEdificiosUNGS.MOD_3)
                     .title("Módulo 3")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.MOD_7)
+                    .position(CoordenadasEdificiosUNGS.MOD_7)
                     .title("Módulo 7")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(Coordenadas.MOD_9)
+                    .position(CoordenadasEdificiosUNGS.MOD_9)
                     .title("Módulo 9 - Buffet - Bar")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+            this.btnModulos.setText(getString(R.string.ocultarModulos));
+            this.verInfoModulos = false;
         }
         else
         {
-            cantPulsaciones = 0;
+            this.verInfoModulos = true;
             mapa.clear();
+            this.btnModulos.setText(getString(R.string.verModulos));
             agregarMarkerAula(latLngAula, aula);
         }
 
@@ -151,7 +158,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     public void moveCamera(View view)
     {
         //se ubica en el mapa segun UNGS con zoom de 17. min=2 max=21
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(Coordenadas.UNGS, 17));
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(CoordenadasEdificiosUNGS.UNGS, 17));
     }
 
     @Override

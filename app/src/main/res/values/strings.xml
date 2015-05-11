@@ -12,6 +12,9 @@
     <string name="buscar">Buscar</string>
     <string name="numeroAula">Número de aula</string>
 
+    <string name="verModulos">Mostrar Módulos</string>
+    <string name="ocultarModulos">Ocultar Módulos</string>
+
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
 

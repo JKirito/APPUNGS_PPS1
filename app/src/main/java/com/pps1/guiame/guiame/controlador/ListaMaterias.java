@@ -148,7 +148,7 @@ public class ListaMaterias extends ActionBarActivity
         }
         return true;
     }
-    
+
 
     /* Si se eligió la opción:
       "IniciarSesion", vamos a Ingreso

@@ -24,6 +24,6 @@ tools:context=".Mapa">
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="agregarMarcadoresInformativos"
-        android:text="Ver módulos" />
+        android:text="@string/verModulos" />
 
 </RelativeLayout>
