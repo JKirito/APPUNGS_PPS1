@@ -76,7 +76,7 @@ public class Principal extends Activity
                             final ArrayList<String> materias = listador.getListadoMateriasUsuario();
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Materias", materias);
-                            Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
+                            Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
                             dialog.dismiss(); //Cierra el dialog
@@ -105,7 +105,7 @@ public class Principal extends Activity
                         Bundle bundleMaterias = new Bundle();
                         bundleMaterias.putSerializable("Materias", materias);
                         //Creamos el Intent
-                        Intent intent = new Intent(getApplicationContext(), ListaMaterias.class);
+                        Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                         intent.putExtras(bundleMaterias);
                         startActivity(intent);
                         dialog.dismiss(); //Cierra el dialog

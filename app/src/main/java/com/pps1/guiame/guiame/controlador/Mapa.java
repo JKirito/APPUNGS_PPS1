@@ -20,7 +20,6 @@ import com.pps1.guiame.guiame.utils.Utils;
 public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListener
 {
     private GoogleMap mapa;
-    private int cantPulsaciones;
     private Aula aula;
     private LatLng latLngAula;
     private Button btnModulos;

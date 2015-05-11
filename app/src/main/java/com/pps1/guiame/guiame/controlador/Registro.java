@@ -126,4 +126,12 @@ public class Registro extends ActionBarActivity
         pass.setText("");
         pass2.setText("");
     }*/
+
+   @Override
+   public void onBackPressed()
+   {
+       Intent start = new Intent(Registro.this,Principal.class);
+       startActivity(start);
+       finishActivity(0);
+   }
 }

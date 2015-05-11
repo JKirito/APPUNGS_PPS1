@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,7 +24,7 @@ import com.pps1.guiame.guiame.utils.Utils;
 import java.util.ArrayList;
 
 
-public class ListaMaterias extends ActionBarActivity
+public class ListaCursos extends ActionBarActivity
 {
     private ListView listaMaterias;
     ArrayAdapter<String> adaptador;
@@ -34,7 +35,8 @@ public class ListaMaterias extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_materias);
+        setContentView(R.layout.activity_lista_cursos);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
         String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
         dialog = new ProgressDialog(this);
@@ -67,7 +69,7 @@ public class ListaMaterias extends ActionBarActivity
                     return;
                 }
                 // When user changed the Text
-                ListaMaterias.this.adaptador.getFilter().filter(cs);
+                ListaCursos.this.adaptador.getFilter().filter(cs);
             }
 
             @Override
@@ -162,19 +164,19 @@ public class ListaMaterias extends ActionBarActivity
 
         if(id == R.id.IniciarSesion)
         {
-            Intent intent = new Intent(ListaMaterias.this, Ingreso.class);
+            Intent intent = new Intent(ListaCursos.this, Ingreso.class);
             startActivity(intent);
         }
         else if(id == R.id.Registrarse)
         {
-            Intent intent = new Intent(ListaMaterias.this, Registro.class);
+            Intent intent = new Intent(ListaCursos.this, Registro.class);
             startActivity(intent);
         }
         else if (id == R.id.Salir)
         {
             SessionManager.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(ListaMaterias.this, Principal.class);
+            Intent intent = new Intent(ListaCursos.this, Principal.class);
             startActivity(intent);
         }
         finish();
@@ -195,7 +197,7 @@ public class ListaMaterias extends ActionBarActivity
     @Override
     public void onBackPressed()
     {
-        Intent start = new Intent(ListaMaterias.this,Principal.class);
+        Intent start = new Intent(ListaCursos.this,Principal.class);
         startActivity(start);
         finishActivity(0);
     }
