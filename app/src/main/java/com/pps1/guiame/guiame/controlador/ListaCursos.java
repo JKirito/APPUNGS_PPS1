@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class ListaCursos extends ActionBarActivity
 {
     private ListView listaMaterias;
+    private Button btnAgregarCurso;
     ArrayAdapter<String> adaptador;
     EditText searchBox;
     ProgressDialog dialog;
@@ -39,6 +41,9 @@ public class ListaCursos extends ActionBarActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
         String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
+        btnAgregarCurso = (Button)findViewById(R.id.btnAgregarCurso);
+        habilitarBotones();
+
         dialog = new ProgressDialog(this);
 
         Thread tr = new Thread()
@@ -123,12 +128,39 @@ public class ListaCursos extends ActionBarActivity
                         intent.putExtras(bundleBuscAula);
                         startActivity(intent);
                         dialog.dismiss();
-                        //TODO: Ponemos finish() acá? como hay un ida y vuelta entre mapa y lista tal vez es mejor no cerrar la lista.
                     }
                 };
                 tr.start();
             }
         });
+
+        btnAgregarCurso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Thread tr = new Thread() {
+                    @Override
+                    public void run() {
+                        //Creamos el Intent
+                        Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                };
+                tr.start();
+            }
+        });
+    }
+
+    private void habilitarBotones()
+    {
+        if(SessionManager.isUserOn())
+        {
+            btnAgregarCurso.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            btnAgregarCurso.setVisibility(View.INVISIBLE);
+        }
     }
 
     /*
