@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,11 +18,12 @@ import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
 import java.util.ArrayList;
 
-public class NombreCursoPersonalizado extends ActionBarActivity
+public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
     private String idCurso;
+    private String aliasMateria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +33,11 @@ public class NombreCursoPersonalizado extends ActionBarActivity
         txtNombreMateria = (EditText)findViewById(R.id.txtNombreMateria);
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
         setTitle("Personalizar materia");
+
+        idCurso = (String) getIntent().getExtras().get("idCurso");
+        aliasMateria = (String) getIntent().getExtras().get("aliasMateria");
+        getIntent().getExtras().clear();
+        txtNombreMateria.setText(aliasMateria);
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
@@ -42,8 +49,6 @@ public class NombreCursoPersonalizado extends ActionBarActivity
                     @Override
                     public void run()
                     {
-                        idCurso = (String) getIntent().getExtras().get("idCurso");
-                        getIntent().getExtras().clear();
                         Buscador buscador = new Buscador(SessionManager.getUser());
                         buscador.registrarCursoPersonalizado(idCurso);
                         runOnUiThread(
@@ -62,7 +67,6 @@ public class NombreCursoPersonalizado extends ActionBarActivity
             }
         });
 
-        txtNombreMateria.setText(idCurso);
     }
 
     //Al presionar el botón Atrás vuelve a la clase CursoPersonalizado

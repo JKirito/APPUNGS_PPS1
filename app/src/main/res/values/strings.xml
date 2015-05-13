@@ -12,7 +12,7 @@
     <string name="buscar">Buscar</string>
 
     <string name="numeroAula">Número de aula</string>
-    <string name="nombreMateria">Nombre de la materia</string>
+    <string name="nombreCurso">Nombre del curso</string>
 
     <string name="verModulos">Mostrar Módulos</string>
     <string name="ocultarModulos">Ocultar Módulos</string>
@@ -36,7 +36,6 @@
     <string name="title_activity_registro">Registro de cuenta</string>
     <string name="title_activity_curso_personalizado">Curso Personalizado</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_nombre_curso_personalizado">NombreCursoPersonalizado</string>
+    <string name="title_activity_nombre_curso_personalizado">Nombre personalizado</string>
 
 </resources>

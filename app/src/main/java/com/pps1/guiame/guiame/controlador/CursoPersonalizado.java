@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import com.pps1.guiame.guiame.utils.Utils;
 
 import java.util.ArrayList;
 
-public class CursoPersonalizado extends ActionBarActivity
+public class CursoPersonalizado extends Activity
 {
     private Button btnBuscarCurso;
     private ListView listaCursosJuntos;
@@ -33,8 +34,6 @@ public class CursoPersonalizado extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_personalizado);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
-        String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
-        setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
 
@@ -80,6 +79,7 @@ public class CursoPersonalizado extends ActionBarActivity
                     public void run()
                     {
                         String idCurso = Utils.getCursoPersonalizado(itemSeleccionado);
+                        String aliasMateria = Utils.getAliasMateria(itemSeleccionado); //Lo pongo separado de getCursoPersonalizado porque a ese no lo vamos a usar cuand oestè la clase Curso
 
                         if(idCurso == null)
                         {
@@ -96,6 +96,7 @@ public class CursoPersonalizado extends ActionBarActivity
 
                         Bundle bundleNombrePersonalizado = new Bundle();
                         bundleNombrePersonalizado.putSerializable("idCurso", idCurso);
+                        bundleNombrePersonalizado.putSerializable("aliasMateria",aliasMateria);
 
                         Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
                         intent.putExtras(bundleNombrePersonalizado);
@@ -111,30 +112,6 @@ public class CursoPersonalizado extends ActionBarActivity
         adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
         listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         listaCursosJuntos.setAdapter(adaptador);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_curso_personalizado, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void onBackPressed()
