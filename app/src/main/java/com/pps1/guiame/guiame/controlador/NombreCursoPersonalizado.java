@@ -65,26 +65,12 @@ public class NombreCursoPersonalizado extends ActionBarActivity
         txtNombreMateria.setText(idCurso);
     }
 
-
+    //Al presionar el botón Atrás vuelve a la clase CursoPersonalizado
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_nombre_curso_personalizado, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void onBackPressed()
+    {
+        Intent start = new Intent(NombreCursoPersonalizado.this,CursoPersonalizado.class);
+        startActivity(start);
+        finishActivity(0);
     }
 }

@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class ListaCursos extends ActionBarActivity
 {
     private ListView listaMaterias;
-    private Button btnAgregarCurso;
     ArrayAdapter<String> adaptador;
     EditText searchBox;
     ProgressDialog dialog;
@@ -41,8 +40,6 @@ public class ListaCursos extends ActionBarActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
         String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
-        btnAgregarCurso = (Button)findViewById(R.id.btnAgregarCurso);
-        habilitarBotones();
 
         dialog = new ProgressDialog(this);
 
@@ -133,34 +130,6 @@ public class ListaCursos extends ActionBarActivity
                 tr.start();
             }
         });
-
-        btnAgregarCurso.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Thread tr = new Thread() {
-                    @Override
-                    public void run() {
-                        //Creamos el Intent
-                        Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                };
-                tr.start();
-            }
-        });
-    }
-
-    private void habilitarBotones()
-    {
-        if(SessionManager.isUserOn())
-        {
-            btnAgregarCurso.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            btnAgregarCurso.setVisibility(View.INVISIBLE);
-        }
     }
 
     /*
@@ -175,10 +144,11 @@ public class ListaCursos extends ActionBarActivity
         {
             menu.getItem(0).setVisible(false); //Iniciar Sesion
             menu.getItem(1).setVisible(false); //Registrarse
+            menu.getItem(2).setVisible(true);  //Agregar nuevo curso
         }
         else
         {
-            menu.getItem(2).setVisible(false); //Salir
+            menu.getItem(3).setVisible(false); //Salir
         }
         return true;
     }
@@ -210,6 +180,12 @@ public class ListaCursos extends ActionBarActivity
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListaCursos.this, Principal.class);
             startActivity(intent);
+        }
+        else if(id == R.id.AgregarNuevoCurso)
+        {
+            Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
+            startActivity(intent);
+            finish();
         }
         finish();
         return super.onOptionsItemSelected(item);

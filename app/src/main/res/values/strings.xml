@@ -32,11 +32,10 @@
     <string name="title_activity_agregar_aula">Agregar aula</string>
     <string name="buscarCurso">Buscar curso</string>
     <string name="guardarCurso">Guardar curso</string>
-    <string name="agregarCurso">Agregar curso</string>
+    <string name="agregarNuevoCurso">Agregar nuevo curso</string>
     <string name="title_activity_registro">Registro de cuenta</string>
     <string name="title_activity_curso_personalizado">Curso Personalizado</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_nombre_curso_personalizado">NombreCursoPersonalizado</string>
 
