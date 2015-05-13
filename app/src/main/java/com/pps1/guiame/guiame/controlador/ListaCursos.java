@@ -192,7 +192,6 @@ public class ListaCursos extends ActionBarActivity
         listaMaterias.setAdapter(adaptador);
     }
 
-
     //Al presionar el botón Atrás vuelve a la clase Principal
     @Override
     public void onBackPressed()

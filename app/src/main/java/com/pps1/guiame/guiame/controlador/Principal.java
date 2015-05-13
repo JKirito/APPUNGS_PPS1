@@ -73,7 +73,7 @@ public class Principal extends Activity
                         @Override
                         public void run(){
                             Listador listador = new Listador(SessionManager.getUser());
-                            final ArrayList<String> materias = listador.getListadoMateriasUsuario();
+                            final ArrayList<String> materias = listador.getListadoCursosUsuario();
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Materias", materias);
                             Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
@@ -101,7 +101,7 @@ public class Principal extends Activity
                     public void run()
                     {
                         Listador listador = new Listador();
-                        ArrayList<String> materias = listador.getListadoMaterias();
+                        ArrayList<String> materias = listador.getListadoCursosDisponibles();
                         Bundle bundleMaterias = new Bundle();
                         bundleMaterias.putSerializable("Materias", materias);
                         //Creamos el Intent

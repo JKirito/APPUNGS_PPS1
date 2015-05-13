@@ -141,22 +141,15 @@ public class AulaAAgregar extends ActionBarActivity
             }
         };
         boolean gpsStatus = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!gpsStatus)
+
+        locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+        Location loc=locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (loc == null)
         {
-            Utils.displayPromptForEnablingGPS(AulaAAgregar.this);
+            locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
+            loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
-        else
-        {
-            locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
-            Location loc=locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (loc == null)
-            {
-                locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
-                loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }
-            return loc;
-        }
-        return null;
+        return loc;
     }
 }

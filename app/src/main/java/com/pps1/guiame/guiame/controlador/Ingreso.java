@@ -75,14 +75,22 @@ public class Ingreso extends ActionBarActivity
                             }
 
                             Listador listador = new Listador(txtDni.getText().toString());
-                            final ArrayList<String> materias = listador.getListadoMateriasUsuario();
-                            Bundle bundleMaterias = new Bundle();
-                            bundleMaterias.putSerializable("Materias", materias);
-                            Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
-                            intent.putExtras(bundleMaterias);
-                            startActivity(intent);
-                            dialog.dismiss(); //Cierra el dialog
-                            finish();
+                            final ArrayList<String> materias = listador.getListadoCursosUsuario();
+                            if(!materias.isEmpty())
+                            {
+                                Bundle bundleMaterias = new Bundle();
+                                bundleMaterias.putSerializable("Materias", materias);
+                                Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
+                                intent.putExtras(bundleMaterias);
+                                startActivity(intent);
+                                dialog.dismiss(); //Cierra el dialog
+                            }
+                            else
+                            {
+                                Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
+                                startActivity(intent);
+                            }
+
                         }
                         catch (Exception e)
                         {
@@ -94,11 +102,9 @@ public class Ingreso extends ActionBarActivity
             }
         });
 
-        btnCancelar.setOnClickListener(new View.OnClickListener()
-        {
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //Creamos el Intent
                 Intent intent = new Intent(Ingreso.this, Principal.class);
                 startActivity(intent);

@@ -2,13 +2,6 @@
 <items version="2" >
 
     <item
-        jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
-        <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\classes-fe460bd15b2464af052a9b69aab2809daadcb7d3.jar" />
-    </item>
-    <item
         jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
@@ -16,11 +9,11 @@
         <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-bb5bf9bf6fcba371231f46e4396b666a0db61394.jar" />
     </item>
     <item
-        jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\6.5.87\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\classes-3b068b63f734746a97b0dda3e8753513e924a3e9.jar" />
+        sha1="dd9247ea0fabe8ee479638c4b4a23e93752be256">
+        <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\classes-fe460bd15b2464af052a9b69aab2809daadcb7d3.jar" />
     </item>
     <item
         jar="C:\Program Files\Android\Android Studio\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
@@ -28,6 +21,13 @@
         revision="21.1.2"
         sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
         <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-dea4348d30921d5f934ede470c40682fd8784866.jar" />
+    </item>
+    <item
+        jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\pre-dexed\debug\classes-3b068b63f734746a97b0dda3e8753513e924a3e9.jar" />
     </item>
     <item
         jar="D:\Mis cosas\Universidad\Android\APPUNGS_PPS1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"

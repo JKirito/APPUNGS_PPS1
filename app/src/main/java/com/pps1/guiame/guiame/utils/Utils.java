@@ -75,30 +75,23 @@ public class Utils
         return aula;
     }
 
-    public static void displayPromptForEnablingGPS(
-            final Activity activity)
+    public static String getCursoPersonalizado(String itemSeleccionado)
     {
-        final AlertDialog.Builder builder =
-                new AlertDialog.Builder(activity);
-        final String action = Settings.ACTION_LOCATION_SOURCE_SETTINGS;
-        final String message = "Enable either GPS or any other location"
-                + " service to find current location.  Click OK to go to"
-                + " location services settings to let you do so.";
-
-        builder.setMessage(message)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface d, int id) {
-                                activity.startActivity(new Intent(action));
-                                d.dismiss();
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface d, int id) {
-                                d.cancel();
-                            }
-                        });
-        builder.create().show();
+        String idCurso="";
+        if(itemSeleccionado != null && !itemSeleccionado.isEmpty())
+        {
+            int posInicio = itemSeleccionado.indexOf(0);
+            int posFin = itemSeleccionado.indexOf("-", posInicio);
+            try
+            {
+                idCurso = itemSeleccionado.substring(posInicio+1, posFin).trim();
+            }
+            catch (Exception e)
+            {
+                idCurso = "Sin id";
+            }
+            return idCurso;
+        }
+        return idCurso;
     }
 }
