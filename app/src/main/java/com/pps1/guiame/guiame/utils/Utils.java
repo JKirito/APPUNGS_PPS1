@@ -95,23 +95,4 @@ public class Utils
         return idCurso;
     }
 
-    public static String getAliasMateria(String itemSeleccionado)
-    {
-        String aliasMateria="";
-        if(itemSeleccionado != null && !itemSeleccionado.isEmpty())
-        {
-            int posInicio = itemSeleccionado.indexOf("-");
-            int posFin = itemSeleccionado.indexOf("-", posInicio);
-            try
-            {
-                aliasMateria = itemSeleccionado.substring(posInicio+1, posFin).trim();
-            }
-            catch (Exception e)
-            {
-                aliasMateria = "Sin alias";
-            }
-            return aliasMateria;
-        }
-        return aliasMateria;
-    }
 }

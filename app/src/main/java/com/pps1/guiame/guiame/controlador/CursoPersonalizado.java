@@ -79,7 +79,6 @@ public class CursoPersonalizado extends Activity
                     public void run()
                     {
                         String idCurso = Utils.getCursoPersonalizado(itemSeleccionado);
-                        String aliasMateria = Utils.getAliasMateria(itemSeleccionado); //Lo pongo separado de getCursoPersonalizado porque a ese no lo vamos a usar cuand oestè la clase Curso
 
                         if(idCurso == null)
                         {
@@ -95,8 +94,7 @@ public class CursoPersonalizado extends Activity
                         }
 
                         Bundle bundleNombrePersonalizado = new Bundle();
-                        bundleNombrePersonalizado.putSerializable("idCurso", idCurso);
-                        bundleNombrePersonalizado.putSerializable("aliasMateria",aliasMateria);
+                        bundleNombrePersonalizado.putString("idCurso", idCurso);
 
                         Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
                         intent.putExtras(bundleNombrePersonalizado);

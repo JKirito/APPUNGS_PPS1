@@ -23,7 +23,6 @@ public class NombreCursoPersonalizado extends Activity
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
     private String idCurso;
-    private String aliasMateria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +31,8 @@ public class NombreCursoPersonalizado extends Activity
         setContentView(R.layout.activity_nombre_curso_personalizado);
         txtNombreMateria = (EditText)findViewById(R.id.txtNombreMateria);
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
-        setTitle("Personalizar materia");
+        setTitle("Personalizar nombre de curso");
 
-        idCurso = (String) getIntent().getExtras().get("idCurso");
-        aliasMateria = (String) getIntent().getExtras().get("aliasMateria");
-        getIntent().getExtras().clear();
-        txtNombreMateria.setText(aliasMateria);
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
@@ -49,6 +44,9 @@ public class NombreCursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
+                        idCurso = (String) getIntent().getExtras().get("idCurso");
+                        getIntent().getExtras().clear();
+
                         Buscador buscador = new Buscador(SessionManager.getUser());
                         buscador.registrarCursoPersonalizado(idCurso);
                         runOnUiThread(
