@@ -47,7 +47,7 @@ public class NombreCursoPersonalizado extends Activity
                         idCurso = (String) getIntent().getExtras().get("idCurso");
                         getIntent().getExtras().clear();
 
-                        Buscador buscador = new Buscador(SessionManager.getUser());
+                        Buscador buscador = new Buscador(UsuarioLogin.getUsuario());
                         buscador.registrarCursoPersonalizado(idCurso);
                         runOnUiThread(
                                 new Runnable() {
