@@ -71,6 +71,6 @@ public class Curso {
 
     @Override
     public String toString() {
-        return this.nombre+" "+;
+        return this.nombre + " - Aula: " + this.aula + " - " + this.diasYHorarios + " Prof "+ this.docente;
     }
 }
