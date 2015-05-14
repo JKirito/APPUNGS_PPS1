@@ -1,8 +1,12 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +14,11 @@ import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.persistencia.dao.Buscador;
+import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
-public class NombreCursoPersonalizado extends ActionBarActivity
+import java.util.ArrayList;
+
+public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
@@ -24,7 +31,8 @@ public class NombreCursoPersonalizado extends ActionBarActivity
         setContentView(R.layout.activity_nombre_curso_personalizado);
         txtNombreMateria = (EditText)findViewById(R.id.txtNombreMateria);
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
-        setTitle("Personalizar materia");
+        setTitle("Personalizar nombre de curso");
+
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
@@ -38,7 +46,8 @@ public class NombreCursoPersonalizado extends ActionBarActivity
                     {
                         idCurso = (String) getIntent().getExtras().get("idCurso");
                         getIntent().getExtras().clear();
-                        Buscador buscador = new Buscador(UsuarioLogin.getUsuario());
+
+                        Buscador buscador = new Buscador(SessionManager.getUser());
                         buscador.registrarCursoPersonalizado(idCurso);
                         runOnUiThread(
                                 new Runnable() {
@@ -56,7 +65,6 @@ public class NombreCursoPersonalizado extends ActionBarActivity
             }
         });
 
-        txtNombreMateria.setText(idCurso);
     }
 
     //Al presionar el botón Atrás vuelve a la clase CursoPersonalizado

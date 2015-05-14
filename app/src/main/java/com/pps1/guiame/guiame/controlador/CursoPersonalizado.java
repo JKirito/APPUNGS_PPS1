@@ -94,7 +94,7 @@ public class CursoPersonalizado extends Activity
                         }
 
                         Bundle bundleNombrePersonalizado = new Bundle();
-                        bundleNombrePersonalizado.putSerializable("idCurso", idCurso);
+                        bundleNombrePersonalizado.putString("idCurso", idCurso);
 
                         Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
                         intent.putExtras(bundleNombrePersonalizado);
@@ -110,30 +110,6 @@ public class CursoPersonalizado extends Activity
         adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,datos);
         listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         listaCursosJuntos.setAdapter(adaptador);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_curso_personalizado, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public void onBackPressed()
