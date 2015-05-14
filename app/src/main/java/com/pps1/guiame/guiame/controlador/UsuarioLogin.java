@@ -1,24 +1,21 @@
 package com.pps1.guiame.guiame.controlador;
 
-import java.util.Date;
-
-public class SessionManager
+public class UsuarioLogin
 {
-    private static String user;
+    private static String usuario;
     private static String nombre;
     private static String password;
     private static int admin;
-    private static Date initSession;
-    private static Date finSession;
+    private static int id;
 
-    public static String getUser()
+    public static String getUsuario()
     {
-        return user;
+        return usuario;
     }
 
-    public static void setUser(String usuario)
+    public static void setUsuario(String usuario)
     {
-        user = usuario;
+        UsuarioLogin.usuario = usuario;
     }
 
     public static String getPassword()
@@ -36,7 +33,7 @@ public class SessionManager
     }
 
     public static void setNombre(String nombre) {
-        SessionManager.nombre = nombre;
+        UsuarioLogin.nombre = nombre;
     }
 
     public static int getAdmin()
@@ -45,32 +42,20 @@ public class SessionManager
     }
 
     public static void setAdmin(int admin){
-        SessionManager.admin = admin;}
+        UsuarioLogin.admin = admin;}
 
-    public static Date getInitSession()
-    {
-        return initSession;
+    public static int getId() {
+        return id;
     }
 
-    public static void setInitSession(Date initSession)
-    {
-        SessionManager.initSession = initSession;
-    }
-
-    public static Date getFinSession()
-    {
-        return finSession;
-    }
-
-    public static void setFinSession(Date finSession)
-    {
-        SessionManager.finSession = finSession;
+    public static void setId(int id) {
+        UsuarioLogin.id = id;
     }
 
     //Cerramos sesión del usuario conectado
     public static void logout()
     {
-        user = null;
+        usuario = null;
         password = null;
         nombre = null;
         admin = 0;
@@ -79,7 +64,7 @@ public class SessionManager
     //Verificamos si el usuario ha iniciado sesion
     public static boolean isUserOn()
     {
-        if(user != null && password != null)
+        if(usuario != null && password != null)
         {
             return true;
         }

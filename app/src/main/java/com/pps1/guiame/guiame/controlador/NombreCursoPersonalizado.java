@@ -3,9 +3,6 @@ package com.pps1.guiame.guiame.controlador;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,9 +10,6 @@ import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.persistencia.dao.Buscador;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
-
-import java.util.ArrayList;
 
 public class NombreCursoPersonalizado extends ActionBarActivity
 {
@@ -44,7 +38,7 @@ public class NombreCursoPersonalizado extends ActionBarActivity
                     {
                         idCurso = (String) getIntent().getExtras().get("idCurso");
                         getIntent().getExtras().clear();
-                        Buscador buscador = new Buscador(SessionManager.getUser());
+                        Buscador buscador = new Buscador(UsuarioLogin.getUsuario());
                         buscador.registrarCursoPersonalizado(idCurso);
                         runOnUiThread(
                                 new Runnable() {

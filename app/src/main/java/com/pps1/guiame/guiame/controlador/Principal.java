@@ -53,11 +53,11 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                Log.d("USER", SessionManager.getUser() + "");
-                Log.d("PASSW", SessionManager.getPassword() + "");
+                Log.d("USER", UsuarioLogin.getUsuario() + "");
+                Log.d("PASSW", UsuarioLogin.getPassword() + "");
                 // si NO está logeado, que vaya a la pantalla de ingreso
-                if(SessionManager.getUser() == null || SessionManager.getUser().isEmpty() ||
-                        SessionManager.getPassword() == null || SessionManager.getPassword().isEmpty())
+                if(UsuarioLogin.getUsuario() == null || UsuarioLogin.getUsuario().isEmpty() ||
+                        UsuarioLogin.getPassword() == null || UsuarioLogin.getPassword().isEmpty())
                 {
                     Intent intent = new Intent(Principal.this, Ingreso.class);
                     startActivity(intent);
@@ -72,7 +72,7 @@ public class Principal extends Activity
                     {
                         @Override
                         public void run(){
-                            Listador listador = new Listador(SessionManager.getUser());
+                            Listador listador = new Listador(UsuarioLogin.getUsuario());
                             final ArrayList<String> materias = listador.getListadoCursosUsuario();
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Materias", materias);
@@ -137,11 +137,11 @@ public class Principal extends Activity
      */
     private void habilitarBotones()
     {
-        if(SessionManager.isUserOn())
+        if(UsuarioLogin.isUserOn())
         {
             btnRegistrarse.setVisibility(View.INVISIBLE);
             btnIngresar.setText(R.string.misCursos);
-            if(SessionManager.isAdministrador())
+            if(UsuarioLogin.isAdministrador())
             {
                 btnAgregarAula.setVisibility(View.VISIBLE);
             }

@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
-import com.pps1.guiame.guiame.utils.Utils;
 
 
 public class AulaAAgregar extends ActionBarActivity
@@ -110,7 +109,7 @@ public class AulaAAgregar extends ActionBarActivity
         int id = item.getItemId();
         if (id == R.id.Salir)
         {
-            SessionManager.logout();
+            UsuarioLogin.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent =
                     new Intent(AulaAAgregar.this, Principal.class);

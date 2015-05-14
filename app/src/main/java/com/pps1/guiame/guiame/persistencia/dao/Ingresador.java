@@ -3,7 +3,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.pps1.guiame.guiame.controlador.SessionManager;
+import com.pps1.guiame.guiame.controlador.UsuarioLogin;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
@@ -83,6 +83,7 @@ public class Ingresador extends ActionBarActivity
             cantidadRegistrados = json.getJSONObject(0).getString("COUNT(*)");
             String nombre = json.getJSONObject(0).getString("nombre");
             int admin = json.getJSONObject(0).getInt("admin");
+            int id = json.getJSONObject(0).getInt("id");
 
            isValido = cantidadRegistrados.toString().equals("1");//Si hay un registrado que tiene ese dni
             Log.d("valido", isValido.toString());
@@ -91,12 +92,11 @@ public class Ingresador extends ActionBarActivity
             {
                 nombre = nombre != null ? nombre.split(" ")[0] : "";
                 // Guardo datos en sessionManager
-                SessionManager.setInitSession(new Date());
-                SessionManager.setUser(dni);
-                SessionManager.setPassword(pass);
-                SessionManager.setNombre(nombre);
-                SessionManager.setAdmin(admin);
-                Log.d("ADMIN",Integer.toString(admin));
+                UsuarioLogin.setUsuario(dni);
+                UsuarioLogin.setPassword(pass);
+                UsuarioLogin.setNombre(nombre);
+                UsuarioLogin.setAdmin(admin);
+                UsuarioLogin.setId(id);
             }
         }
         catch (Exception e)

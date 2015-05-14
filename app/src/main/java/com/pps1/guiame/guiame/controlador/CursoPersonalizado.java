@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import com.pps1.guiame.guiame.utils.Utils;
 
 import java.util.ArrayList;
 
-public class CursoPersonalizado extends ActionBarActivity
+public class CursoPersonalizado extends Activity
 {
     private Button btnBuscarCurso;
     private ListView listaCursosJuntos;
@@ -33,8 +34,6 @@ public class CursoPersonalizado extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_personalizado);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
-        String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
-        setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
 
@@ -48,7 +47,7 @@ public class CursoPersonalizado extends ActionBarActivity
                     @Override
                     public void run()
                     {
-                        Listador listador = new Listador(SessionManager.getUser(), txtNombreMateria.getText().toString());
+                        Listador listador = new Listador(UsuarioLogin.getUsuario(), txtNombreMateria.getText().toString());
                         final ArrayList<String> cursos = listador.getListadoCursosJuntos();
                         runOnUiThread(
                                 new Runnable()

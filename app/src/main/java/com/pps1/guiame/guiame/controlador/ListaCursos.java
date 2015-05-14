@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -38,7 +37,7 @@ public class ListaCursos extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cursos);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
-        String nombreUsuario = SessionManager.getNombre() != null ? " "+SessionManager.getNombre() : "";
+        String nombreUsuario = UsuarioLogin.getNombre() != null ? " "+ UsuarioLogin.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
 
         dialog = new ProgressDialog(this);
@@ -140,7 +139,7 @@ public class ListaCursos extends ActionBarActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu_lista, menu);
-        if(SessionManager.isUserOn())
+        if(UsuarioLogin.isUserOn())
         {
             menu.getItem(0).setVisible(false); //Iniciar Sesion
             menu.getItem(1).setVisible(false); //Registrarse
@@ -176,7 +175,7 @@ public class ListaCursos extends ActionBarActivity
         }
         else if (id == R.id.Salir)
         {
-            SessionManager.logout();
+            UsuarioLogin.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListaCursos.this, Principal.class);
             startActivity(intent);
