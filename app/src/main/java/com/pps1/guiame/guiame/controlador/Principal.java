@@ -72,7 +72,7 @@ public class Principal extends Activity
                     {
                         @Override
                         public void run(){
-                            Listador listador = new Listador(UsuarioLogin.getUsuario());
+                            Listador listador = new Listador(UsuarioLogin.getId());
                             final ArrayList<String> materias = listador.getListadoCursosUsuario();
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Materias", materias);

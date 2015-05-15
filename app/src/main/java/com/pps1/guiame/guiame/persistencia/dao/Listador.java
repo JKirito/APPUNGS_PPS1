@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Listador
 {
-    private String dni;
+    private Integer idUsuario;
     private String textoCurso;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
     private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php";
@@ -20,14 +20,14 @@ public class Listador
 
     public Listador(){}
 
-    public Listador(String dni)
+    public Listador(Integer idUsuario)
     {
-        this.dni = dni;
+        this.idUsuario = idUsuario;
     }
 
-    public Listador(String dni,String textoCurso)
+    public Listador(Integer idUsuario,String textoCurso)
     {
-        this.dni = dni;
+        this.idUsuario = idUsuario;
         this.textoCurso = textoCurso;
     }
 
@@ -36,7 +36,7 @@ public class Listador
     {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
-        datos.put("dni",dni);
+        datos.put("id",idUsuario.toString());
 
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR);
         ArrayList<String> listadoCursos = obtDatosJSON(result);

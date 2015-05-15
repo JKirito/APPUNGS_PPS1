@@ -47,7 +47,7 @@ public class CursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
-                        Listador listador = new Listador(UsuarioLogin.getUsuario(), txtNombreMateria.getText().toString());
+                        Listador listador = new Listador(UsuarioLogin.getId(), txtNombreMateria.getText().toString());
                         final ArrayList<String> cursos = listador.getListadoCursosJuntos();
                         runOnUiThread(
                                 new Runnable()

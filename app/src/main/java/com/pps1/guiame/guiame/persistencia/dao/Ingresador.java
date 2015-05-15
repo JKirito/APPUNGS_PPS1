@@ -19,7 +19,6 @@ public class Ingresador extends ActionBarActivity
 {
     private String dni;
     private String pass;
-    private Boolean estadoUsuario;
 
     private final String MSJ_DNI_INVALIDO = "DNI invalido";
     private final String MSJ_PASS_NULL = "Debe ingresar la contraseña";
@@ -108,14 +107,11 @@ public class Ingresador extends ActionBarActivity
 
     public Boolean validarUsuario()
     {
-        estadoUsuario = false; //Lo inicializo por las dudas
-
-                Map<String,String> datos = new HashMap<String,String>();
-                datos.put("dni", dni);
-                datos.put("contrasena",pass);
-                final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
-                Log.d("Resultado count", resultado);
-                estadoUsuario = isUsuarioValido(resultado);
-        return estadoUsuario;
+        Map<String,String> datos = new HashMap<String,String>();
+        datos.put("dni", dni);
+        datos.put("contrasena",pass);
+        final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
+        Log.d("Resultado count", resultado);
+        return isUsuarioValido(resultado);
     }
 }
