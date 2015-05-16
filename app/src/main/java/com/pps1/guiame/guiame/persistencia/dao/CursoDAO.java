@@ -3,6 +3,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 import android.util.Log;
 
 import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
@@ -16,6 +17,7 @@ import java.util.Map;
 public class CursoDAO {
     private final String PHP_NAME_REGISTRADOR_AULA = "registrarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
+    private final String PHP_NAME_CURSO_PERSONAL = "registrarCursoPersonalizado.php";
 
     public void registrarAula(Aula aula)
     {
@@ -53,5 +55,16 @@ public class CursoDAO {
         Double latitud = ubicacion != null ? Double.valueOf(ubicacion.split(",")[0]) : 0.0;
         Double longitud = ubicacion != null ? Double.valueOf(ubicacion.split(",")[1]) : 0.0;
         return new Aula(numAula, latitud, longitud);
+    }
+
+    public void registrarCursoPersonalizado(Curso curso, Integer idUsuario)
+    {
+        Map<String, String> datos = new HashMap<String, String>();
+        datos.put("idUsuario",idUsuario.toString());
+        datos.put("idCurso",curso.getId().toString());
+        datos.put("nombre",curso.getNombre().toString());
+
+        String result = Conexion.enviarPost(datos, PHP_NAME_CURSO_PERSONAL);
+        Log.d("RESULTADOU", result);
     }
 }

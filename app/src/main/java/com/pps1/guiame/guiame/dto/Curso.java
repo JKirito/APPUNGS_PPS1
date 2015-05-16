@@ -1,9 +1,11 @@
 package com.pps1.guiame.guiame.dto;
 
+import java.io.Serializable;
+
 /**
  * Created by javi on 13/05/15.
  */
-public class Curso {
+public class Curso implements Serializable {
     private Integer id;
     private String nombre;
     private String comision;

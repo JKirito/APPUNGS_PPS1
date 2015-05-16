@@ -2,6 +2,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
+import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
@@ -59,13 +60,13 @@ public class Listador
     }
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
-    public ArrayList<String> getListadoCursosJuntos()
+    public ArrayList<Curso> getListadoCursosJuntos()
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto",textoCurso);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);
 
-        ArrayList<String> listadoCursos = obtDatosJSONCursosJuntos(result);
+        ArrayList<Curso> listadoCursos = obtDatosJSONCursosJuntos2(result);
 
         //TODO: qué hago con el result?
         Log.d("resultPostListadoCurso", result == null ? "null :(": result);
@@ -81,7 +82,7 @@ public class Listador
             String texto;
             for (int i=0; i<json.length();i++)
             {
-                texto = json.getJSONObject(i).getString("alias") +"- Aula: "+
+                texto = json.getJSONObject(i).getString("nomPersonalizado") +"- Aula: "+
                         json.getJSONObject(i).getString("numero") +" - "+
                         json.getJSONObject(i).getString("comision") +" - "+
                         json.getJSONObject(i).getString("dia") +" de "+
@@ -102,7 +103,8 @@ public class Listador
     public ArrayList<String> obtDatosJSONCursosJuntos(String response)
     {
         ArrayList<String> listado= new ArrayList<String>();
-        try {
+        try
+        {
             JSONArray json= new JSONArray(response);
             String texto;
             for (int i=0; i<json.length();i++)
@@ -115,6 +117,32 @@ public class Listador
                         json.getJSONObject(i).getString("nombre");
                 Log.d("texto",texto);
                 listado.add(texto);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("EXCEPCION obtDatosJSON", e+"");
+        }
+        return listado;
+    }
+
+    public ArrayList<Curso> obtDatosJSONCursosJuntos2(String response)
+    {
+        ArrayList<Curso> listado= new ArrayList<Curso>();
+        try
+        {
+            JSONArray json= new JSONArray(response);
+            Curso c;
+            for (int i=0; i<json.length();i++)
+            {
+                Integer id = json.getJSONObject(i).getInt("curso");
+                String nombreCurso = json.getJSONObject(i).getString("alias");
+                String aula = json.getJSONObject(i).getString("numero");
+                String comision = json.getJSONObject(i).getString("comision");
+                String horario = json.getJSONObject(i).getString("horario");
+                String prof = json.getJSONObject(i).getString("nombre");
+                c = new Curso(id, nombreCurso, comision, aula, prof, horario);
+                listado.add(c);
             }
         }
         catch (Exception e)
