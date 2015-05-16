@@ -27,8 +27,6 @@ public class NombreCursoPersonalizado extends Activity
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
         final Curso curso = (Curso) getIntent().getExtras().get("Curso");
         getIntent().getExtras().clear();
-        Log.d("txtnombmat", txtNombreMateria+" --");
-        Log.d("curso", curso+" --");
         txtNombreMateria.setText(curso.getNombre());
         setTitle("Personalizar nombre de curso");
 
