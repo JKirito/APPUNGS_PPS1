@@ -9,7 +9,6 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,13 +77,12 @@ public class Ingresador extends ActionBarActivity
         try
         {
             JSONArray json= new JSONArray(response);
-            String cantidadRegistrados="";
-            cantidadRegistrados = json.getJSONObject(0).getString("COUNT(*)");
+            String cantidadRegistrados= json.getJSONObject(0).getString("COUNT(*)");
             String nombre = json.getJSONObject(0).getString("nombre");
             int admin = json.getJSONObject(0).getInt("admin");
             int id = json.getJSONObject(0).getInt("id");
 
-           isValido = cantidadRegistrados.toString().equals("1");//Si hay un registrado que tiene ese dni
+           isValido = cantidadRegistrados.equals("1");//Si hay un registrado que tiene ese dni
             Log.d("valido", isValido.toString());
 
             if(isValido)

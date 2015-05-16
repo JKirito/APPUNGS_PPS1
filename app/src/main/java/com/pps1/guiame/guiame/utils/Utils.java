@@ -1,11 +1,5 @@
 package com.pps1.guiame.guiame.utils;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.provider.Settings;
-
 /**
  * Created by javi on 29/04/15.
  */
@@ -73,26 +67,6 @@ public class Utils
             return aula;
         }
         return aula;
-    }
-
-    public static String getCursoPersonalizado(String itemSeleccionado)
-    {
-        String idCurso="";
-        if(itemSeleccionado != null && !itemSeleccionado.isEmpty())
-        {
-            int posInicio = itemSeleccionado.indexOf(0);
-            int posFin = itemSeleccionado.indexOf("-", posInicio);
-            try
-            {
-                idCurso = itemSeleccionado.substring(posInicio+1, posFin).trim();
-            }
-            catch (Exception e)
-            {
-                idCurso = "Sin id";
-            }
-            return idCurso;
-        }
-        return idCurso;
     }
 
 }
