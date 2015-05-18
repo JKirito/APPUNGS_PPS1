@@ -1,7 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -61,7 +60,7 @@ public class ListaCursos extends ActionBarActivity
                             @Override
                             public void run()
                             {
-                               mostrarItems(cursos);
+                                mostrarItems(cursos);
                             }
                         });
             }
@@ -167,10 +166,6 @@ public class ListaCursos extends ActionBarActivity
         {
             case R.id.menuBorrarCurso:
                 this.eliminarCurso(info.position);
-               // this.llenarLista();
-                return true;
-            case R.id.menuLocalizarCurso:
-                this.geoLocalizarAula(info.position);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -204,13 +199,10 @@ public class ListaCursos extends ActionBarActivity
                             @Override
                             public void run() {
                                 ArrayList<Curso> cursosAeliminar = new ArrayList<Curso>();
-                                Log.d("SIZE ADAPT", adaptador.getCount() + "");
                                 for (int i = 0; i < adaptador.getCount(); i++)
                                 {
-                                    Log.d("CURSO ", i + "");
                                     if(((Curso)adaptador.getItem(i)).getId().equals(idCurso))
                                     {
-                                        Log.d("Agregando ID", idCurso + " - i: "+i);
                                         cursosAeliminar.add(adaptador.getItem(i));
                                     }
                                 }
@@ -277,4 +269,5 @@ public class ListaCursos extends ActionBarActivity
         startActivity(start);
         finishActivity(0);
     }
+
 }
