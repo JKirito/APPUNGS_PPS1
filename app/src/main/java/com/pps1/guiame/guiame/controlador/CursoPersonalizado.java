@@ -14,7 +14,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
+import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
 import java.util.ArrayList;
@@ -91,21 +93,21 @@ public class CursoPersonalizado extends Activity
             {
                 final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
-                Thread tr = new Thread()
-                {
-                    @Override
-                    public void run()
+                    Thread tr = new Thread()
                     {
-                        Bundle bundleNombrePersonalizado = new Bundle();
-                        bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
+                        @Override
+                        public void run()
+                        {
+                            Bundle bundleNombrePersonalizado = new Bundle();
+                            bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
 
-                        Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
-                        intent.putExtras(bundleNombrePersonalizado);
-                        startActivity(intent);
-                    }
-                };
-                tr.start();
-            }
+                            Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
+                            intent.putExtras(bundleNombrePersonalizado);
+                            startActivity(intent);
+                        }
+                    };
+                    tr.start();
+                }
         });
     }
     public void mostrarItems(ArrayList<Curso> datos)

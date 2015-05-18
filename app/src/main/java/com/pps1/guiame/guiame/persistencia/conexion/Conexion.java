@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by javi on 29/04/15.
- */
 public class Conexion
 {
 

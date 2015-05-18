@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class Principal extends Activity
     ProgressDialog dialog;
     private Button btnRegistrarse;
     private Button btnIngresar;
-    private Button btnVistaRapida;
+    private Button btnBuscarCurso;
     private Button btnAgregarAula;
 
     @Override
@@ -28,7 +29,7 @@ public class Principal extends Activity
         setContentView(R.layout.activity_pantalla_principal);
         btnRegistrarse = (Button)findViewById(R.id.btnRegistrarse);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
-        btnVistaRapida = (Button)findViewById(R.id.btnVistaRapida);
+        btnBuscarCurso = (Button)findViewById(R.id.btnBuscar);
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
         dialog = new ProgressDialog(this);
         habilitarBotones();
@@ -73,9 +74,9 @@ public class Principal extends Activity
                         @Override
                         public void run(){
                             Listador listador = new Listador(UsuarioLogin.getId());
-                            final ArrayList<String> materias = listador.getListadoCursosUsuario();
+                            final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
                             Bundle bundleMaterias = new Bundle();
-                            bundleMaterias.putSerializable("Materias", materias);
+                            bundleMaterias.putSerializable("Cursos", cursos);
                             Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
@@ -88,31 +89,15 @@ public class Principal extends Activity
             }
         });
 
-        btnVistaRapida.setOnClickListener(new View.OnClickListener()
+
+        btnBuscarCurso.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                dialog.setMessage("Actualizando datos...");
-                dialog.show();
-                Thread tr = new Thread()
-                {
-                    @Override
-                    public void run()
-                    {
-                        Listador listador = new Listador();
-                        ArrayList<String> materias = listador.getListadoCursosDisponibles();
-                        Bundle bundleMaterias = new Bundle();
-                        bundleMaterias.putSerializable("Materias", materias);
-                        //Creamos el Intent
-                        Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
-                        intent.putExtras(bundleMaterias);
-                        startActivity(intent);
-                        dialog.dismiss(); //Cierra el dialog
-                        finish();
-                    }
-                };
-                tr.start();
+                Intent intent = new Intent(getApplicationContext(), CursoABuscar.class);
+                startActivity(intent);
+                finish();
             }
         });
         btnAgregarAula.setOnClickListener(new View.OnClickListener() {

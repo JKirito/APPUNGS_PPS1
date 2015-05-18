@@ -9,12 +9,22 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text = "@string/guiaNombreCurso"
+            android:textColor="@color/white"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="20dip"
+            android:id="@+id/lblNombreMateria" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dip"
             android:hint = "@string/nombreCurso"
             android:textColor="@color/input_login"
             android:padding="10dp"

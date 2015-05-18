@@ -72,7 +72,8 @@ public class Curso implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return this.nombre + " - Aula: " + this.aula + " - " + this.diasYHorarios + " Prof "+ this.docente;
+    public String toString()
+    {
+        return this.nombre + " - Aula: " + this.aula + " - " + this.diasYHorarios + " Prof.: "+ this.docente;
     }
 }

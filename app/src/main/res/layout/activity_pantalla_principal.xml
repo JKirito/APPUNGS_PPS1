@@ -31,8 +31,8 @@
         android:background="@color/boton"
         android:layout_marginTop="10dip"
         android:textColor="@color/white"
-        android:text="@string/cursosDisponibles"
-        android:id="@+id/btnVistaRapida"
+        android:text="@string/buscarCurso"
+        android:id="@+id/btnBuscar"
         android:layout_gravity="center_horizontal" />
 
     <Button

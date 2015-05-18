@@ -16,10 +16,8 @@ public class Listador
     private Integer idUsuario;
     private String textoCurso;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
-    private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php";
+  //  private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php"; BORRAR
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
-
-    public Listador(){}
 
     public Listador(Integer idUsuario)
     {
@@ -33,21 +31,22 @@ public class Listador
     }
 
 
-    public ArrayList<String> getListadoCursosUsuario()
+    public ArrayList<Curso> getListadoCursosUsuario()
     {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id",idUsuario.toString());
 
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR);
-        ArrayList<String> listadoCursos = obtDatosJSON(result);
+        ArrayList<Curso> listadoCursos = obtDatosJSON(result);
 
         Log.d("resultPostListadoMatUS", result);
 
         return listadoCursos;
     }
 
-    public ArrayList<String> getListadoCursosDisponibles()
+    //BORRAR!
+   /* public ArrayList<String> getListadoCursosDisponibles()
     {
         String result = Conexion.getPHPResult(PHP_NAME_LISTADOR_TODO); //Obtenemos el resultado del query
 
@@ -57,7 +56,7 @@ public class Listador
         Log.d("resultPostListadoMat", result == null ? "null :(": result);
 
         return listadoCursosDisponibles; //Devolvemos lista de cursos
-    }
+    }*/
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     public ArrayList<Curso> getListadoCursosJuntos()
@@ -69,23 +68,25 @@ public class Listador
         return obtDatosJSONCursosJuntos(result);
     }
 
-    public ArrayList<String> obtDatosJSON(String response)
+    public ArrayList<Curso> obtDatosJSON(String response)
     {
-        ArrayList<String> listado= new ArrayList<String>();
-        try {
+        ArrayList<Curso> listado= new ArrayList<Curso>();
+        try
+        {
             JSONArray json= new JSONArray(response);
-            String texto;
+            Curso curso;
             for (int i=0; i<json.length();i++)
             {
-                texto = json.getJSONObject(i).getString("nomPersonalizado") +"- Aula: "+
-                        json.getJSONObject(i).getString("numero") +" - "+
-                        json.getJSONObject(i).getString("comision") +" - "+
-                        json.getJSONObject(i).getString("dia") +" de "+
-                        json.getJSONObject(i).getString("horaInicio") +" a "+
-                        json.getJSONObject(i).getString("horaFin") +" - "+
-                        json.getJSONObject(i).getString("nombre");
-                Log.d("texto",texto);
-                listado.add(texto);
+                int idCurso = json.getJSONObject(i).getInt("id_cursos");
+                String nombreCurso = json.getJSONObject(i).getString("nomPersonalizado");
+                String aula = json.getJSONObject(i).getString("numero");
+                String comision = json.getJSONObject(i).getString("comision")+" Dia: ";
+                String dia = json.getJSONObject(i).getString("dia")+" de ";
+                String horaInicio = json.getJSONObject(i).getString("horaInicio")+" a ";
+                String horaFin = json.getJSONObject(i).getString("horaFin")+" - ";
+                String prof = json.getJSONObject(i).getString("nombre");
+                curso = new Curso(idCurso, nombreCurso, comision, aula, prof, dia+horaInicio+horaFin);
+                listado.add(curso);
             }
         }
         catch (Exception e)

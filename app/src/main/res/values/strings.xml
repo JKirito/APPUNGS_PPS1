@@ -11,8 +11,9 @@
     <string name="repetirContraseña">Repita la contraseña</string>
     <string name="buscar">Buscar</string>
 
-    <string name="numeroAula">Número de aula</string>
-    <string name="nombreCurso">Nombre del curso</string>
+    <string name="numeroAula">Ingrese número de aula</string>
+    <string name="nombreCurso"> Ingrese nombre de la materia</string>
+    <string name="guiaNombreCurso">Puede dejar el nombre original de la materia o cambiarlo por uno que usted desee.</string>
 
     <string name="verModulos">Mostrar Módulos</string>
     <string name="ocultarModulos">Ocultar Módulos</string>
@@ -22,20 +23,29 @@
 
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
-    <string name="cursosDisponibles">Cursos disponibles</string>
     <string name="misCursos">Ver mis cursos</string>
+
+
+    <string name="buscarCurso">Buscar curso</string>
+    <string name="guardarCurso">Guardar curso</string>
+    <string name="borrarCurso">Borrar curso</string>
+    <string name="localizarCurso">Localizar</string>
+    <string name="agregarNuevoCurso">Agregar nuevo curso</string>
+    <string name="guiaBorrarCurso">Seleccione el curso a borrar</string>
 
     <string name="title_activity_pantalla_principal">Principal</string>
     <string name="title_activity_ingreso">Ingresar cuenta</string>
     <string name="title_activity_lista">Bienvenid@</string>
     <string name="title_activity_mapa">Mapa</string>
     <string name="title_activity_agregar_aula">Agregar aula</string>
-    <string name="buscarCurso">Buscar curso</string>
-    <string name="guardarCurso">Guardar curso</string>
-    <string name="agregarNuevoCurso">Agregar nuevo curso</string>
     <string name="title_activity_registro">Registro de cuenta</string>
     <string name="title_activity_curso_personalizado">Curso Personalizado</string>
 
     <string name="title_activity_nombre_curso_personalizado">Nombre personalizado</string>
+    <string name="title_activity_curso_aborrar">CursoABorrar</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_curso_abuscar">CursoABuscar</string>
 
 </resources>

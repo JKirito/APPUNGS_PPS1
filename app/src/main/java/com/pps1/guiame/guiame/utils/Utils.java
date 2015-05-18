@@ -1,8 +1,5 @@
 package com.pps1.guiame.guiame.utils;
 
-/**
- * Created by javi on 29/04/15.
- */
 public class Utils
 {
 

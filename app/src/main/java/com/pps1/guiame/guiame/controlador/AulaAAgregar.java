@@ -158,4 +158,11 @@ public class AulaAAgregar extends ActionBarActivity
 //        }
 //        return null;
     }
+
+    public void onBackPressed()
+    {
+        Intent start = new Intent(AulaAAgregar.this,Principal.class);
+        startActivity(start);
+        finishActivity(0);
+    }
 }

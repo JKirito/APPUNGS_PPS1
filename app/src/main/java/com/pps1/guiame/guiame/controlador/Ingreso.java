@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Ingresador;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
@@ -75,11 +76,11 @@ public class Ingreso extends ActionBarActivity
                             }
 
                             Listador listador = new Listador(UsuarioLogin.getId());
-                            final ArrayList<String> materias = listador.getListadoCursosUsuario();
-                            if(!materias.isEmpty())
+                            final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
+                            if(!cursos.isEmpty())
                             {
                                 Bundle bundleMaterias = new Bundle();
-                                bundleMaterias.putSerializable("Materias", materias);
+                                bundleMaterias.putSerializable("Cursos", cursos);
                                 Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
