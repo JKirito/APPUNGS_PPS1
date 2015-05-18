@@ -1,9 +1,7 @@
 package com.pps1.guiame.guiame.dto;
 
-/**
- * Created by javi on 13/05/15.
- */
-public class Curso {
+public class Curso
+{
     private Integer id;
     private String nombre;
     private String comision;
