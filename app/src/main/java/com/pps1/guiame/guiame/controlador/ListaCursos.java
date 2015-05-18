@@ -166,7 +166,7 @@ public class ListaCursos extends ActionBarActivity
         {
             case R.id.menuBorrarCurso:
                 this.eliminarCurso(info.position);
-                this.llenarLista();
+               // this.llenarLista();
                 return true;
             case R.id.menuLocalizarCurso:
                 this.geoLocalizarAula(info.position);
@@ -183,8 +183,9 @@ public class ListaCursos extends ActionBarActivity
     }
 
 
-    private void eliminarCurso(int posicionItemSeleccionado)
+    private void eliminarCurso(int posItemSeleccionado)
     {
+        final int posicionItemSeleccionado = posItemSeleccionado;
         final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
         dialog.setMessage("Eliminando curso...");
         dialog.show();
@@ -199,7 +200,19 @@ public class ListaCursos extends ActionBarActivity
                 String nombreMateria = curso.getNombre();
                 Borrador borrador = new Borrador(idCurso,idUsuario,nombreMateria);
                 borrador.eliminarCurso();
-                llenarLista(); //Llamo dos veces, esta mal!
+                runOnUiThread(
+                        new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                adaptador.remove(adaptador.getItem(posicionItemSeleccionado));
+                                adaptador.notifyDataSetChanged();
+                                dialog.dismiss(); //Cierra el dialog de EliminarCurso
+                                Toast.makeText(getApplicationContext(),
+                                        "Se elimino el curso correctamente", Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         };
         tr.start();
@@ -251,15 +264,13 @@ public class ListaCursos extends ActionBarActivity
             @Override
             public void run()
             {
-                Listador listador = new Listador(UsuarioLogin.getId());
-                final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
                 runOnUiThread(
                         new Runnable()
                         {
                             @Override
                             public void run()
                             {
-                                mostrarItems(cursos);
+                                adaptador.notifyDataSetChanged();
                                 dialog.dismiss(); //Cierra el dialog de EliminarCurso
                                 Toast.makeText(getApplicationContext(),
                                         "Se elimino el curso correctamente", Toast.LENGTH_LONG).show();
