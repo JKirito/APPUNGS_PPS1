@@ -9,7 +9,6 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ public class Ingresador extends ActionBarActivity
 {
     private String dni;
     private String pass;
-    private Boolean estadoUsuario;
 
     private final String MSJ_DNI_INVALIDO = "DNI invalido";
     private final String MSJ_PASS_NULL = "Debe ingresar la contraseña";
@@ -79,13 +77,12 @@ public class Ingresador extends ActionBarActivity
         try
         {
             JSONArray json= new JSONArray(response);
-            String cantidadRegistrados="";
-            cantidadRegistrados = json.getJSONObject(0).getString("COUNT(*)");
+            String cantidadRegistrados= json.getJSONObject(0).getString("COUNT(*)");
             String nombre = json.getJSONObject(0).getString("nombre");
             int admin = json.getJSONObject(0).getInt("admin");
             int id = json.getJSONObject(0).getInt("id");
 
-           isValido = cantidadRegistrados.toString().equals("1");//Si hay un registrado que tiene ese dni
+           isValido = cantidadRegistrados.equals("1");//Si hay un registrado que tiene ese dni
             Log.d("valido", isValido.toString());
 
             if(isValido)
@@ -108,14 +105,11 @@ public class Ingresador extends ActionBarActivity
 
     public Boolean validarUsuario()
     {
-        estadoUsuario = false; //Lo inicializo por las dudas
-
-                Map<String,String> datos = new HashMap<String,String>();
-                datos.put("dni", dni);
-                datos.put("contrasena",pass);
-                final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
-                Log.d("Resultado count", resultado);
-                estadoUsuario = isUsuarioValido(resultado);
-        return estadoUsuario;
+        Map<String,String> datos = new HashMap<String,String>();
+        datos.put("dni", dni);
+        datos.put("contrasena",pass);
+        final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
+        Log.d("Resultado count", resultado);
+        return isUsuarioValido(resultado);
     }
 }

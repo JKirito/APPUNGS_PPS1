@@ -74,7 +74,7 @@ public class Ingreso extends ActionBarActivity
                                 return;
                             }
 
-                            Listador listador = new Listador(txtDni.getText().toString());
+                            Listador listador = new Listador(UsuarioLogin.getId());
                             final ArrayList<String> materias = listador.getListadoCursosUsuario();
                             if(!materias.isEmpty())
                             {

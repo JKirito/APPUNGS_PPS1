@@ -2,27 +2,20 @@ package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
-import com.pps1.guiame.guiame.persistencia.dao.Buscador;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
-
-import java.util.ArrayList;
+import com.pps1.guiame.guiame.dto.Curso;
+import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 
 public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
-    private String idCurso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,24 +24,23 @@ public class NombreCursoPersonalizado extends Activity
         setContentView(R.layout.activity_nombre_curso_personalizado);
         txtNombreMateria = (EditText)findViewById(R.id.txtNombreMateria);
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
+        final Curso curso = (Curso) getIntent().getExtras().get("Curso");
+        getIntent().getExtras().clear();
+        txtNombreMateria.setText(curso.getNombre());
         setTitle("Personalizar nombre de curso");
-
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                curso.setNombre(txtNombreMateria.getText().toString());
                 Thread tr = new Thread()
                 {
                     @Override
                     public void run()
                     {
-                        idCurso = (String) getIntent().getExtras().get("idCurso");
-                        getIntent().getExtras().clear();
-
-                        Buscador buscador = new Buscador(UsuarioLogin.getUsuario());
-                        buscador.registrarCursoPersonalizado(idCurso);
+                        new CursoDAO().registrarCursoPersonalizado(curso, UsuarioLogin.getId());
                         runOnUiThread(
                                 new Runnable() {
                                     @Override
