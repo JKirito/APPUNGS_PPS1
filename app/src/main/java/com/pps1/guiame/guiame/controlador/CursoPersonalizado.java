@@ -92,6 +92,7 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+
                 final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
                 Thread tr = new Thread()

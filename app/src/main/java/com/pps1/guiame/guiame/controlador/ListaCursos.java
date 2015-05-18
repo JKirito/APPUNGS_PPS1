@@ -25,8 +25,6 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
-import com.pps1.guiame.guiame.persistencia.dao.Borrador;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
 import java.util.ArrayList;
 
@@ -90,6 +88,15 @@ public class ListaCursos extends ActionBarActivity
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3){}
+        });
+
+        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                geoLocalizarAula(position);
+    }
         });
     }
 
@@ -171,9 +178,6 @@ public class ListaCursos extends ActionBarActivity
                 this.eliminarCurso(info.position);
                // this.llenarLista();
                 return true;
-            case R.id.menuLocalizarCurso:
-                this.geoLocalizarAula(info.position);
-                return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -200,9 +204,6 @@ public class ListaCursos extends ActionBarActivity
             @Override
             public void run()
             {
-                String nombreMateria = curso.getNombre();
-                Borrador borrador = new Borrador(idCurso,idUsuario,nombreMateria);
-                borrador.eliminarCurso();
                 runOnUiThread(
                         new Runnable()
                         {
@@ -295,7 +296,6 @@ public class ListaCursos extends ActionBarActivity
                 }
             }
         };
-        tr.start();
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal
