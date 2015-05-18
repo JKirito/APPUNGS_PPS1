@@ -1,6 +1,5 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +24,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
+import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 
 import java.util.ArrayList;
 
@@ -88,15 +88,6 @@ public class ListaCursos extends ActionBarActivity
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3){}
-        });
-
-        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                geoLocalizarAula(position);
-    }
         });
     }
 
@@ -178,6 +169,9 @@ public class ListaCursos extends ActionBarActivity
                 this.eliminarCurso(info.position);
                // this.llenarLista();
                 return true;
+            case R.id.menuLocalizarCurso:
+                this.geoLocalizarAula(info.position);
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -198,15 +192,15 @@ public class ListaCursos extends ActionBarActivity
         dialog.show();
         Thread tr = new Thread()
         {
-            String idCurso = Integer.toString(curso.getId());
-            String idUsuario = Integer.toString(UsuarioLogin.getId());
+            Integer idCurso = curso.getId();
+            Integer idUsuario = UsuarioLogin.getId();
 
             @Override
             public void run()
             {
+                new CursoDAO().eliminarCurso(curso, UsuarioLogin.getId());
                 runOnUiThread(
-                        new Runnable()
-                        {
+                        new Runnable() {
                             @Override
                             public void run() {
                                 ArrayList<Curso> cursosAeliminar = new ArrayList<Curso>();
@@ -273,29 +267,6 @@ public class ListaCursos extends ActionBarActivity
             }
         };
         tr.start();
-    }
-
-    private void preguntar(int posicionCurso)
-    {
-
-        final int posicionCursoABorrar = posicionCurso;
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
-        {
-            @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
-                switch (which)
-                {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        eliminarCurso(posicionCursoABorrar);
-                        break;
-
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No borramos nada
-                        break;
-                }
-            }
-        };
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal
