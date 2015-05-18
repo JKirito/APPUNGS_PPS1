@@ -1,6 +1,8 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -88,6 +90,15 @@ public class ListaCursos extends ActionBarActivity
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3){}
         });
+
+        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                geoLocalizarAula(position);
+            }
+        });
     }
 
     /*
@@ -165,12 +176,11 @@ public class ListaCursos extends ActionBarActivity
         switch (item.getItemId())
         {
             case R.id.menuBorrarCurso:
-                this.eliminarCurso(info.position);
-               // this.llenarLista();
+                preguntar(info.position);
                 return true;
-            case R.id.menuLocalizarCurso:
+            /*case R.id.menuLocalizarCurso:
                 this.geoLocalizarAula(info.position);
-                return true;
+                return true;*/
             default:
                 return super.onContextItemSelected(item);
         }
@@ -206,7 +216,7 @@ public class ListaCursos extends ActionBarActivity
                             @Override
                             public void run()
                             {
-                                adaptador.remove(adaptador.getItem(posicionItemSeleccionado));
+                                adaptador.remove(curso);
                                 adaptador.notifyDataSetChanged();
                                 dialog.dismiss(); //Cierra el dialog de EliminarCurso
                                 Toast.makeText(getApplicationContext(),
@@ -257,28 +267,31 @@ public class ListaCursos extends ActionBarActivity
         tr.start();
     }
 
-    private void llenarLista()
+    private void preguntar(int posicionCurso)
     {
-        Thread tr = new Thread()
+
+        final int posicionCursoABorrar = posicionCurso;
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
         {
             @Override
-            public void run()
+            public void onClick(DialogInterface dialog, int which)
             {
-                runOnUiThread(
-                        new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                adaptador.notifyDataSetChanged();
-                                dialog.dismiss(); //Cierra el dialog de EliminarCurso
-                                Toast.makeText(getApplicationContext(),
-                                        "Se elimino el curso correctamente", Toast.LENGTH_LONG).show();
-                            }
-                        });
+                switch (which)
+                {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        eliminarCurso(posicionCursoABorrar);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No borramos nada
+                        break;
+                }
             }
         };
-        tr.start();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setMessage("Está seguro que desea eliminar este curso?").setPositiveButton("Si", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal

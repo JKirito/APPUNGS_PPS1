@@ -53,8 +53,10 @@ public class CursoPersonalizado extends Activity
                             "Debe ingresar al menos 4 caracteres", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 dialog.setMessage("Buscando...");
                 dialog.show();
+
                 Thread tr = new Thread()
                 {
                     @Override
@@ -81,7 +83,6 @@ public class CursoPersonalizado extends Activity
                     }
                 };
                 tr.start();
-
             }
         });
 
@@ -93,22 +94,23 @@ public class CursoPersonalizado extends Activity
             {
                 final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
-                    Thread tr = new Thread()
+                Thread tr = new Thread()
+                {
+                    @Override
+                    public void run()
                     {
-                        @Override
-                        public void run()
-                        {
-                            Bundle bundleNombrePersonalizado = new Bundle();
-                            bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
+                        Bundle bundleNombrePersonalizado = new Bundle();
+                        bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
 
-                            Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
-                            intent.putExtras(bundleNombrePersonalizado);
-                            startActivity(intent);
-                        }
-                    };
-                    tr.start();
-                }
+                        Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
+                        intent.putExtras(bundleNombrePersonalizado);
+                        startActivity(intent);
+                    }
+                };
+                tr.start();
+            }
         });
+
     }
     public void mostrarItems(ArrayList<Curso> datos)
     {

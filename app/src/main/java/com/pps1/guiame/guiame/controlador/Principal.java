@@ -95,7 +95,7 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(getApplicationContext(), CursoABuscar.class);
+                Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
                 startActivity(intent);
                 finish();
             }
