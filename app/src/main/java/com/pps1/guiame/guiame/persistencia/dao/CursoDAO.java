@@ -18,6 +18,7 @@ public class CursoDAO {
     private final String PHP_NAME_REGISTRADOR_AULA = "registrarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
     private final String PHP_NAME_CURSO_PERSONAL = "registrarCursoPersonalizado.php";
+    private final String PHP_NAME_BORRADOR_CURSO = "borrarCurso.php";
 
     public void registrarAula(Aula aula)
     {
@@ -66,5 +67,17 @@ public class CursoDAO {
 
         String result = Conexion.enviarPost(datos, PHP_NAME_CURSO_PERSONAL);
         Log.d("RESULTADOU", result);
+    }
+
+    public void eliminarCurso(Curso curso, Integer idUsuario)
+    {
+        //La key del map deben ser los nombres de los campos en la tabla
+        Map<String, String> datos = new HashMap<String, String>();
+        datos.put("id_cursos",curso.getId().toString());
+        datos.put("id_usuarios", idUsuario.toString());
+        //datos.put("nomPersonalizado",nombreMateria);
+
+        String result = Conexion.enviarPost(datos, PHP_NAME_BORRADOR_CURSO);
+        Log.d("RESULT BORRAR", result);
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -90,15 +91,6 @@ public class ListaCursos extends ActionBarActivity
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3){}
         });
-
-        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                geoLocalizarAula(position);
-            }
-        });
     }
 
     /*
@@ -176,11 +168,12 @@ public class ListaCursos extends ActionBarActivity
         switch (item.getItemId())
         {
             case R.id.menuBorrarCurso:
-                preguntar(info.position);
+                this.eliminarCurso(info.position);
+               // this.llenarLista();
                 return true;
-            /*case R.id.menuLocalizarCurso:
+            case R.id.menuLocalizarCurso:
                 this.geoLocalizarAula(info.position);
-                return true;*/
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
@@ -214,9 +207,23 @@ public class ListaCursos extends ActionBarActivity
                         new Runnable()
                         {
                             @Override
-                            public void run()
-                            {
-                                adaptador.remove(curso);
+                            public void run() {
+                                ArrayList<Curso> cursosAeliminar = new ArrayList<Curso>();
+                                Log.d("SIZE ADAPT", adaptador.getCount() + "");
+                                for (int i = 0; i < adaptador.getCount(); i++)
+                                {
+                                    Log.d("CURSO ", i + "");
+                                    if(((Curso)adaptador.getItem(i)).getId().equals(idCurso))
+                                    {
+                                        Log.d("Agregando ID", idCurso + " - i: "+i);
+                                        cursosAeliminar.add(adaptador.getItem(i));
+                                    }
+                                }
+
+                                for(Curso c : cursosAeliminar)
+                                {
+                                    adaptador.remove(c);
+                                }
                                 adaptador.notifyDataSetChanged();
                                 dialog.dismiss(); //Cierra el dialog de EliminarCurso
                                 Toast.makeText(getApplicationContext(),
@@ -288,10 +295,7 @@ public class ListaCursos extends ActionBarActivity
                 }
             }
         };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        builder.setMessage("Está seguro que desea eliminar este curso?").setPositiveButton("Si", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener).show();
+        tr.start();
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal
