@@ -1,11 +1,14 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,14 +30,16 @@ import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import java.util.ArrayList;
 
 
-public class ListaCursos extends ActionBarActivity {
+public class ListaCursos extends ActionBarActivity
+{
     private ListView listaCursos;
     ArrayAdapter<Curso> adaptador;
     EditText searchBox;
     ProgressDialog dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cursos);
         // as before
@@ -46,23 +51,26 @@ public class ListaCursos extends ActionBarActivity {
         setTitle(this.getString(R.string.title_activity_lista) + nombreUsuario + "!");
         dialog = new ProgressDialog(this);
 
-        Thread tr = new Thread() {
+        Thread tr = new Thread()
+        {
             @Override
-            public void run() {
+            public void run(){
                 final ArrayList<Curso> cursos = (ArrayList<Curso>) getIntent().getExtras().get("Cursos");
                 getIntent().getExtras().clear();
                 runOnUiThread(
                         new Runnable() {
                             @Override
-                            public void run() {
-                                mostrarItems(cursos);
+                            public void run()
+                            {
+                               mostrarItems(cursos);
                             }
                         });
             }
         };
         tr.start();
         searchBox = (EditText) findViewById(R.id.searchBox);
-        searchBox.addTextChangedListener(new TextWatcher() {
+        searchBox.addTextChangedListener(new TextWatcher()
+        {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
@@ -80,6 +88,15 @@ public class ListaCursos extends ActionBarActivity {
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
                                           int arg3) {
+            }
+        });
+
+        ((ListView) findViewById(R.id.listaMaterias)).setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                geoLocalizarAula(position);
             }
         });
     }
@@ -145,27 +162,28 @@ public class ListaCursos extends ActionBarActivity {
                 .getMenuInfo();
         switch (item.getItemId()) {
             case R.id.menuBorrarCurso:
-                this.eliminarCurso(info.position);
+                preguntar(info.position);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
 
-    public void mostrarItems(ArrayList<Curso> datos) {
-        adaptador = new ArrayAdapter<Curso>(this, android.R.layout.simple_list_item_1, datos);
+    public void mostrarItems(ArrayList<Curso> datos)
+    {
+        adaptador = new ArrayAdapter<Curso>(this,android.R.layout.simple_list_item_1,datos);
         listaCursos.setAdapter(adaptador);
     }
 
 
-    private void eliminarCurso(int posItemSeleccionado) {
+    private void eliminarCurso(int posItemSeleccionado)
+    {
         final int posicionItemSeleccionado = posItemSeleccionado;
         final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
         dialog.setMessage("Eliminando curso...");
         dialog.show();
         Thread tr = new Thread() {
             Integer idCurso = curso.getId();
-            Integer idUsuario = UsuarioLogin.getId();
 
             @Override
             public void run() {
@@ -195,7 +213,8 @@ public class ListaCursos extends ActionBarActivity {
         tr.start();
     }
 
-    private void geoLocalizarAula(int posicionItemSeleccionado) {
+    private void geoLocalizarAula(int posicionItemSeleccionado)
+    {
         final Curso itemSeleccionado = (Curso) listaCursos.getAdapter().getItem(posicionItemSeleccionado);
         dialog.setMessage("Buscando aula...");
         dialog.show();
@@ -226,6 +245,29 @@ public class ListaCursos extends ActionBarActivity {
             }
         };
         tr.start();
+    }
+
+    private void preguntar(int posicionCurso)
+    {
+
+        final int posicionCursoABorrar = posicionCurso;
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                switch (which)
+                {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        eliminarCurso(posicionCursoABorrar);
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No borramos nada
+                        break;
+                }
+            }
+        };
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal
