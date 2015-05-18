@@ -43,27 +43,4 @@ public class Utils
         return ubicacion;
     }
 
-    /**
-     * Devuelve el número del aula dentro del texto que recibe como parámetro.
-     *
-     * @param itemSeleccionado debe ser algo como "PPS1 - Aula:7070 - COM - DIA HORARIO - PROF"
-     */
-    public static String getNumAula(String itemSeleccionado)
-    {
-        String aula = "";
-        if(itemSeleccionado != null && !itemSeleccionado.isEmpty()) {
-            int posInicio = itemSeleccionado.indexOf(":");
-            int posFin = itemSeleccionado.indexOf("-", posInicio);
-            try
-            {
-                aula = itemSeleccionado.substring(posInicio + 1, posFin).trim();
-            } catch (Exception e)
-            {
-                aula = "Sin Aula";
-            }
-            return aula;
-        }
-        return aula;
-    }
-
 }

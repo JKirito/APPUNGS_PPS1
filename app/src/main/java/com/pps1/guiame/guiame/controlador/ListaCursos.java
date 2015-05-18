@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +23,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
-import com.pps1.guiame.guiame.persistencia.dao.Borrador;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 
 import java.util.ArrayList;
 
@@ -191,22 +191,33 @@ public class ListaCursos extends ActionBarActivity
         dialog.show();
         Thread tr = new Thread()
         {
-            String idCurso = Integer.toString(curso.getId());
-            String idUsuario = Integer.toString(UsuarioLogin.getId());
+            Integer idCurso = curso.getId();
+            Integer idUsuario = UsuarioLogin.getId();
 
             @Override
             public void run()
             {
-                String nombreMateria = curso.getNombre();
-                Borrador borrador = new Borrador(idCurso,idUsuario,nombreMateria);
-                borrador.eliminarCurso();
+                new CursoDAO().eliminarCurso(curso, UsuarioLogin.getId());
                 runOnUiThread(
-                        new Runnable()
-                        {
+                        new Runnable() {
                             @Override
-                            public void run()
-                            {
-                                adaptador.remove(adaptador.getItem(posicionItemSeleccionado));
+                            public void run() {
+                                ArrayList<Curso> cursosAeliminar = new ArrayList<Curso>();
+                                Log.d("SIZE ADAPT", adaptador.getCount() + "");
+                                for (int i = 0; i < adaptador.getCount(); i++)
+                                {
+                                    Log.d("CURSO ", i + "");
+                                    if(((Curso)adaptador.getItem(i)).getId().equals(idCurso))
+                                    {
+                                        Log.d("Agregando ID", idCurso + " - i: "+i);
+                                        cursosAeliminar.add(adaptador.getItem(i));
+                                    }
+                                }
+
+                                for(Curso c : cursosAeliminar)
+                                {
+                                    adaptador.remove(c);
+                                }
                                 adaptador.notifyDataSetChanged();
                                 dialog.dismiss(); //Cierra el dialog de EliminarCurso
                                 Toast.makeText(getApplicationContext(),
@@ -252,30 +263,6 @@ public class ListaCursos extends ActionBarActivity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
-            }
-        };
-        tr.start();
-    }
-
-    private void llenarLista()
-    {
-        Thread tr = new Thread()
-        {
-            @Override
-            public void run()
-            {
-                runOnUiThread(
-                        new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                adaptador.notifyDataSetChanged();
-                                dialog.dismiss(); //Cierra el dialog de EliminarCurso
-                                Toast.makeText(getApplicationContext(),
-                                        "Se elimino el curso correctamente", Toast.LENGTH_LONG).show();
-                            }
-                        });
             }
         };
         tr.start();
