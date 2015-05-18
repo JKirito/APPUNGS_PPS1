@@ -26,7 +26,6 @@ public class CursoPersonalizado extends Activity
     private Button btnBuscarCurso;
     private ListView listaCursosJuntos;
     private EditText txtNombreMateria;
-    ArrayAdapter<String> adaptador;
     ArrayAdapter<Curso> adaptadorCursos;
     ProgressDialog dialog;
 
@@ -62,24 +61,34 @@ public class CursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
-                        Listador listador = new Listador(UsuarioLogin.getId(), nombreMat);
-                        final ArrayList<Curso> cursos = listador.getListadoCursosJuntos();
-                        runOnUiThread(
-                                new Runnable()
-                                {
-                                    @Override
-                                    public void run()
+                        final ArrayList<Curso> cursos;
+                        if(UsuarioLogin.isUserOn())
+                        {
+                            Listador listador = new Listador(UsuarioLogin.getId(), nombreMat);
+                            cursos = listador.getListadoCursosJuntos();
+                            runOnUiThread(
+                                    new Runnable()
                                     {
-                                        if(cursos == null || cursos.isEmpty())
+                                        @Override
+                                        public void run()
                                         {
-                                            Toast.makeText(getApplicationContext(),
-                                                    "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
-                                        }
+                                            if(cursos == null || cursos.isEmpty())
+                                            {
+                                                Toast.makeText(getApplicationContext(),
+                                                        "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
+                                            }
 
-                                        mostrarItems(cursos);
-                                        dialog.dismiss();
-                                    }
-                                });
+
+                                        }
+                                    });
+                        }
+                        else
+                        {
+                            Listador listador = new Listador(UsuarioLogin.getId());
+                            cursos = listador.getListadoCursosUsuario();
+                        }
+                        mostrarItems(cursos);
+                        dialog.dismiss();
                     }
                 };
                 tr.start();
@@ -92,23 +101,30 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
+        if(UsuarioLogin.isUserOn())
+        {
+            final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
-                final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
-
-                Thread tr = new Thread()
+            Thread tr = new Thread()
+            {
+                @Override
+                public void run()
                 {
-                    @Override
-                    public void run()
-                    {
-                        Bundle bundleNombrePersonalizado = new Bundle();
-                        bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
+                    Bundle bundleNombrePersonalizado = new Bundle();
+                    bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
 
-                        Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
-                        intent.putExtras(bundleNombrePersonalizado);
-                        startActivity(intent);
-                    }
-                };
-                tr.start();
+                    Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
+                    intent.putExtras(bundleNombrePersonalizado);
+                    startActivity(intent);
+                }
+            };
+            tr.start();
+        }
+        else
+        {
+            geoLocalizarAula(position);
+        }
+
             }
         });
 
@@ -118,6 +134,45 @@ public class CursoPersonalizado extends Activity
         adaptadorCursos = new ArrayAdapter<Curso>(this,android.R.layout.simple_list_item_1,datos);
         listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         listaCursosJuntos.setAdapter(adaptadorCursos);
+    }
+
+    private void geoLocalizarAula(int posicionItemSeleccionado)
+    {
+        final Curso itemSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(posicionItemSeleccionado);
+        dialog.setMessage("Buscando aula...");
+        dialog.show();
+        Thread tr = new Thread()
+        {
+            @Override
+            public void run()
+            {
+                Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                if(aula == null)
+                {
+                    runOnUiThread(
+                            new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    Toast.makeText(getApplicationContext(),
+                                            "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
+                                    dialog.dismiss();
+                                }
+                            });
+                    return;
+                }
+
+                Bundle bundleBuscAula = new Bundle();
+                bundleBuscAula.putSerializable("Aula", aula);
+
+                Intent intent = new Intent(getApplicationContext(), Mapa.class);
+                intent.putExtras(bundleBuscAula);
+                startActivity(intent);
+                dialog.dismiss();
+            }
+        };
+        tr.start();
     }
 
     public void onBackPressed()
