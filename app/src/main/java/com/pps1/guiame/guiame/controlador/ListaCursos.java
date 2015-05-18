@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,16 +27,14 @@ import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import java.util.ArrayList;
 
 
-public class ListaCursos extends ActionBarActivity
-{
+public class ListaCursos extends ActionBarActivity {
     private ListView listaCursos;
     ArrayAdapter<Curso> adaptador;
     EditText searchBox;
     ProgressDialog dialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cursos);
         // as before
@@ -45,21 +42,19 @@ public class ListaCursos extends ActionBarActivity
         registerForContextMenu(listaCursos);
         listaCursos.setAdapter(adaptador);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
-        String nombreUsuario = UsuarioLogin.getNombre() != null ? " "+ UsuarioLogin.getNombre() : "";
-        setTitle(this.getString(R.string.title_activity_lista)+nombreUsuario+"!");
+        String nombreUsuario = UsuarioLogin.getNombre() != null ? " " + UsuarioLogin.getNombre() : "";
+        setTitle(this.getString(R.string.title_activity_lista) + nombreUsuario + "!");
         dialog = new ProgressDialog(this);
 
-        Thread tr = new Thread()
-        {
+        Thread tr = new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 final ArrayList<Curso> cursos = (ArrayList<Curso>) getIntent().getExtras().get("Cursos");
                 getIntent().getExtras().clear();
                 runOnUiThread(
                         new Runnable() {
                             @Override
-                            public void run()
-                            {
+                            public void run() {
                                 mostrarItems(cursos);
                             }
                         });
@@ -67,14 +62,11 @@ public class ListaCursos extends ActionBarActivity
         };
         tr.start();
         searchBox = (EditText) findViewById(R.id.searchBox);
-        searchBox.addTextChangedListener(new TextWatcher()
-        {
+        searchBox.addTextChangedListener(new TextWatcher() {
 
             @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3)
-            {
-                if(adaptador == null)
-                {
+            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
+                if (adaptador == null) {
                     return;
                 }
                 // When user changed the Text
@@ -82,11 +74,13 @@ public class ListaCursos extends ActionBarActivity
             }
 
             @Override
-            public void afterTextChanged(Editable editable){}
+            public void afterTextChanged(Editable editable) {
+            }
 
             @Override
             public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3){}
+                                          int arg3) {
+            }
         });
     }
 
@@ -96,17 +90,13 @@ public class ListaCursos extends ActionBarActivity
      * Si el usuario no está logeado, desactivar la opción de Salir
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lista, menu);
-        if(UsuarioLogin.isUserOn())
-        {
+        if (UsuarioLogin.isUserOn()) {
             menu.getItem(0).setVisible(false); //Iniciar Sesion
             menu.getItem(1).setVisible(false); //Registrarse
             menu.getItem(2).setVisible(true);  //Agregar nuevo curso
-        }
-        else
-        {
+        } else {
             menu.getItem(3).setVisible(false); //Salir
         }
         return true;
@@ -119,28 +109,20 @@ public class ListaCursos extends ActionBarActivity
       "Salir", cerramos la sesión actual y vuelve a Principal
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.IniciarSesion)
-        {
+        if (id == R.id.IniciarSesion) {
             Intent intent = new Intent(ListaCursos.this, Ingreso.class);
             startActivity(intent);
-        }
-        else if(id == R.id.Registrarse)
-        {
+        } else if (id == R.id.Registrarse) {
             Intent intent = new Intent(ListaCursos.this, Registro.class);
             startActivity(intent);
-        }
-        else if(id == R.id.AgregarNuevoCurso)
-        {
+        } else if (id == R.id.AgregarNuevoCurso) {
             Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
             startActivity(intent);
             finish();
-        }
-        else if (id == R.id.Salir)
-        {
+        } else if (id == R.id.Salir) {
             UsuarioLogin.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListaCursos.this, Principal.class);
@@ -149,21 +131,19 @@ public class ListaCursos extends ActionBarActivity
         finish();
         return super.onOptionsItemSelected(item);
     }
+
     public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo)
-    {
+                                    ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_opciones_lista, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item)
-    {
+    public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
                 .getMenuInfo();
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.menuBorrarCurso:
                 this.eliminarCurso(info.position);
                 return true;
@@ -172,43 +152,36 @@ public class ListaCursos extends ActionBarActivity
         }
     }
 
-    public void mostrarItems(ArrayList<Curso> datos)
-    {
-        adaptador = new ArrayAdapter<Curso>(this,android.R.layout.simple_list_item_1,datos);
+    public void mostrarItems(ArrayList<Curso> datos) {
+        adaptador = new ArrayAdapter<Curso>(this, android.R.layout.simple_list_item_1, datos);
         listaCursos.setAdapter(adaptador);
     }
 
 
-    private void eliminarCurso(int posItemSeleccionado)
-    {
+    private void eliminarCurso(int posItemSeleccionado) {
         final int posicionItemSeleccionado = posItemSeleccionado;
         final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
         dialog.setMessage("Eliminando curso...");
         dialog.show();
-        Thread tr = new Thread()
-        {
+        Thread tr = new Thread() {
             Integer idCurso = curso.getId();
             Integer idUsuario = UsuarioLogin.getId();
 
             @Override
-            public void run()
-            {
+            public void run() {
                 new CursoDAO().eliminarCurso(curso, UsuarioLogin.getId());
                 runOnUiThread(
                         new Runnable() {
                             @Override
                             public void run() {
                                 ArrayList<Curso> cursosAeliminar = new ArrayList<Curso>();
-                                for (int i = 0; i < adaptador.getCount(); i++)
-                                {
-                                    if(((Curso)adaptador.getItem(i)).getId().equals(idCurso))
-                                    {
+                                for (int i = 0; i < adaptador.getCount(); i++) {
+                                    if (((Curso) adaptador.getItem(i)).getId().equals(idCurso)) {
                                         cursosAeliminar.add(adaptador.getItem(i));
                                     }
                                 }
 
-                                for(Curso c : cursosAeliminar)
-                                {
+                                for (Curso c : cursosAeliminar) {
                                     adaptador.remove(c);
                                 }
                                 adaptador.notifyDataSetChanged();
@@ -222,25 +195,19 @@ public class ListaCursos extends ActionBarActivity
         tr.start();
     }
 
-    private void geoLocalizarAula(int posicionItemSeleccionado)
-    {
+    private void geoLocalizarAula(int posicionItemSeleccionado) {
         final Curso itemSeleccionado = (Curso) listaCursos.getAdapter().getItem(posicionItemSeleccionado);
         dialog.setMessage("Buscando aula...");
         dialog.show();
-        Thread tr = new Thread()
-        {
+        Thread tr = new Thread() {
             @Override
-            public void run()
-            {
+            public void run() {
                 Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
-                if(aula == null)
-                {
+                if (aula == null) {
                     runOnUiThread(
-                            new Runnable()
-                            {
+                            new Runnable() {
                                 @Override
-                                public void run()
-                                {
+                                public void run() {
                                     Toast.makeText(getApplicationContext(),
                                             "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
@@ -263,9 +230,8 @@ public class ListaCursos extends ActionBarActivity
 
     //Al presionar el botón Atrás vuelve a la clase Principal
     @Override
-    public void onBackPressed()
-    {
-        Intent start = new Intent(ListaCursos.this,Principal.class);
+    public void onBackPressed() {
+        Intent start = new Intent(ListaCursos.this, Principal.class);
         startActivity(start);
         finishActivity(0);
     }
