@@ -77,8 +77,6 @@ public class CursoPersonalizado extends Activity
                                                 Toast.makeText(getApplicationContext(),
                                                         "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
                                             }
-
-
                                         }
                                     });
                         }
@@ -101,31 +99,31 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-        if(UsuarioLogin.isUserOn())
-        {
-            final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
-
-            Thread tr = new Thread()
+            if(UsuarioLogin.isUserOn())
             {
-                @Override
-                public void run()
+                final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
+
+                Thread tr = new Thread()
                 {
-                    Bundle bundleNombrePersonalizado = new Bundle();
-                    bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
+                    @Override
+                    public void run()
+                    {
+                        Bundle bundleNombrePersonalizado = new Bundle();
+                        bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
 
-                    Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
-                    intent.putExtras(bundleNombrePersonalizado);
-                    startActivity(intent);
-                }
-            };
-            tr.start();
-        }
-        else
-        {
-            geoLocalizarAula(position);
-        }
-
+                        Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
+                        intent.putExtras(bundleNombrePersonalizado);
+                        startActivity(intent);
+                    }
+                };
+                tr.start();
             }
+            else
+            {
+                geoLocalizarAula(position);
+            }
+
+        }
         });
 
     }
