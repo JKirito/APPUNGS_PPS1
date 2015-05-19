@@ -80,7 +80,7 @@
         <!-- key debug -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC1-ANEqeuuVDZdLhRZi33YKpsgz6lGFJQ" />
+            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
         <activity
             android:name=".controlador.AulaAAgregar"
@@ -93,10 +93,6 @@
         <activity
             android:name=".controlador.NombreCursoPersonalizado"
             android:label="@string/title_activity_nombre_curso_personalizado" >
-        </activity>
-        <activity
-            android:name=".controlador.CursoABuscar"
-            android:label="@string/title_activity_curso_abuscar" >
         </activity>
     </application>
 
