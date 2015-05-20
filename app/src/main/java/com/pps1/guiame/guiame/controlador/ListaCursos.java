@@ -50,6 +50,8 @@ public class ListaCursos extends ActionBarActivity
         String nombreUsuario = UsuarioLogin.getNombre() != null ? " " + UsuarioLogin.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista) + nombreUsuario + "!");
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         Thread tr = new Thread()
         {
@@ -126,20 +128,27 @@ public class ListaCursos extends ActionBarActivity
       "Salir", cerramos la sesión actual y vuelve a Principal
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-        if (id == R.id.IniciarSesion) {
+        if (id == R.id.IniciarSesion)
+        {
             Intent intent = new Intent(ListaCursos.this, Ingreso.class);
             startActivity(intent);
-        } else if (id == R.id.Registrarse) {
+        }
+        else if (id == R.id.Registrarse)
+        {
             Intent intent = new Intent(ListaCursos.this, Registro.class);
             startActivity(intent);
-        } else if (id == R.id.AgregarNuevoCurso) {
+        }
+        else if (id == R.id.AgregarNuevoCurso)
+        {
             Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.Salir) {
+        } else if (id == R.id.Salir)
+        {
             UsuarioLogin.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListaCursos.this, Principal.class);
@@ -242,6 +251,7 @@ public class ListaCursos extends ActionBarActivity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
+                finish();
             }
         };
         tr.start();

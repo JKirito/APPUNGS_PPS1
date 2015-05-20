@@ -40,6 +40,8 @@ public class Registro extends ActionBarActivity
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
 
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         btnCancelar.setOnClickListener(new View.OnClickListener()
         {
@@ -50,6 +52,7 @@ public class Registro extends ActionBarActivity
                 Intent intent =
                         new Intent(Registro.this, Principal.class);
                 startActivity(intent);
+                finish();
             }
         });
 

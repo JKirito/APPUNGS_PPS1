@@ -58,6 +58,7 @@ public class NombreCursoPersonalizado extends Activity
                         Intent intent = new Intent(getApplicationContext(), Principal.class);
                         startActivity(intent);
                         dialog.dismiss();
+                        finish();
                     }
                 };
                 tr.start();

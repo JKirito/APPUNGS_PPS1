@@ -32,6 +32,8 @@ public class Principal extends Activity
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscar);
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
         habilitarBotones();
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener()
