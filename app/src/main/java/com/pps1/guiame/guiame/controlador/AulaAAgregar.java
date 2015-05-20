@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -28,6 +29,7 @@ public class AulaAAgregar extends ActionBarActivity
     private LocationManager locManager;
     private LocationListener locListener;
     private Object Settings;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,6 +40,7 @@ public class AulaAAgregar extends ActionBarActivity
 
         btnLocalizar = (Button)findViewById(R.id.btnAgregar);
         txtAula = (EditText)findViewById(R.id.txtAula);
+        dialog = new ProgressDialog(this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
         //y se la pasamos al agregador para que la inserte en la BD.
@@ -46,6 +49,8 @@ public class AulaAAgregar extends ActionBarActivity
            @Override
             public void onClick(View v)
             {
+                dialog.setMessage("Agregando aula...");
+                dialog.show();
 
                 final String numeroAula = txtAula.getText().toString();
                 final Location posicion = getPosicionAdmin();
@@ -81,6 +86,7 @@ public class AulaAAgregar extends ActionBarActivity
 
                             Intent intent = new Intent(AulaAAgregar.this, Principal.class);
                             startActivity(intent);
+                            dialog.dismiss();
                             finish();
                         }
                         catch (Exception e)

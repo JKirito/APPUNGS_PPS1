@@ -18,10 +18,16 @@ public class Listador
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
   //  private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php"; BORRAR
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
+    private final String PHP_NAME_LISTADOR_CURSOS = "listarCursos.php";
 
     public Listador(Integer idUsuario)
     {
         this.idUsuario = idUsuario;
+    }
+
+    public Listador(String textoCurso)
+    {
+        this.textoCurso = textoCurso;
     }
 
     public Listador(Integer idUsuario,String textoCurso)
@@ -45,18 +51,20 @@ public class Listador
         return listadoCursos;
     }
 
-    //BORRAR!
-   /* public ArrayList<String> getListadoCursosDisponibles()
+    public ArrayList<Curso> getListadoCursos()
     {
-        String result = Conexion.getPHPResult(PHP_NAME_LISTADOR_TODO); //Obtenemos el resultado del query
+        //La key del map deben ser los nombres de los campos en la tabla
+        Map<String, String> datos = new HashMap<String, String>();
+        datos.put("texto",textoCurso.toString());
 
-        ArrayList<String> listadoCursosDisponibles = obtDatosJSON(result); //Resultado con formato para lista
+        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_CURSOS);
+        ArrayList<Curso> listadoCursos = obtDatosJSONCursos(result);
 
-        //TODO: qué hago con el result?
-        Log.d("resultPostListadoMat", result == null ? "null :(": result);
+        Log.d("resultPostListadoMatUS", result);
 
-        return listadoCursosDisponibles; //Devolvemos lista de cursos
-    }*/
+        return listadoCursos;
+    }
+
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     public ArrayList<Curso> getListadoCursosJuntos()
@@ -65,7 +73,7 @@ public class Listador
         datos.put("texto",textoCurso);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);
 
-        return obtDatosJSONCursosJuntos(result);
+        return obtDatosJSONCursos(result);
     }
 
     public ArrayList<Curso> obtDatosJSON(String response)
@@ -96,7 +104,7 @@ public class Listador
         return listado;
     }
 
-    public ArrayList<Curso> obtDatosJSONCursosJuntos(String response)
+    public ArrayList<Curso> obtDatosJSONCursos(String response)
     {
         ArrayList<Curso> listado= new ArrayList<Curso>();
         try

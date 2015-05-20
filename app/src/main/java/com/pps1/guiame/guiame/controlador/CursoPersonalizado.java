@@ -84,10 +84,17 @@ public class CursoPersonalizado extends Activity
                         }
                         else
                         {
-                            Listador listador = new Listador(UsuarioLogin.getId());
-                            cursos = listador.getListadoCursosUsuario();
+                            Listador listador = new Listador(nombreMat);
+                            cursos = listador.getListadoCursos();
                         }
-                        mostrarItems(cursos);
+                        runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mostrarItems(cursos);
+                                    }
+                                });
+
                         dialog.dismiss();
                     }
                 };

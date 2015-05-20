@@ -1,6 +1,7 @@
 package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,12 +30,16 @@ public class NombreCursoPersonalizado extends Activity
         getIntent().getExtras().clear();
         txtNombreMateria.setText(curso.getNombre());
         setTitle("Personalizar nombre de curso");
+        dialog = new ProgressDialog(this);
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                dialog.setMessage("Guardando...");
+                dialog.show();
+
                 curso.setNombre(txtNombreMateria.getText().toString());
                 Thread tr = new Thread()
                 {
@@ -51,6 +57,7 @@ public class NombreCursoPersonalizado extends Activity
                                 });
                         Intent intent = new Intent(getApplicationContext(), Principal.class);
                         startActivity(intent);
+                        dialog.dismiss();
                     }
                 };
                 tr.start();

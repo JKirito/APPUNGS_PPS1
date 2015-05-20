@@ -268,6 +268,9 @@ public class ListaCursos extends ActionBarActivity
                 }
             }
         };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ListaCursos.this);
+        builder.setMessage("¿Desea borrar el curso?").setPositiveButton("Si", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
     }
 
     //Al presionar el botón Atrás vuelve a la clase Principal
