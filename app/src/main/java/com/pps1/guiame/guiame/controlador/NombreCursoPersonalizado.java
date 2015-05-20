@@ -51,6 +51,7 @@ public class NombreCursoPersonalizado extends Activity
                                 });
                         Intent intent = new Intent(getApplicationContext(), Principal.class);
                         startActivity(intent);
+                        finish();
                     }
                 };
                 tr.start();

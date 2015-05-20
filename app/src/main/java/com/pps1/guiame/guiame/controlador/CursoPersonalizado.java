@@ -38,6 +38,8 @@ public class CursoPersonalizado extends Activity
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         btnBuscarCurso.setOnClickListener(new View.OnClickListener()
         {
@@ -114,6 +116,7 @@ public class CursoPersonalizado extends Activity
                         Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
                         intent.putExtras(bundleNombrePersonalizado);
                         startActivity(intent);
+                        finish();
                     }
                 };
                 tr.start();
@@ -168,6 +171,7 @@ public class CursoPersonalizado extends Activity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
+                finish();
             }
         };
         tr.start();

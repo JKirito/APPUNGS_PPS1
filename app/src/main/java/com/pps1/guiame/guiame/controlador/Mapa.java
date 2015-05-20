@@ -170,7 +170,6 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
                 .icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_RED)))
                 .showInfoWindow();
-
     }
 
     public void moveCamera(View view)

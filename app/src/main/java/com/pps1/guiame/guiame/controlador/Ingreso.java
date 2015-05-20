@@ -39,6 +39,8 @@ public class Ingreso extends ActionBarActivity
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         //Implementamos el evento “click” del botón
         btnAceptar.setOnClickListener(new View.OnClickListener()
@@ -85,11 +87,13 @@ public class Ingreso extends ActionBarActivity
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
                                 dialog.dismiss(); //Cierra el dialog
+                                finish();
                             }
                             else
                             {
                                 Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
                                 startActivity(intent);
+                                finish();
                             }
 
                         }
