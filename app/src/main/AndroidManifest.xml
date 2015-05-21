@@ -94,10 +94,6 @@
             android:name=".controlador.NombreCursoPersonalizado"
             android:label="@string/title_activity_nombre_curso_personalizado" >
         </activity>
-        <activity
-            android:name=".controlador.CursoABuscar"
-            android:label="@string/title_activity_curso_abuscar" >
-        </activity>
     </application>
 
 </manifest>
