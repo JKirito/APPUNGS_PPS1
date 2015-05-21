@@ -133,7 +133,7 @@ public class Ingreso extends ActionBarActivity
     {
         Intent start = new Intent(Ingreso.this,Principal.class);
         startActivity(start);
-        finishActivity(0);
+        finish();
     }
 
 }

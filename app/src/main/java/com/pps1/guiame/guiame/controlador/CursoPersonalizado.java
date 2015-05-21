@@ -64,7 +64,8 @@ public class CursoPersonalizado extends Activity
                     public void run()
                     {
                         final ArrayList<Curso> cursos;
-                        if(UsuarioLogin.isUserOn())
+                        boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
+                        if(UsuarioLogin.isUserOn() && agregandoCurso)
                         {
                             Listador listador = new Listador(UsuarioLogin.getId(), nombreMat);
                             cursos = listador.getListadoCursosJuntos();
@@ -84,10 +85,17 @@ public class CursoPersonalizado extends Activity
                         }
                         else
                         {
-                            Listador listador = new Listador(UsuarioLogin.getId());
-                            cursos = listador.getListadoCursosUsuario();
+                            Listador listador = new Listador(nombreMat);
+                            cursos = listador.getListadoCursos();
                         }
-                        mostrarItems(cursos);
+                        runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mostrarItems(cursos);
+                                    }
+                                });
+
                         dialog.dismiss();
                     }
                 };
@@ -116,7 +124,7 @@ public class CursoPersonalizado extends Activity
                         Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
                         intent.putExtras(bundleNombrePersonalizado);
                         startActivity(intent);
-                        finish();
+                        //finish();
                     }
                 };
                 tr.start();
@@ -124,6 +132,7 @@ public class CursoPersonalizado extends Activity
             else
             {
                 geoLocalizarAula(position);
+                //finish();
             }
 
         }
@@ -171,7 +180,7 @@ public class CursoPersonalizado extends Activity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
-                finish();
+                //finish();
             }
         };
         tr.start();
@@ -181,6 +190,6 @@ public class CursoPersonalizado extends Activity
     {
         Intent start = new Intent(CursoPersonalizado.this,Principal.class);
         startActivity(start);
-        finishActivity(0);
+        finish();
     }
 }
