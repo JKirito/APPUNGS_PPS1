@@ -135,6 +135,6 @@ public class Registro extends ActionBarActivity
    {
        Intent start = new Intent(Registro.this,Principal.class);
        startActivity(start);
-       finishActivity(0);
+       finish();
    }
 }

@@ -73,6 +73,6 @@ public class NombreCursoPersonalizado extends Activity
     {
         Intent start = new Intent(NombreCursoPersonalizado.this,CursoPersonalizado.class);
         startActivity(start);
-        finishActivity(0);
+        finish();
     }
 }

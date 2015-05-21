@@ -169,6 +169,6 @@ public class AulaAAgregar extends ActionBarActivity
     {
         Intent start = new Intent(AulaAAgregar.this,Principal.class);
         startActivity(start);
-        finishActivity(0);
+        finish();
     }
 }
