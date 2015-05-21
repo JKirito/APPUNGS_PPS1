@@ -144,7 +144,11 @@ public class ListaCursos extends ActionBarActivity
         }
         else if (id == R.id.AgregarNuevoCurso)
         {
+            Bundle bundleAgregarCurso = new Bundle();
+            bundleAgregarCurso.putBoolean("AgregarCurso", true);
+
             Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
+            intent.putExtras(bundleAgregarCurso);
             startActivity(intent);
             finish();
         } else if (id == R.id.Salir)
@@ -251,7 +255,7 @@ public class ListaCursos extends ActionBarActivity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
-                finish();
+                //finish();
             }
         };
         tr.start();
@@ -288,7 +292,7 @@ public class ListaCursos extends ActionBarActivity
     public void onBackPressed() {
         Intent start = new Intent(ListaCursos.this, Principal.class);
         startActivity(start);
-        finishActivity(0);
+        finish();
     }
 
 }
