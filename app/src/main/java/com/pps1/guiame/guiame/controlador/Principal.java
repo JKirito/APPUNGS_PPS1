@@ -127,7 +127,6 @@ public class Principal extends Activity
         if(Perfil.isUserOn())
         {
             btnRegistrarse.setVisibility(View.INVISIBLE);
-            btnBuscarCurso.setVisibility(View.INVISIBLE);
             btnIngresar.setText(R.string.misCursos);
             if(Perfil.isAdministrador())
             {
