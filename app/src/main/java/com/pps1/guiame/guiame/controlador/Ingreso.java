@@ -13,6 +13,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Ingresador;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.persistencia.dao.Verificador;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,13 +55,16 @@ public class Ingreso extends ActionBarActivity
                 final String dni = txtDni.getText().toString();
                 final String pass = txtContraseña.getText().toString();
                 final Ingresador ingresador = new Ingresador(dni, pass);
+                final Verificador verificador = new Verificador (dni, pass);
                 Thread thread = new Thread(new Runnable(){
                     @Override
                     public void run()
                     {
                         try
                         {
-                            final List<String> errores = ingresador.ingresarUsuario();
+
+                            String resultados = ingresador.resultadoJSON();
+                            final List<String> errores = verificador.validarUsuario(resultados);
 
                             if(errores.size() > 0)
                             {
@@ -77,7 +81,8 @@ public class Ingreso extends ActionBarActivity
                                 return;
                             }
 
-                            Listador listador = new Listador(UsuarioLogin.getId());
+                            ingresador.guardarDatosUsuario();
+                            Listador listador = new Listador(Perfil.getId());
                             final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
                             if(!cursos.isEmpty())
                             {
@@ -87,13 +92,11 @@ public class Ingreso extends ActionBarActivity
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
                                 dialog.dismiss(); //Cierra el dialog
-                                finish();
                             }
                             else
                             {
                                 Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
                                 startActivity(intent);
-                                finish();
                             }
 
                         }

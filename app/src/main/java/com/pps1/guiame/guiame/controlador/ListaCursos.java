@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,7 +46,7 @@ public class ListaCursos extends ActionBarActivity
         registerForContextMenu(listaCursos);
         listaCursos.setAdapter(adaptador);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
-        String nombreUsuario = UsuarioLogin.getNombre() != null ? " " + UsuarioLogin.getNombre() : "";
+        String nombreUsuario = Perfil.getNombre() != null ? " " + Perfil.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista) + nombreUsuario + "!");
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
@@ -105,18 +104,14 @@ public class ListaCursos extends ActionBarActivity
 
     /*
      * Si el usuario está logeado, desactivamos las opciones de Iniciar sesión y Registrarse del menu
-     * y activamos Agregar nuevo curso y Borrar curso
-     * Si el usuario no está logeado, desactivar la opción de Salir
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lista, menu);
-        if (UsuarioLogin.isUserOn()) {
+        if (Perfil.isUserOn())
+        {
             menu.getItem(0).setVisible(false); //Iniciar Sesion
             menu.getItem(1).setVisible(false); //Registrarse
-            menu.getItem(2).setVisible(true);  //Agregar nuevo curso
-        } else {
-            menu.getItem(3).setVisible(false); //Salir
         }
         return true;
     }
@@ -126,6 +121,7 @@ public class ListaCursos extends ActionBarActivity
       "IniciarSesion", vamos a Ingreso
       "Registrarse", vamos a Registro
       "Salir", cerramos la sesión actual y vuelve a Principal
+      "Agregar nuevo curso", vamos a CursoPersonalizado
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -151,9 +147,16 @@ public class ListaCursos extends ActionBarActivity
             intent.putExtras(bundleAgregarCurso);
             startActivity(intent);
             finish();
-        } else if (id == R.id.Salir)
+        }
+        else if(id==R.id.ModificarPerfil)
         {
-            UsuarioLogin.logout();
+            Intent intent = new Intent(getApplicationContext(), Registro.class);
+            startActivity(intent);
+            finish();
+        }
+        else if (id == R.id.Salir)
+        {
+            Perfil.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListaCursos.this, Principal.class);
             startActivity(intent);
@@ -200,7 +203,7 @@ public class ListaCursos extends ActionBarActivity
 
             @Override
             public void run() {
-                new CursoDAO().eliminarCurso(curso, UsuarioLogin.getId());
+                new CursoDAO().eliminarCurso(curso, Perfil.getId());
                 runOnUiThread(
                         new Runnable() {
                             @Override

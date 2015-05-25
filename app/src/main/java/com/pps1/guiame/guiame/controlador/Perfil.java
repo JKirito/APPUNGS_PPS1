@@ -1,12 +1,21 @@
 package com.pps1.guiame.guiame.controlador;
 
-public class UsuarioLogin
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.pps1.guiame.guiame.R;
+
+public class Perfil
 {
     private static String usuario;
     private static String nombre;
     private static String password;
+    private static String mail;
     private static int admin;
     private static int id;
+
 
     public static String getUsuario()
     {
@@ -15,7 +24,7 @@ public class UsuarioLogin
 
     public static void setUsuario(String usuario)
     {
-        UsuarioLogin.usuario = usuario;
+        Perfil.usuario = usuario;
     }
 
     public static String getPassword()
@@ -33,7 +42,7 @@ public class UsuarioLogin
     }
 
     public static void setNombre(String nombre) {
-        UsuarioLogin.nombre = nombre;
+        Perfil.nombre = nombre;
     }
 
     public static int getAdmin()
@@ -42,15 +51,20 @@ public class UsuarioLogin
     }
 
     public static void setAdmin(int admin){
-        UsuarioLogin.admin = admin;}
+        Perfil.admin = admin;}
 
     public static int getId() {
         return id;
     }
 
     public static void setId(int id) {
-        UsuarioLogin.id = id;
+        Perfil.id = id;
     }
+
+    public static String getMail(){return mail;}
+
+    public static void setMail(String mail) {
+        Perfil.mail = mail; }
 
     //Cerramos sesión del usuario conectado
     public static void logout()

@@ -8,6 +8,8 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/AgregarNuevoCurso" android:title="@string/agregarNuevoCurso"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/ModificarPerfil" android:title="@string/modificarPerfil"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/Salir" android:title="@string/Salir"
     android:orderInCategory="100" app:showAsAction="never" />
 </menu>

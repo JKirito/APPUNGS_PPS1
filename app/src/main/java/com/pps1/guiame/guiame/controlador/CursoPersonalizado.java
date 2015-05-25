@@ -65,9 +65,9 @@ public class CursoPersonalizado extends Activity
                     {
                         final ArrayList<Curso> cursos;
                         boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
-                        if(UsuarioLogin.isUserOn() && agregandoCurso)
+                        if(Perfil.isUserOn() && agregandoCurso)
                         {
-                            Listador listador = new Listador(UsuarioLogin.getId(), nombreMat);
+                            Listador listador = new Listador(Perfil.getId(), nombreMat);
                             cursos = listador.getListadoCursosJuntos();
                             runOnUiThread(
                                     new Runnable()
@@ -109,7 +109,7 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-            if(UsuarioLogin.isUserOn())
+            if(Perfil.isUserOn())
             {
                 final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 

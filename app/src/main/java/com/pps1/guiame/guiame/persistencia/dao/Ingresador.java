@@ -3,7 +3,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.pps1.guiame.guiame.controlador.UsuarioLogin;
+import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
@@ -37,43 +37,11 @@ public class Ingresador extends ActionBarActivity
         this.pass = pass;
     }
 
-    public List<String> validarDatos()
+
+
+    public void guardarDatosUsuario()
     {
-        List<String> errores = new ArrayList<String>();
-        if(dni == null || dni.length() != 8)
-        {
-            errores.add(MSJ_DNI_INVALIDO);
-        }
-
-        if(this.pass == null)
-        {
-            errores.add(MSJ_PASS_NULL);
-        }
-        return errores;
-    }
-
-    public List<String> ingresarUsuario()
-    {
-        List<String> errores = this.validarDatos();
-        if(errores.size() > 0){
-            return errores;
-        }
-
-        Boolean isUsuarioValido = this.validarUsuario();
-        if(!isUsuarioValido)
-            errores.add("Usuario inválido. Revise sus datos");
-
-        if(errores.size() > 0)
-        {
-            return errores;
-        }
-
-        return errores;
-    }
-
-    public Boolean isUsuarioValido(String response)
-    {
-        Boolean isValido = false;
+        String response = this.resultadoJSON();
         try
         {
             JSONArray json= new JSONArray(response);
@@ -81,35 +49,30 @@ public class Ingresador extends ActionBarActivity
             String nombre = json.getJSONObject(0).getString("nombre");
             int admin = json.getJSONObject(0).getInt("admin");
             int id = json.getJSONObject(0).getInt("id");
+            String mail = json.getJSONObject(0).getString("mail");
+            nombre = nombre != null ? nombre.split(" ")[0] : "";
 
-           isValido = cantidadRegistrados.equals("1");//Si hay un registrado que tiene ese dni
-            Log.d("valido", isValido.toString());
-
-            if(isValido)
-            {
-                nombre = nombre != null ? nombre.split(" ")[0] : "";
                 // Guardo datos en sessionManager
-                UsuarioLogin.setUsuario(dni);
-                UsuarioLogin.setPassword(pass);
-                UsuarioLogin.setNombre(nombre);
-                UsuarioLogin.setAdmin(admin);
-                UsuarioLogin.setId(id);
-            }
+                Perfil.setUsuario(dni);
+                Perfil.setPassword(pass);
+                Perfil.setNombre(nombre);
+                Perfil.setAdmin(admin);
+                Perfil.setId(id);
+                Perfil.setMail(mail);
         }
         catch (Exception e)
         {
             // TODO: handle exception
         }
-        return isValido;
     }
 
-    public Boolean validarUsuario()
+    public String resultadoJSON()
     {
         Map<String,String> datos = new HashMap<String,String>();
         datos.put("dni", dni);
         datos.put("contrasena",pass);
         final String resultado = Conexion.enviarPost(datos, PHP_NAME_INGRESADOR);
         Log.d("Resultado count", resultado);
-        return isUsuarioValido(resultado);
+        return resultado;
     }
 }

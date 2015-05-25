@@ -46,7 +46,7 @@ public class NombreCursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
-                        new CursoDAO().registrarCursoPersonalizado(curso, UsuarioLogin.getId());
+                        new CursoDAO().registrarCursoPersonalizado(curso, Perfil.getId());
                         runOnUiThread(
                                 new Runnable() {
                                     @Override

@@ -56,11 +56,11 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                Log.d("USER", UsuarioLogin.getUsuario() + "");
-                Log.d("PASSW", UsuarioLogin.getPassword() + "");
+                Log.d("USER", Perfil.getUsuario() + "");
+                Log.d("PASSW", Perfil.getPassword() + "");
                 // si NO está logeado, que vaya a la pantalla de ingreso
-                if(UsuarioLogin.getUsuario() == null || UsuarioLogin.getUsuario().isEmpty() ||
-                        UsuarioLogin.getPassword() == null || UsuarioLogin.getPassword().isEmpty())
+                if(Perfil.getUsuario() == null || Perfil.getUsuario().isEmpty() ||
+                        Perfil.getPassword() == null || Perfil.getPassword().isEmpty())
                 {
                     Intent intent = new Intent(Principal.this, Ingreso.class);
                     startActivity(intent);
@@ -75,7 +75,7 @@ public class Principal extends Activity
                     {
                         @Override
                         public void run(){
-                            Listador listador = new Listador(UsuarioLogin.getId());
+                            Listador listador = new Listador(Perfil.getId());
                             final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Cursos", cursos);
@@ -124,11 +124,12 @@ public class Principal extends Activity
      */
     private void habilitarBotones()
     {
-        if(UsuarioLogin.isUserOn())
+        if(Perfil.isUserOn())
         {
             btnRegistrarse.setVisibility(View.INVISIBLE);
+            btnBuscarCurso.setVisibility(View.INVISIBLE);
             btnIngresar.setText(R.string.misCursos);
-            if(UsuarioLogin.isAdministrador())
+            if(Perfil.isAdministrador())
             {
                 btnAgregarAula.setVisibility(View.VISIBLE);
             }

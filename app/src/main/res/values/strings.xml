@@ -24,6 +24,7 @@
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
     <string name="misCursos">Ver mis cursos</string>
+    <string name="modificarPerfil">Modificar Perfil</string>
 
 
     <string name="buscarCurso">Buscar curso</string>
@@ -47,5 +48,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_curso_abuscar">CursoABuscar</string>
+    <string name="title_activity_perfil">Perfil</string>
+    <string name="title_activity_d">d</string>
 
 </resources>

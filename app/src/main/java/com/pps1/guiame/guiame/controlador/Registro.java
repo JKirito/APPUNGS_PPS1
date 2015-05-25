@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.persistencia.dao.Modificador;
 import com.pps1.guiame.guiame.persistencia.dao.Registrador;
+import com.pps1.guiame.guiame.persistencia.dao.Verificador;
 
 import java.util.List;
 
@@ -43,6 +45,15 @@ public class Registro extends ActionBarActivity
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
 
+        if(Perfil.isUserOn())
+        {
+            setTitle("Modificacion de perfil");
+            nombreApellido.setText(Perfil.getNombre());
+            dni.setText(Perfil.getUsuario());
+            mail.setText(Perfil.getMail());
+            pass.setText(Perfil.getPassword());
+        }
+
         btnCancelar.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -61,60 +72,121 @@ public class Registro extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                final Registrador registrador = new Registrador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
-                dialog.setMessage("Registrando usuario...");
-                dialog.show();
-                Thread thread = new Thread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        try
-                        {
-                            final List<String> errores = registrador.validarDatos();
+                final Verificador verificador = new Verificador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
+                if(Perfil.isUserOn())
+                {
+                    final Modificador modificador = new Modificador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
+                    dialog.setMessage("Guardando cambios...");
+                    dialog.show();
 
-                            if(errores.size() > 0)
+                    Thread thread = new Thread(new Runnable(){
+                        @Override
+                        public void run()
+                        {
+                            try
                             {
-                                StringBuilder todosErrores = new StringBuilder();
-                                for(String e : errores)
+                                final List<String> errores = verificador.validarDatosRegistro();
+
+                                if(errores.size() > 0)
                                 {
-                                    todosErrores.append(e+"\n");
+                                    StringBuilder todosErrores = new StringBuilder();
+                                    for(String e : errores)
+                                    {
+                                        todosErrores.append(e+"\n");
+                                    }
+                                    final String errors = todosErrores.toString();
+                                    runOnUiThread(
+                                            new Runnable() {
+                                                @Override
+                                                public void run()
+                                                {
+                                                    Toast.makeText(getApplicationContext(),
+                                                            errors, Toast.LENGTH_SHORT).show();
+                                                    dialog.dismiss(); //Cierra el dialog
+                                                }
+                                            });
+
+                                    return;
                                 }
-                                final String errors = todosErrores.toString();
+
+                                modificador.actualizarDatos();
+                                Perfil.logout();
+                                Intent intent = new Intent(Registro.this, Ingreso.class);
+                                startActivity(intent);
                                 runOnUiThread(
                                         new Runnable() {
                                             @Override
-                                            public void run()
-                                            {
-                                                Toast.makeText(getApplicationContext(),
-                                                        errors, Toast.LENGTH_SHORT).show();
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(), "Se actualizaron los datos correctamente. Por favor ingrese de nuevo.", Toast.LENGTH_LONG).show();
                                                 dialog.dismiss(); //Cierra el dialog
                                             }
                                         });
-
-                                return;
+                                finish();
                             }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                    thread.start();
+                }
+                else
+                {
+                    final Registrador registrador = new Registrador(nombreApellido.getText().toString(), dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
+                    dialog.setMessage("Registrando usuario...");
+                    dialog.show();
+                    Thread thread = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                final List<String> errores = verificador.validarDatosRegistro();
 
-                            registrador.registrarDatos();
-                            Intent intent = new Intent(Registro.this, Ingreso.class);
-                            startActivity(intent);
-                            runOnUiThread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
-                                            dialog.dismiss(); //Cierra el dialog
-                                        }
-                                    });
-                            finish();
+                                if (errores.size() > 0)
+                                {
+                                    StringBuilder todosErrores = new StringBuilder();
+                                    for (String e : errores)
+                                    {
+                                        todosErrores.append(e + "\n");
+                                    }
+                                    final String errors = todosErrores.toString();
+                                    runOnUiThread(
+                                            new Runnable()
+                                            {
+                                                @Override
+                                                public void run()
+                                                {
+                                                    Toast.makeText(getApplicationContext(),
+                                                            errors, Toast.LENGTH_SHORT).show();
+                                                    dialog.dismiss(); //Cierra el dialog
+                                                }
+                                            });
+
+                                    return;
+                                }
+
+                                registrador.registrarDatos();
+                                Intent intent = new Intent(Registro.this, Ingreso.class);
+                                startActivity(intent);
+                                runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
+                                                dialog.dismiss(); //Cierra el dialog
+                                            }
+                                        });
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                thread.start();
+                    });
+                    thread.start();
+                }
+
             }
+
         });
     }
 

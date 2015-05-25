@@ -115,7 +115,7 @@ public class AulaAAgregar extends ActionBarActivity
         int id = item.getItemId();
         if (id == R.id.Salir)
         {
-            UsuarioLogin.logout();
+            Perfil.logout();
             Toast.makeText(this, "Ha cerrado sesión", Toast.LENGTH_SHORT).show();
             Intent intent =
                     new Intent(AulaAAgregar.this, Principal.class);
