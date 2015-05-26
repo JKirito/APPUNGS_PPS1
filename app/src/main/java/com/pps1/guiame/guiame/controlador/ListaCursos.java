@@ -166,14 +166,16 @@ public class ListaCursos extends ActionBarActivity
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v,
-                                    ContextMenu.ContextMenuInfo menuInfo) {
+                                    ContextMenu.ContextMenuInfo menuInfo)
+    {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_opciones_lista, menu);
     }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
+    public boolean onContextItemSelected(MenuItem item)
+    {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
                 .getMenuInfo();
         switch (item.getItemId()) {
@@ -198,11 +200,13 @@ public class ListaCursos extends ActionBarActivity
         final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
         dialog.setMessage("Eliminando curso...");
         dialog.show();
-        Thread tr = new Thread() {
+        Thread tr = new Thread()
+        {
             Integer idCurso = curso.getId();
 
             @Override
-            public void run() {
+            public void run()
+            {
                 new CursoDAO().eliminarCurso(curso, Perfil.getId());
                 runOnUiThread(
                         new Runnable() {
