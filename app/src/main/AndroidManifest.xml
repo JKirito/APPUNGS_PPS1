@@ -71,31 +71,34 @@
             android:value="@integer/google_play_services_version" />
         <!-- key release -->
         <!--
-                           <meta-data
-                           android:name="com.google.android.maps.v2.API_KEY"
-                           android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />
+                   <meta-data
+                   android:name="com.google.android.maps.v2.API_KEY"
+                   android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />
         -->
 
 
-                <!-- key debug -->
+        <!-- key debug -->
 
-                <meta-data
-                    android:name="com.google.android.maps.v2.API_KEY"
-                    android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
+        <activity
+            android:name=".controlador.AulaAAgregar"
+            android:label="@string/title_activity_agregar_aula" >
+        </activity>
+        <activity
+            android:name=".controlador.CursoPersonalizado"
+            android:label="@string/title_activity_curso_personalizado" >
+        </activity>
+        <activity
+            android:name=".controlador.NombreCursoPersonalizado"
+            android:label="@string/title_activity_nombre_curso_personalizado" >
+        </activity>
+        <activity
+            android:name=".controlador.Perfil"
+            android:label="@string/title_activity_perfil" >
+        </activity>
+    </application>
 
-                <activity
-                    android:name=".controlador.AulaAAgregar"
-                    android:label="@string/title_activity_agregar_aula" >
-                </activity>
-                <activity
-                    android:name=".controlador.CursoPersonalizado"
-                    android:label="@string/title_activity_curso_personalizado" >
-                </activity>
-                <activity
-                    android:name=".controlador.NombreCursoPersonalizado"
-                    android:label="@string/title_activity_nombre_curso_personalizado" >
-                </activity>
-            </application>
-
-        </manifest>
+</manifest>
