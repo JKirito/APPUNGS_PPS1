@@ -69,19 +69,6 @@ public class CursoPersonalizado extends Activity
                         {
                             Listador listador = new Listador(Perfil.getId(), nombreMat);
                             cursos = listador.getListadoCursosJuntos();
-                            runOnUiThread(
-                                    new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            if(cursos == null || cursos.isEmpty())
-                                            {
-                                                Toast.makeText(getApplicationContext(),
-                                                        "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    });
                         }
                         else
                         {
@@ -92,6 +79,12 @@ public class CursoPersonalizado extends Activity
                                 new Runnable() {
                                     @Override
                                     public void run() {
+                                        if(cursos == null || cursos.isEmpty())
+                                        {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
+                                            return;
+                                        }
                                         mostrarItems(cursos);
                                     }
                                 });
