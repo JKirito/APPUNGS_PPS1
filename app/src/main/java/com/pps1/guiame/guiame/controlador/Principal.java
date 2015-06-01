@@ -162,6 +162,7 @@ public class Principal extends Activity
         }
     }
 
+    //Para volver atrás
     public void onBackPressed()
     {
         Intent intent = new Intent(Intent.ACTION_MAIN);
