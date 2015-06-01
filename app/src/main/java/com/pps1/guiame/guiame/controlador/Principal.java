@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
@@ -106,18 +107,30 @@ public class Principal extends Activity
             }
         });
         btnAgregarAula.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Thread tr = new Thread() {
+                @Override
+                public void run() {
+                    //Creamos el Intent
+                    Intent intent = new Intent(getApplicationContext(), AulaAAgregar.class);
+                    startActivity(intent);
+                    finish();
+                }
+            };
+            tr.start();
+            }
+        });
+        btnSalir.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                Thread tr = new Thread() {
-                    @Override
-                    public void run() {
-                        //Creamos el Intent
-                        Intent intent = new Intent(getApplicationContext(), AulaAAgregar.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                };
-                tr.start();
+            public void onClick(View v)
+            {
+                Perfil.logout();
+                Toast.makeText(getApplicationContext(),
+                        "Ha cerrado sesión", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Principal.this, Principal.class);
+                startActivity(intent);
             }
         });
     }
