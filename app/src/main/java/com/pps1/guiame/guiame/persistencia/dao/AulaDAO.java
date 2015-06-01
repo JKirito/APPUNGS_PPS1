@@ -7,6 +7,7 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,7 @@ public class AulaDAO {
     private final String PHP_NAME_REGISTRADOR_AULA = "registrarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
 
-    public void registrarAula(Aula aula)
-    {
+    public void registrarAula(Aula aula) throws IOException {
         String ubicacion = aula.getLatitud()+","+aula.getLongitud();
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
@@ -28,8 +28,7 @@ public class AulaDAO {
         String result = Conexion.enviarPost(datos, PHP_NAME_REGISTRADOR_AULA);
     }
 
-    public Aula getAula(String numAula)
-    {
+    public Aula getAula(String numAula) throws IOException {
         Map<String, String> data = new HashMap<String, String>();
         data.put("aula", numAula);
 

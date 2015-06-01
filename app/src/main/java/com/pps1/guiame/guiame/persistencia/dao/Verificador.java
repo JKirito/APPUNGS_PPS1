@@ -9,6 +9,7 @@ import com.pps1.guiame.guiame.utils.MailValidator;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,8 +49,7 @@ public class Verificador
         this.pass = pass;
     }
 
-    public static List<String> validarDatosRegistro()
-    {
+    public static List<String> validarDatosRegistro() throws IOException {
         List<String> errores = new ArrayList<String>();
         if(nombreYApellido == null || nombreYApellido.replaceAll("/s","").length() == 0)
         {

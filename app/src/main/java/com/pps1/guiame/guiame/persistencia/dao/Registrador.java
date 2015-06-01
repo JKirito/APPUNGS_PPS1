@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +29,7 @@ public class Registrador
         this.pass2 = pass2;
     }
 
-    public void registrarDatos()
-    {
+    public void registrarDatos() throws IOException {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("nombre",nombreYApellido);

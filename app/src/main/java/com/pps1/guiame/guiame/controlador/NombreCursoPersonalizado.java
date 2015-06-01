@@ -13,6 +13,8 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 
+import java.io.IOException;
+
 public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
@@ -46,7 +48,20 @@ public class NombreCursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
-                        new CursoDAO().registrarCursoPersonalizado(curso, Perfil.getId());
+                        try {
+                            new CursoDAO().registrarCursoPersonalizado(curso, Perfil.getId());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Hubo un error al registrar el Curso, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            return;
+                        }
                         runOnUiThread(
                                 new Runnable() {
                                     @Override

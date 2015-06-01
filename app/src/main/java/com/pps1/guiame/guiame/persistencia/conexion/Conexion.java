@@ -15,6 +15,9 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -51,8 +54,7 @@ public class Conexion
         return resultado;
     }
 
-    public static String enviarPost(Map<String, String> datos, String phpName)
-    {
+    public static String enviarPost(Map<String, String> datos, String phpName) throws IOException {
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpContext localContext = new BasicHttpContext();
@@ -60,8 +62,6 @@ public class Conexion
         Log.d("url",URL+phpName);
         HttpResponse response = null;
         String resultado = "";
-        try
-        {
             List<NameValuePair> params = new ArrayList<NameValuePair>(3);
             for(String nombreVariable : datos.keySet())
             {
@@ -70,13 +70,10 @@ public class Conexion
             }
             httpPost.setEntity(new UrlEncodedFormEntity(params));
             response = httpClient.execute(httpPost, localContext);
+
             HttpEntity entity = response.getEntity();
             resultado = EntityUtils.toString(entity, "UTF-8");
             Log.d("RESULTADO",resultado);
-        } catch (Exception e)
-        {
-            Log.d("Exception enviarPost", e+"");
-        }
 
         return resultado;
     }
