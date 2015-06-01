@@ -8,6 +8,7 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +40,7 @@ public class Ingresador extends ActionBarActivity
 
 
 
-    public void guardarDatosUsuario()
-    {
+    public void guardarDatosUsuario() throws IOException {
         String response = this.resultadoJSON();
         try
         {
@@ -66,8 +66,7 @@ public class Ingresador extends ActionBarActivity
         }
     }
 
-    public String resultadoJSON()
-    {
+    public String resultadoJSON() throws IOException {
         Map<String,String> datos = new HashMap<String,String>();
         datos.put("dni", dni);
         datos.put("contrasena",pass);

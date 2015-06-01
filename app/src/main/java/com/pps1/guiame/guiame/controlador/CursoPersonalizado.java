@@ -19,6 +19,7 @@ import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CursoPersonalizado extends Activity
@@ -61,7 +62,20 @@ public class CursoPersonalizado extends Activity
                     public void run() {
                         final ArrayList<Curso> cursos;
                         Listador listador = new Listador(Perfil.getId(), nombreMat);
-                        cursos = listador.getListadoCursosJuntos();
+                        try {
+                            cursos = listador.getListadoCursosJuntos();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Hubo un error al obtener los Cursos, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            return;
+                        }
                         runOnUiThread(
                                 new Runnable() {
                                     @Override
@@ -128,7 +142,21 @@ public class CursoPersonalizado extends Activity
             @Override
             public void run()
             {
-                final Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                final Aula aula;
+                try {
+                    aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Hubo un error al obtener el aula, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    return;
+                }
                 if(aula == null || aula.getLatitud() == 0.0 || aula.getLongitud() == 0.0)
                 {
                     runOnUiThread(

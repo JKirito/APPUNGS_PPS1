@@ -7,6 +7,7 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,8 +38,7 @@ public class Listador
     }
 
 
-    public ArrayList<Curso> getListadoCursosUsuario()
-    {
+    public ArrayList<Curso> getListadoCursosUsuario() throws IOException {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id",idUsuario.toString());
@@ -68,8 +68,7 @@ public class Listador
     */
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
-    public ArrayList<Curso> getListadoCursosJuntos()
-    {
+    public ArrayList<Curso> getListadoCursosJuntos() throws IOException {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto",textoCurso);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);

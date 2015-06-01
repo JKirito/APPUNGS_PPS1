@@ -13,6 +13,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Principal extends Activity
@@ -80,7 +81,21 @@ public class Principal extends Activity
                         @Override
                         public void run(){
                             Listador listador = new Listador(Perfil.getId());
-                            final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
+                            final ArrayList<Curso> cursos;
+                            try {
+                                cursos = listador.getListadoCursosUsuario();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                                runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(),
+                                                        "Hubo un error al obtener los Cursos, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                return;
+                            }
                             Bundle bundleMaterias = new Bundle();
                             bundleMaterias.putSerializable("Cursos", cursos);
                             Intent intent = new Intent(getApplicationContext(), ListaCursos.class);

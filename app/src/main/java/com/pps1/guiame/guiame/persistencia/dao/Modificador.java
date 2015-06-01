@@ -6,6 +6,7 @@ import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 import com.pps1.guiame.guiame.utils.MailValidator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,8 +30,7 @@ public class Modificador {
         this.pass2 = pass2;
     }
 
-    public void actualizarDatos()
-    {
+    public void actualizarDatos() throws IOException {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id", Integer.toString(Perfil.getId()));

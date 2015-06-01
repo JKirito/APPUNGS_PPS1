@@ -26,6 +26,7 @@ import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -221,7 +222,20 @@ public class ListaCursos extends ActionBarActivity
             @Override
             public void run()
             {
-                new CursoDAO().eliminarCurso(curso, Perfil.getId());
+                try {
+                    new CursoDAO().eliminarCurso(curso, Perfil.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Hubo un error al eliminar el Curso, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    return;
+                }
                 runOnUiThread(
                         new Runnable() {
                             @Override
@@ -255,7 +269,21 @@ public class ListaCursos extends ActionBarActivity
         Thread tr = new Thread() {
             @Override
             public void run() {
-                Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                Aula aula = null;
+                try {
+                    aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Hubo un error al localizar el aula, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    return;
+                }
                 if (aula == null) {
                     runOnUiThread(
                             new Runnable() {
