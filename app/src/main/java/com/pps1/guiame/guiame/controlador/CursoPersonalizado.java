@@ -40,16 +40,14 @@ public class CursoPersonalizado extends Activity
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
+        final boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
 
-        btnBuscarCurso.setOnClickListener(new View.OnClickListener()
-        {
+        btnBuscarCurso.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 final String nombreMat = txtNombreMateria.getText().toString().trim();
 
-                if(nombreMat.trim().length() < 4)
-                {
+                if (nombreMat.trim().length() < 4) {
                     Toast.makeText(getApplicationContext(),
                             "Debe ingresar al menos 4 caracteres", Toast.LENGTH_SHORT).show();
                     return;
@@ -58,29 +56,17 @@ public class CursoPersonalizado extends Activity
                 dialog.setMessage("Buscando...");
                 dialog.show();
 
-                Thread tr = new Thread()
-                {
+                Thread tr = new Thread() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         final ArrayList<Curso> cursos;
-                        boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
-                        if(Perfil.isUserOn() && agregandoCurso)
-                        {
-                            Listador listador = new Listador(Perfil.getId(), nombreMat);
-                            cursos = listador.getListadoCursosJuntos();
-                        }
-                        else
-                        {
-                            Listador listador = new Listador(nombreMat);
-                            cursos = listador.getListadoCursos();
-                        }
+                        Listador listador = new Listador(Perfil.getId(), nombreMat);
+                        cursos = listador.getListadoCursosJuntos();
                         runOnUiThread(
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        if(cursos == null || cursos.isEmpty())
-                                        {
+                                        if (cursos == null || cursos.isEmpty()) {
                                             Toast.makeText(getApplicationContext(),
                                                     "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
                                             return;
@@ -97,36 +83,29 @@ public class CursoPersonalizado extends Activity
         });
 
         // Registra callback si se selecciona un item de este AdaptView
-        ((ListView) findViewById(R.id.listaCursosJuntos)).setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        ((ListView) findViewById(R.id.listaCursosJuntos)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-            if(Perfil.isUserOn())
-            {
-                final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (Perfil.isUserOn() && agregandoCurso) {
+                    final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
-                Thread tr = new Thread()
+                    Thread tr = new Thread() {
+                        @Override
+                        public void run() {
+                            Bundle bundleNombrePersonalizado = new Bundle();
+                            bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
+
+                            Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
+                            intent.putExtras(bundleNombrePersonalizado);
+                            startActivity(intent);
+                            //finish();
+                        }
+                    };
+                    tr.start();
+                } else
                 {
-                    @Override
-                    public void run()
-                    {
-                        Bundle bundleNombrePersonalizado = new Bundle();
-                        bundleNombrePersonalizado.putSerializable("Curso", cursoSeleccionado);
-
-                        Intent intent = new Intent(getApplicationContext(), NombreCursoPersonalizado.class);
-                        intent.putExtras(bundleNombrePersonalizado);
-                        startActivity(intent);
-                        //finish();
-                    }
-                };
-                tr.start();
-            }
-            else
-            {
-                geoLocalizarAula(position);
-                //finish();
-            }
+                    geoLocalizarAula(position);
+                }
 
         }
         });
@@ -149,8 +128,8 @@ public class CursoPersonalizado extends Activity
             @Override
             public void run()
             {
-                Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
-                if(aula == null)
+                final Aula aula = new AulaDAO().getAula(itemSeleccionado.getAula());
+                if(aula == null || aula.getLatitud() == 0.0 || aula.getLongitud() == 0.0)
                 {
                     runOnUiThread(
                             new Runnable()
@@ -158,8 +137,8 @@ public class CursoPersonalizado extends Activity
                                 @Override
                                 public void run()
                                 {
-                                    Toast.makeText(getApplicationContext(),
-                                            "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
+                                    String msj = aula == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
+                                    Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
                             });

@@ -18,7 +18,7 @@ public class Listador
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
   //  private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php"; BORRAR
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
-    private final String PHP_NAME_LISTADOR_CURSOS = "listarCursos.php";
+    // private final String PHP_NAME_LISTADOR_CURSOS = "listarCursos.php";
 
     public Listador(Integer idUsuario)
     {
@@ -51,20 +51,21 @@ public class Listador
         return listadoCursos;
     }
 
+    /*
     public ArrayList<Curso> getListadoCursos()
     {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto",textoCurso.toString());
 
-        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_CURSOS);
+        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);
         ArrayList<Curso> listadoCursos = obtDatosJSONCursos(result);
 
         Log.d("resultPostListadoMatUS", result);
 
         return listadoCursos;
     }
-
+    */
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     public ArrayList<Curso> getListadoCursosJuntos()
