@@ -21,6 +21,7 @@ public class Principal extends Activity
     private Button btnIngresar;
     private Button btnBuscarCurso;
     private Button btnAgregarAula;
+    private Button btnSalir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +32,8 @@ public class Principal extends Activity
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscar);
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
+        btnSalir = (Button) findViewById((R.id.btnSalir));
+
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
@@ -128,13 +131,15 @@ public class Principal extends Activity
         {
             btnRegistrarse.setVisibility(View.INVISIBLE);
             btnIngresar.setText(R.string.misCursos);
+            btnSalir.setVisibility(View.VISIBLE);
+
             if(Perfil.isAdministrador())
             {
                 btnAgregarAula.setVisibility(View.VISIBLE);
             }
             else
             {
-                btnAgregarAula.setVisibility(View.INVISIBLE);
+                btnAgregarAula.setVisibility(View.GONE);
             }
         }
         else
@@ -143,13 +148,6 @@ public class Principal extends Activity
             btnIngresar.setText(R.string.ingresar);
         }
     }
-
-   /* @Override
-    protected void onResume()
-    {
-        super.onResume();
-    }*/
-
 
     public void onBackPressed()
     {

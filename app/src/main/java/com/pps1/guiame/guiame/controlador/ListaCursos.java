@@ -178,14 +178,21 @@ public class ListaCursos extends ActionBarActivity
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
                 .getMenuInfo();
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.menuBorrarCurso:
                 preguntar(info.position);
+                return true;
+            case R.id.menuVerDetalles:
+                MenuItem menuBorrar = (MenuItem) findViewById(R.id.menuBorrarCurso);
+                menuBorrar.setVisible(false);
+                verDetalles(info.position, item);
                 return true;
             default:
                 return super.onContextItemSelected(item);
         }
     }
+
 
     public void mostrarItems(ArrayList<Curso> datos)
     {
@@ -193,6 +200,13 @@ public class ListaCursos extends ActionBarActivity
         listaCursos.setAdapter(adaptador);
     }
 
+    //Cambia el titulo de Ver detalles con el nombre del docente.
+    private void verDetalles(int posItemSeleccionado, MenuItem item)
+    {
+        final int posicionItemSeleccionado = posItemSeleccionado;
+        final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
+        item.setTitle(curso.getDocente());
+    }
 
     private void eliminarCurso(int posItemSeleccionado)
     {
