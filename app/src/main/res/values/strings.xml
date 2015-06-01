@@ -30,6 +30,7 @@
     <string name="buscarCurso">Buscar curso</string>
     <string name="guardarCurso">Guardar curso</string>
     <string name="borrarCurso">Borrar curso</string>
+    <string name="verDetalles">Ver detalles</string>
     <string name="localizarCurso">Localizar</string>
     <string name="agregarNuevoCurso">Agregar nuevo curso</string>
     <string name="guiaBorrarCurso">Seleccione el curso a borrar</string>
