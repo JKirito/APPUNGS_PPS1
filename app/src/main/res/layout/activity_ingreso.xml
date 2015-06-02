@@ -25,7 +25,8 @@
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/input_login"
-            android:textColorHint="@color/hint_claro" />
+            android:textColorHint="@color/hint_claro"
+            android:inputType="number"/>
 
         <EditText
             android:id="@+id/txtContraseña"
