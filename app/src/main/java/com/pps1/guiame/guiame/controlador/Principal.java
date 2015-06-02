@@ -144,8 +144,7 @@ public class Principal extends Activity
                 Perfil.logout();
                 Toast.makeText(getApplicationContext(),
                         "Ha cerrado sesión", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Principal.this, Principal.class);
-                startActivity(intent);
+                btnIngresar.setText(R.string.IniciarSesion);
             }
         });
     }
