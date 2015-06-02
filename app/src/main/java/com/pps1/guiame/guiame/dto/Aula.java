@@ -11,7 +11,7 @@ public class Aula implements Serializable
     private Double latitud;
     private Double longitud;
 
-    public Aula(String numAula, double latitud, double longitud)
+    public Aula(String numAula, Double latitud, Double longitud)
     {
         this.numAula = numAula;
         this.latitud = latitud;
@@ -23,12 +23,12 @@ public class Aula implements Serializable
         return numAula;
     }
 
-    public double getLatitud()
+    public Double getLatitud()
     {
         return latitud;
     }
 
-    public double getLongitud()
+    public Double getLongitud()
     {
         return longitud;
     }

@@ -88,6 +88,7 @@ public class Ingreso extends ActionBarActivity
                             {
                                 Bundle bundleMaterias = new Bundle();
                                 bundleMaterias.putSerializable("Cursos", cursos);
+                                bundleMaterias.putBoolean("AgregarCurso", true);
                                 Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
