@@ -263,7 +263,7 @@ public class ListaCursos extends ActionBarActivity
         Thread tr = new Thread() {
             @Override
             public void run() {
-                Aula aula = null;
+                final Aula aula;
                 try {
                     aula = new AulaDAO().getAula(itemSeleccionado.getAula());
                 } catch (IOException e) {
@@ -278,13 +278,16 @@ public class ListaCursos extends ActionBarActivity
                             });
                     return;
                 }
-                if (aula == null) {
+                if(aula == null || aula.getLatitud() == 0.0 || aula.getLongitud() == 0.0)
+                {
                     runOnUiThread(
-                            new Runnable() {
+                            new Runnable()
+                            {
                                 @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),
-                                            "No se ha podido localizar el aula", Toast.LENGTH_SHORT).show();
+                                public void run()
+                                {
+                                    String msj = aula == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
+                                    Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
                                 }
                             });
