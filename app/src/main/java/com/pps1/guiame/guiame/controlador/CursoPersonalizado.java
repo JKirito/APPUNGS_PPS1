@@ -188,7 +188,7 @@ public class CursoPersonalizado extends Activity
                             });
                     return;
                 }
-                if(aula == null || aula.getLatitud() == 0.0 || aula.getLongitud() == 0.0)
+                if(aula == null || aula.getLatitud() == null || aula.getLongitud() == null)
                 {
                     runOnUiThread(
                             new Runnable()
