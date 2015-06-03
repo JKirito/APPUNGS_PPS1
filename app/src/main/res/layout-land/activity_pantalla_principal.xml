@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="30dip"
+        android:textColor="@color/white"
+        android:text="@string/registrarse"
+        android:id="@+id/btnRegistrarse"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/ingresar"
+        android:id="@+id/btnIngresar"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/buscarCurso"
+        android:id="@+id/btnBuscar"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/AgregarAula"
+        android:id="@+id/btnAgregarAula"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/boton"
+        android:layout_marginTop="10dip"
+        android:textColor="@color/white"
+        android:text="@string/Salir"
+        android:id="@+id/btnSalir"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal" />
+
+</LinearLayout>
