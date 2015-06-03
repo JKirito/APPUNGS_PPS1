@@ -52,7 +52,7 @@ public class AulaAAgregar extends ActionBarActivity
         dialog = new ProgressDialog(this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
-        //y se la pasamos al agregador para que la inserte en la BD.
+        //y se la pasamos al agregador para que actualice la tabla aulas con esa posicion.
 
         ((ListView) findViewById(R.id.listaAulas)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
