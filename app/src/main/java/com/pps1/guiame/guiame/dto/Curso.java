@@ -74,6 +74,6 @@ public class Curso implements Serializable {
     @Override
     public String toString()
     {
-        return this.nombre + " (" + this.comision.split(" ")[1] + ") Aula: " + this.aula + " - " + this.diasYHorarios + " Prof.: "+ this.docente;
+        return this.nombre + " (" + this.comision.split(" ")[1] + ") Aula: " + this.aula + " - " + this.diasYHorarios;
     }
 }

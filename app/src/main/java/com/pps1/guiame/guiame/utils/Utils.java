@@ -1,5 +1,10 @@
 package com.pps1.guiame.guiame.utils;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import com.pps1.guiame.guiame.dto.Curso;
+
 public class Utils
 {
 
@@ -42,5 +47,20 @@ public class Utils
 
         return ubicacion;
     }
+
+    public static void verDetalles(Curso curso, AlertDialog.Builder builder)
+    {
+        builder.setTitle("Detalles");
+        builder.setMessage("Prof.:" + curso.getDocente());
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
 
 }

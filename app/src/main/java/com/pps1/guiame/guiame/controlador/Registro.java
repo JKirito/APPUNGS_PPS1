@@ -111,6 +111,7 @@ public class Registro extends ActionBarActivity
 
                                 modificador.actualizarDatos();
                                 Perfil.logout();
+
                                 Intent intent = new Intent(Registro.this, Ingreso.class);
                                 startActivity(intent);
                                 runOnUiThread(
@@ -166,6 +167,7 @@ public class Registro extends ActionBarActivity
                                 }
 
                                 registrador.registrarDatos();
+
                                 Intent intent = new Intent(Registro.this, Ingreso.class);
                                 startActivity(intent);
                                 runOnUiThread(
@@ -177,7 +179,9 @@ public class Registro extends ActionBarActivity
                                             }
                                         });
                                 finish();
-                            } catch (Exception e) {
+                            }
+                            catch (Exception e)
+                            {
                                 e.printStackTrace();
                             }
                         }

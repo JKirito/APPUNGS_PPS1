@@ -4,12 +4,9 @@ import android.util.Log;
 
 import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
-import com.pps1.guiame.guiame.utils.MailValidator;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Modificador {

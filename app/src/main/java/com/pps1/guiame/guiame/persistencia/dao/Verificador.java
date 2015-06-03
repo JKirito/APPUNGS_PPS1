@@ -1,8 +1,6 @@
 package com.pps1.guiame.guiame.persistencia.dao;
 
 
-import android.util.Log;
-
 import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 import com.pps1.guiame.guiame.utils.MailValidator;

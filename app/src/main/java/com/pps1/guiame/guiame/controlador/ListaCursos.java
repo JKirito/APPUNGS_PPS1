@@ -25,6 +25,7 @@ import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
+import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -185,9 +186,9 @@ public class ListaCursos extends ActionBarActivity
                 preguntar(info.position);
                 return true;
             case R.id.menuVerDetalles:
-                MenuItem menuBorrar = (MenuItem) findViewById(R.id.menuBorrarCurso);
-                menuBorrar.setVisible(false);
-                verDetalles(info.position, item);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ListaCursos.this);
+                final Curso curso = (Curso) listaCursos.getItemAtPosition(info.position);
+                Utils.verDetalles(curso, builder);
                 return true;
             default:
                 return super.onContextItemSelected(item);
@@ -201,13 +202,6 @@ public class ListaCursos extends ActionBarActivity
         listaCursos.setAdapter(adaptador);
     }
 
-    //Cambia el titulo de Ver detalles con el nombre del docente.
-    private void verDetalles(int posItemSeleccionado, MenuItem item)
-    {
-        final int posicionItemSeleccionado = posItemSeleccionado;
-        final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
-        item.setTitle(curso.getDocente());
-    }
 
     private void eliminarCurso(int posItemSeleccionado)
     {
@@ -312,7 +306,6 @@ public class ListaCursos extends ActionBarActivity
 
     private void preguntar(int posicionCurso)
     {
-
         final int posicionCursoABorrar = posicionCurso;
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener()
         {

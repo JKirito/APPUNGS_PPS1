@@ -1,9 +1,11 @@
 package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -18,6 +20,7 @@ import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -130,6 +133,23 @@ public class CursoPersonalizado extends Activity
         adaptadorCursos = new ArrayAdapter<Curso>(this,android.R.layout.simple_list_item_1,datos);
         listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         listaCursosJuntos.setAdapter(adaptadorCursos);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+                .getMenuInfo();
+        switch (item.getItemId())
+        {
+            case R.id.menuVerDetalles:
+                AlertDialog.Builder builder = new AlertDialog.Builder(CursoPersonalizado.this);
+                final Curso curso = (Curso) listaCursosJuntos.getItemAtPosition(info.position);
+                Utils.verDetalles(curso, builder);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     private void geoLocalizarAula(int posicionItemSeleccionado)

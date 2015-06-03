@@ -17,9 +17,7 @@ public class Listador
     private Integer idUsuario;
     private String textoCurso;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
-  //  private final String PHP_NAME_LISTADOR_TODO = "listarMaterias.php"; BORRAR
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
-    // private final String PHP_NAME_LISTADOR_CURSOS = "listarCursos.php";
 
     public Listador(Integer idUsuario)
     {

@@ -1,12 +1,5 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-
-import com.pps1.guiame.guiame.R;
-
 public class Perfil
 {
     private static String usuario;

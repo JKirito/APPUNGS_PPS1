@@ -15,10 +15,11 @@ import java.util.Map;
  * Created by javi on 29/04/15.
  */
 public class AulaDAO {
-    private final String PHP_NAME_REGISTRADOR_AULA = "registrarAula.php";
+    private final String PHP_NAME_REGISTRADOR_AULA = "geolocalizarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
 
-    public void registrarAula(Aula aula) throws IOException {
+    public void registrarAula(Aula aula) throws IOException
+    {
         String ubicacion = aula.getLatitud()+","+aula.getLongitud();
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
