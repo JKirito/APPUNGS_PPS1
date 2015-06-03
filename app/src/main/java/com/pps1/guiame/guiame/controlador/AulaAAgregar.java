@@ -39,7 +39,6 @@ public class AulaAAgregar extends ActionBarActivity
 
 
         btnLocalizar = (Button)findViewById(R.id.btnAgregar);
-        txtAula = (EditText)findViewById(R.id.txtAula);
         dialog = new ProgressDialog(this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula

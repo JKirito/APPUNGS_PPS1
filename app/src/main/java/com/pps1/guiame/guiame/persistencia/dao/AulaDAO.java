@@ -50,8 +50,8 @@ public class AulaDAO {
         {
             Log.d("EXCEP obtDatJSONBusAula", e + "");
         }
-        Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : 0.0;
-        Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : 0.0;
+        Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
+        Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
         return new Aula(numAula, latitud, longitud);
     }
 }
