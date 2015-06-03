@@ -144,7 +144,7 @@ public class Principal extends Activity
                 Perfil.logout();
                 Toast.makeText(getApplicationContext(),
                         "Ha cerrado sesión", Toast.LENGTH_LONG).show();
-                btnIngresar.setText(R.string.IniciarSesion);
+                habilitarBotones();
             }
         });
     }
@@ -173,6 +173,9 @@ public class Principal extends Activity
         {
             btnRegistrarse.setVisibility(View.VISIBLE);
             btnIngresar.setText(R.string.ingresar);
+            btnAgregarAula.setVisibility(View.GONE);
+            btnSalir.setVisibility(View.GONE);
+
         }
     }
 
