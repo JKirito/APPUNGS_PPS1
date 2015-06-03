@@ -160,6 +160,7 @@ public class AulaAAgregar extends ActionBarActivity
         });
     }
 
+    //Muestra el numero de  aula en la lista
     public void mostrarItems(ArrayList<Aula> datos)
     {
         adaptadorAulas = new ArrayAdapter<Aula>(this,android.R.layout.simple_list_item_1,datos);
