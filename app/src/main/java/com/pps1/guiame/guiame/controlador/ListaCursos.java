@@ -43,7 +43,6 @@ public class ListaCursos extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cursos);
-        // as before
         listaCursos = (ListView) findViewById(R.id.listaMaterias);
         registerForContextMenu(listaCursos);
         listaCursos.setAdapter(adaptador);

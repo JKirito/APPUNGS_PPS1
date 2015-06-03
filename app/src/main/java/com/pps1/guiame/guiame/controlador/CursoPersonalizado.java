@@ -40,7 +40,13 @@ public class CursoPersonalizado extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_personalizado);
+
+        listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
+        registerForContextMenu(listaCursosJuntos);
+        listaCursosJuntos.setAdapter(adaptadorCursos);
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
+
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
         dialog = new ProgressDialog(this);
@@ -133,7 +139,6 @@ public class CursoPersonalizado extends Activity
     public void mostrarItems(ArrayList<Curso> datos)
     {
         adaptadorCursos = new ArrayAdapter<Curso>(this,android.R.layout.simple_list_item_1,datos);
-        listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         listaCursosJuntos.setAdapter(adaptadorCursos);
     }
 

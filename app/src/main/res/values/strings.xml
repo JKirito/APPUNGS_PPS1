@@ -20,6 +20,7 @@
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
 
+    <string name="iniciarSesion">Iniciar Sesion</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrarse">Registrarse</string>
     <string name="misCursos">Ver mis cursos</string>
