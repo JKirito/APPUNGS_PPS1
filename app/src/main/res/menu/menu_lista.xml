@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context="com.pps1.guiame.guiame.presentacion.controlador.ListaMaterias">
 
-    <item android:id="@+id/IniciarSesion" android:title="@string/IniciarSesion"
+    <item android:id="@+id/IniciarSesion" android:title="@string/iniciarSesion"
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/Registrarse" android:title="@string/registrarse"
         android:orderInCategory="100" app:showAsAction="never" />

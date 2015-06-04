@@ -11,14 +11,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by javi on 29/04/15.
- */
-public class AulaDAO {
-    private final String PHP_NAME_REGISTRADOR_AULA = "geolocalizarAula.php";
+public class AulaDAO
+{
+    private final String PHP_NAME_GEOLOCALIZADOR_AULA = "geolocalizarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
 
-    public void registrarAula(Aula aula) throws IOException
+    public void geolocalizarAula(Aula aula) throws IOException
     {
         String ubicacion = aula.getLatitud()+","+aula.getLongitud();
         //La key del map deben ser los nombres de los campos en la tabla
@@ -26,7 +24,7 @@ public class AulaDAO {
         datos.put("numero",aula.getNumAula());
         datos.put("ubicacion", ubicacion);
 
-        String result = Conexion.enviarPost(datos, PHP_NAME_REGISTRADOR_AULA);
+        String result = Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
     }
 
     public Aula getAula(String numAula) throws IOException {

@@ -12,23 +12,33 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
+import com.pps1.guiame.guiame.persistencia.dao.Listador;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class AulaAAgregar extends ActionBarActivity
 {
 
-    private EditText txtAula;
-    private Button btnLocalizar;
+    private EditText txtNumeroAula;
+    private Button btnBuscarAula;
     private LocationManager locManager;
     private LocationListener locListener;
     private Object Settings;
+    private ListView listaAulas;
+    ArrayAdapter<Aula> adaptadorAulas;
     ProgressDialog dialog;
 
     @Override
@@ -37,24 +47,26 @@ public class AulaAAgregar extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_aula);
 
-
-        btnLocalizar = (Button)findViewById(R.id.btnAgregar);
+        btnBuscarAula = (Button)findViewById(R.id.btnBuscarAula);
+        txtNumeroAula = (EditText)findViewById(R.id.txtAula);
         dialog = new ProgressDialog(this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
-        //y se la pasamos al agregador para que la inserte en la BD.
-        btnLocalizar.setOnClickListener(new View.OnClickListener()
-        {
-           @Override
-            public void onClick(View v)
+        //y se la pasamos al agregador para que actualice la tabla aulas con esa posicion.
+
+        ((ListView) findViewById(R.id.listaAulas)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 dialog.setMessage("Agregando aula...");
                 dialog.show();
 
-                final String numeroAula = txtAula.getText().toString();
+                final Aula aulaSeleccionada = (Aula) listaAulas.getAdapter().getItem(position);
                 final Location posicion = getPosicionAdmin();
+                aulaSeleccionada.setLatitud(posicion.getLatitude());
+                aulaSeleccionada.setLongitud(posicion.getLongitude());
 
-                if(numeroAula == null || numeroAula.isEmpty())
+                if(aulaSeleccionada == null)
                 {
                     Toast.makeText(getApplicationContext(),"Ingrese aula", Toast.LENGTH_SHORT).show();
                     return;
@@ -64,7 +76,6 @@ public class AulaAAgregar extends ActionBarActivity
                     Toast.makeText(getApplicationContext(),"No se pudo obtener las coordenadas. Verifique que tiene activado el GPS", Toast.LENGTH_LONG).show();
                     return;
                 }
-                final Aula aulaNueva = new Aula(numeroAula,posicion.getLatitude(),posicion.getLongitude());
 
                 Thread thread = new Thread(new Runnable(){
                     @Override
@@ -72,16 +83,16 @@ public class AulaAAgregar extends ActionBarActivity
                     {
                         try
                         {
-                            new AulaDAO().registrarAula(aulaNueva);
-                                runOnUiThread(
-                                        new Runnable()
+                            new AulaDAO().geolocalizarAula(aulaSeleccionada);
+                            runOnUiThread(
+                                    new Runnable()
+                                    {
+                                        @Override
+                                        public void run()
                                         {
-                                            @Override
-                                            public void run()
-                                            {
-                                                Toast.makeText(getApplicationContext(),"Aula agregada", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
+                                            Toast.makeText(getApplicationContext(),"Aula agregada", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
 
                             Intent intent = new Intent(AulaAAgregar.this, Principal.class);
                             startActivity(intent);
@@ -95,8 +106,66 @@ public class AulaAAgregar extends ActionBarActivity
                     }
                 });
                 thread.start();
+
             }
         });
+
+        btnBuscarAula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String numeroAula = txtNumeroAula.getText().toString().trim();
+                dialog.setMessage("Buscando...");
+                dialog.show();
+
+                Thread tr = new Thread() {
+                    @Override
+                    public void run() {
+                        final ArrayList<Aula> aulas;
+                        Listador listador = new Listador(numeroAula);
+                        try
+                        {
+                            aulas = listador.getListadoAulas();
+                        }
+                        catch (IOException e)
+                        {
+                            e.printStackTrace();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "Hubo un error al obtener las aulas, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            return;
+                        }
+                        runOnUiThread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        if (aulas == null || aulas.isEmpty()) {
+                                            Toast.makeText(getApplicationContext(),
+                                                    "No se han encontrado aulas. Pruebe escribir otro numero", Toast.LENGTH_LONG).show();
+                                            return;
+                                        }
+                                        mostrarItems(aulas);
+                                    }
+                                });
+
+                        dialog.dismiss();
+                    }
+                };
+                tr.start();
+            }
+        });
+    }
+
+    //Muestra el numero de  aula en la lista
+    public void mostrarItems(ArrayList<Aula> datos)
+    {
+        adaptadorAulas = new ArrayAdapter<Aula>(this,android.R.layout.simple_list_item_1,datos);
+        listaAulas = (ListView) findViewById(R.id.listaAulas);
+        listaAulas.setAdapter(adaptadorAulas);
     }
 
     @Override

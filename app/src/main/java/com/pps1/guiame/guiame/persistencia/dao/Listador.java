@@ -2,6 +2,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
+import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
@@ -15,24 +16,26 @@ import java.util.Map;
 public class Listador
 {
     private Integer idUsuario;
-    private String textoCurso;
+    private String textoParaFiltrar;
+    private String numeroAula;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
+    private final String PHP_NAME_LISTADOR_AULAS = "listarAulas.php";
 
     public Listador(Integer idUsuario)
     {
         this.idUsuario = idUsuario;
     }
 
-    public Listador(String textoCurso)
+    public Listador(String textoAFiltrar)
     {
-        this.textoCurso = textoCurso;
+        this.textoParaFiltrar = textoAFiltrar;
     }
 
-    public Listador(Integer idUsuario,String textoCurso)
+    public Listador(Integer idUsuario,String textoParaFiltrar)
     {
         this.idUsuario = idUsuario;
-        this.textoCurso = textoCurso;
+        this.textoParaFiltrar = textoParaFiltrar;
     }
 
 
@@ -49,26 +52,19 @@ public class Listador
         return listadoCursos;
     }
 
-    /*
-    public ArrayList<Curso> getListadoCursos()
+    public ArrayList<Aula> getListadoAulas() throws IOException
     {
-        //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
-        datos.put("texto",textoCurso.toString());
+        datos.put("texto", textoParaFiltrar);
+        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_AULAS);
 
-        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);
-        ArrayList<Curso> listadoCursos = obtDatosJSONCursos(result);
-
-        Log.d("resultPostListadoMatUS", result);
-
-        return listadoCursos;
+        return obtDatosJSONAulas(result);
     }
-    */
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     public ArrayList<Curso> getListadoCursosJuntos() throws IOException {
         Map<String, String> datos = new HashMap<String, String>();
-        datos.put("texto",textoCurso);
+        datos.put("texto", textoParaFiltrar);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);
 
         return obtDatosJSONCursos(result);
@@ -128,5 +124,25 @@ public class Listador
         return listado;
     }
 
+    public ArrayList<Aula> obtDatosJSONAulas(String response)
+    {
+        ArrayList<Aula> listado= new ArrayList<Aula>();
+        try
+        {
+            JSONArray json= new JSONArray(response);
+            Aula a;
+            for (int i=0; i<json.length();i++)
+            {
+                String aula = json.getJSONObject(i).getString("numero");
+                a = new Aula(aula,0.0,0.0);
+                listado.add(a);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("EXCEPCION obtDatosJSON", e+"");
+        }
+        return listado;
+    }
 
 }
