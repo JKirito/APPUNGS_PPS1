@@ -17,7 +17,6 @@ public class Listador
 {
     private Integer idUsuario;
     private String textoParaFiltrar;
-    private String numeroAula;
     private final String PHP_NAME_LISTADOR = "listarMateriasUsuario.php";
     private final String PHP_NAME_LISTADOR_JUNTO = "listarCursosJuntos.php";
     private final String PHP_NAME_LISTADOR_AULAS = "listarAulas.php";
@@ -62,7 +61,8 @@ public class Listador
     }
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
-    public ArrayList<Curso> getListadoCursosJuntos() throws IOException {
+    public ArrayList<Curso> getListadoCursosJuntos() throws IOException
+    {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_JUNTO);

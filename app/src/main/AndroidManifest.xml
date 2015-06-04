@@ -89,15 +89,12 @@
         </activity>
         <activity
             android:name=".controlador.CursoPersonalizado"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_curso_personalizado" >
         </activity>
         <activity
             android:name=".controlador.NombreCursoPersonalizado"
             android:label="@string/title_activity_nombre_curso_personalizado" >
-        </activity>
-        <activity
-            android:name=".controlador.Perfil"
-            android:label="@string/title_activity_perfil" >
         </activity>
     </application>
 
