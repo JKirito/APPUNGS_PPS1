@@ -24,7 +24,7 @@ public class AulaDAO
         datos.put("numero",aula.getNumAula());
         datos.put("ubicacion", ubicacion);
 
-        String result = Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
+        Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
     }
 
     public Aula getAula(String numAula) throws IOException {
@@ -48,8 +48,8 @@ public class AulaDAO
         {
             Log.d("EXCEP obtDatJSONBusAula", e + "");
         }
-        Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : 0.0;
-        Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : 0.0;
+        Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
+        Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
         return new Aula(numAula, latitud, longitud);
     }
 }

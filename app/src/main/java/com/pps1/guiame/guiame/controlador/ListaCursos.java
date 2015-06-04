@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -172,6 +173,7 @@ public class ListaCursos extends ActionBarActivity
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_opciones_lista, menu);
+        Log.d("detalles", "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     }
 
     @Override
@@ -179,6 +181,7 @@ public class ListaCursos extends ActionBarActivity
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
                 .getMenuInfo();
+        Log.d("detalles", "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         switch (item.getItemId())
         {
             case R.id.menuBorrarCurso:
