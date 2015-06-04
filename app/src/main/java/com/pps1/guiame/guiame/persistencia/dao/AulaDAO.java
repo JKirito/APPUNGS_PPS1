@@ -24,7 +24,7 @@ public class AulaDAO
         datos.put("numero",aula.getNumAula());
         datos.put("ubicacion", ubicacion);
 
-        String result = Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
+        Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
     }
 
     public Aula getAula(String numAula) throws IOException {
