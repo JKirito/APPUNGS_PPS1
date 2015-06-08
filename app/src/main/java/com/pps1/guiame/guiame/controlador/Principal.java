@@ -3,6 +3,7 @@ package com.pps1.guiame.guiame.controlador;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -186,5 +187,19 @@ public class Principal extends Activity
         intent.addCategory(Intent.CATEGORY_HOME);
         //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            setContentView(R.layout.activity_pantalla_principal);
+        }
+        else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            setContentView(R.layout.activity_pantalla_principal);
+        }
     }
 }

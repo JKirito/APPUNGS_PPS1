@@ -12,12 +12,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by javi on 29/04/15.
- */
-public class CursoDAO {
-    private final String PHP_NAME_REGISTRADOR_AULA = "registrarAula.php";
-    private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
+public class CursoDAO
+{
     private final String PHP_NAME_CURSO_PERSONAL = "registrarCursoPersonalizado.php";
     private final String PHP_NAME_BORRADOR_CURSO = "borrarCurso.php";
 

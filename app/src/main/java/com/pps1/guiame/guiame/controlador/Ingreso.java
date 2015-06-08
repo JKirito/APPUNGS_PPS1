@@ -2,6 +2,7 @@ package com.pps1.guiame.guiame.controlador;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -99,7 +100,6 @@ public class Ingreso extends ActionBarActivity
                                 Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
                                 startActivity(intent);
                             }
-
                         }
                         catch (Exception e)
                         {
@@ -122,15 +122,6 @@ public class Ingreso extends ActionBarActivity
         });
     }
 
-    /*@Override
-    public void onResume()
-   {
-       super.onResume();
-
-       txtDni.setText("");
-       txtContraseña.setText("");
-    }*/
-
 
     @Override
     public void onBackPressed()
@@ -140,4 +131,14 @@ public class Ingreso extends ActionBarActivity
         finish();
     }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ||
+                newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            setContentView(R.layout.activity_ingreso);
+        }
+    }
 }

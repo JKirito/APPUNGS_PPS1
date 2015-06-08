@@ -85,6 +85,7 @@
 
         <activity
             android:name=".controlador.AulaAAgregar"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_agregar_aula" >
         </activity>
         <activity
