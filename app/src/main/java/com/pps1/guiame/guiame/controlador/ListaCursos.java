@@ -181,7 +181,6 @@ public class ListaCursos extends ActionBarActivity
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
                 .getMenuInfo();
-        Log.d("detalles", "CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
         switch (item.getItemId())
         {
             case R.id.menuBorrarCurso:

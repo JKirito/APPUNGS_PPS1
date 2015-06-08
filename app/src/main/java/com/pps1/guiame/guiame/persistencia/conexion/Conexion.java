@@ -66,7 +66,7 @@ public class Conexion
                 Log.d(nombreVariable, datos.get(nombreVariable));
                 params.add(new BasicNameValuePair(nombreVariable, datos.get(nombreVariable)));
             }
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
             response = httpClient.execute(httpPost, localContext);
 
             HttpEntity entity = response.getEntity();

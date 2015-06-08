@@ -50,6 +50,8 @@ public class AulaAAgregar extends ActionBarActivity
         btnBuscarAula = (Button)findViewById(R.id.btnBuscarAula);
         txtNumeroAula = (EditText)findViewById(R.id.txtAula);
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
         //y se la pasamos al agregador para que actualice la tabla aulas con esa posicion.
