@@ -76,6 +76,7 @@ public class CursoPersonalizado extends Activity
                         final ArrayList<Curso> cursos;
                         Listador listador = new Listador(Perfil.getId(), nombreMat);
                         try {
+                            Log.d("agregarCursoAAAA", agregandoCurso + "");
                             if (Perfil.isUserOn() && agregandoCurso)
                             {
                                 cursos = listador.getListadoCursosJuntos();
@@ -122,6 +123,7 @@ public class CursoPersonalizado extends Activity
         ((ListView) findViewById(R.id.listaCursosJuntos)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("agregarCursoBBBBBB", agregandoCurso + "");
                 if (Perfil.isUserOn() && agregandoCurso) {
                     final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
