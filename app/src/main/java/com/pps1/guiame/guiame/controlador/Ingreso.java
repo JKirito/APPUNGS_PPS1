@@ -15,6 +15,7 @@ import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Ingresador;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.persistencia.dao.Verificador;
+import com.pps1.guiame.guiame.utils.Aviso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class Ingreso extends ActionBarActivity
     private EditText txtContraseña;
     private Button btnAceptar;
     private Button btnCancelar;
-    ProgressDialog dialog;
+    //ProgressDialog dialog;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,9 +42,9 @@ public class Ingreso extends ActionBarActivity
         txtContraseña = (EditText)findViewById(R.id.txtContraseña);
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
+        aviso.setCancelable(false);
+        aviso.setCanceledOnTouchOutside(false);
 
         //Implementamos el evento “click” del botón
         btnAceptar.setOnClickListener(new View.OnClickListener()
@@ -50,8 +52,8 @@ public class Ingreso extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                dialog.setMessage("Verificando usuario...");
-                dialog.show();
+                aviso.setMessage("Verificando usuario...");
+                aviso.show();
 
                 final String dni = txtDni.getText().toString();
                 final String pass = txtContraseña.getText().toString();
@@ -75,7 +77,7 @@ public class Ingreso extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         errores.get(0), Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss(); //Cierra el dialog
+                                                aviso.dismiss(); //Cierra el dialog
                                             }
                                         });
 
@@ -92,7 +94,7 @@ public class Ingreso extends ActionBarActivity
                                 Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
-                                dialog.dismiss(); //Cierra el dialog
+                                aviso.dismiss(); //Cierra el dialog
                             }
                             else
                             {
@@ -132,16 +134,5 @@ public class Ingreso extends ActionBarActivity
         startActivity(start);
         finish();
     }
-
-    //Para evitar que se cierre el Dialog al cambiar de orientacion la pantalla
-    @Override
-    public void onConfigurationChanged(Configuration newConfig)
-    {
-        super.onConfigurationChanged(newConfig);
-        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ||
-                newConfig.orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
-            setContentView(R.layout.activity_ingreso);
-        }
-    }
 }
+

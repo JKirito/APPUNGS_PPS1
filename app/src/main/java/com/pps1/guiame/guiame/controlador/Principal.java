@@ -13,13 +13,15 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.utils.Aviso;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class Principal extends Activity
 {
-    ProgressDialog dialog;
+    //ProgressDialog dialog;
+    Aviso aviso;
     private Button btnRegistrarse;
     private Button btnIngresar;
     private Button btnBuscarCurso;
@@ -37,9 +39,9 @@ public class Principal extends Activity
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
+        aviso.setCancelable(false);
+        aviso.setCanceledOnTouchOutside(false);
         habilitarBotones();
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener()
@@ -75,8 +77,8 @@ public class Principal extends Activity
                 // Si está logeado lo mando a la pantalla con las materias
                 else
                 {
-                    dialog.setMessage("Cargando...");
-                    dialog.show();
+                    aviso.setMessage("Cargando...");
+                    aviso.show();
                     Thread tr = new Thread()
                     {
                         @Override
@@ -102,7 +104,7 @@ public class Principal extends Activity
                             Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
-                            dialog.dismiss(); //Cierra el dialog
+                            aviso.dismiss(); //Cierra el dialog
                             finish();
                         }
                     };
