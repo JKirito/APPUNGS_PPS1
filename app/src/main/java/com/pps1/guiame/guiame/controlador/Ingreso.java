@@ -133,6 +133,7 @@ public class Ingreso extends ActionBarActivity
         finish();
     }
 
+    //Para evitar que se cierre el Dialog al cambiar de orientacion la pantalla
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {

@@ -189,6 +189,7 @@ public class Principal extends Activity
         startActivity(intent);
     }
 
+    //Para evitar que se cierre el Dialog al cambiar de orientacion la pantalla
     @Override
     public void onConfigurationChanged(Configuration newConfig)
     {
