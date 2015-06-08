@@ -85,11 +85,11 @@ public class NombreCursoPersonalizado extends Activity
     }
 
     //Al presionar el botón Atrás vuelve a la clase CursoPersonalizado
-    @Override
-    public void onBackPressed()
-    {
-        Intent start = new Intent(NombreCursoPersonalizado.this,CursoPersonalizado.class);
-        startActivity(start);
-        finish();
-    }
+    //@Override
+    //public void onBackPressed()
+    //{
+        //Intent start = new Intent(NombreCursoPersonalizado.this,CursoPersonalizado.class);
+        //startActivity(start);
+        //finish();
+    //}
 }
