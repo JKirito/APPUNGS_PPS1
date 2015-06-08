@@ -33,6 +33,8 @@ public class NombreCursoPersonalizado extends Activity
         txtNombreMateria.setText(curso.getNombre());
         setTitle("Personalizar nombre de curso");
         dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {

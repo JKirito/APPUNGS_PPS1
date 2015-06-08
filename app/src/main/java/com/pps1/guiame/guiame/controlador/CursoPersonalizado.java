@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +54,7 @@ public class CursoPersonalizado extends Activity
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         final boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
+        Log.d("agregarCurso", agregandoCurso + "");
 
         btnBuscarCurso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +76,16 @@ public class CursoPersonalizado extends Activity
                         final ArrayList<Curso> cursos;
                         Listador listador = new Listador(Perfil.getId(), nombreMat);
                         try {
-                            cursos = listador.getListadoCursosJuntos();
+                            if (Perfil.isUserOn() && agregandoCurso)
+                            {
+                                cursos = listador.getListadoCursosJuntos();
+                            }
+                            else
+                            {
+                                cursos = listador.getListadoCursos();
+                            }
+
+
                         } catch (IOException e) {
                             e.printStackTrace();
                             runOnUiThread(

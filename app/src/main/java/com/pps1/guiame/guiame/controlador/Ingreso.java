@@ -88,7 +88,6 @@ public class Ingreso extends ActionBarActivity
                             {
                                 Bundle bundleMaterias = new Bundle();
                                 bundleMaterias.putSerializable("Cursos", cursos);
-                                bundleMaterias.putBoolean("AgregarCurso", true);
                                 Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
@@ -96,7 +95,10 @@ public class Ingreso extends ActionBarActivity
                             }
                             else
                             {
+                                Bundle bundleCurso = new Bundle();
+                                bundleCurso.putBoolean("AgregarCurso", true);
                                 Intent intent = new Intent(getApplicationContext(), CursoPersonalizado.class);
+                                intent.putExtras(bundleCurso);
                                 startActivity(intent);
                             }
 

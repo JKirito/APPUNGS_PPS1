@@ -34,4 +34,8 @@ public class Aula implements Serializable
 
     public void setLongitud(Double longitud) { this.longitud = longitud;}
 
+    @Override
+    public String toString() {
+        return numAula;
+    }
 }
