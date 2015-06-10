@@ -84,6 +84,7 @@ public class Conexion
         return resultado;
     }
 
+    //Para revisar conexiones
     public static Boolean tieneConexion()
     {
         ConnectivityManager connectivityManager
