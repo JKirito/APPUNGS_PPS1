@@ -24,7 +24,7 @@ public class CoordenadasEdificiosUNGS
     public static final LatLng MOD_3 = new LatLng(-34.522375, -58.700046);
     public static final LatLng MOD_7 = new LatLng(-34.522699, -58.700496);
     public static final LatLng MOD_9 = new LatLng(-34.521964, -58.701254);
-    public static final LatLng JARDIN = new LatLng(-34.521190, -58.699881);
+    public static final LatLng ESCUELA_INFANTIL = new LatLng(-34.521190, -58.699881);
     public static final LatLng CAMPO_DEPORTES = new LatLng(-34.522652, -58.698026);
     public static final LatLng ANFITEATRO = new LatLng(-34.521131, -58.700064);
 }

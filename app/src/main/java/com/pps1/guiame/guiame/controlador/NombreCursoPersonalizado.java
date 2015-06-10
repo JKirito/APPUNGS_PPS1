@@ -50,9 +50,12 @@ public class NombreCursoPersonalizado extends Activity
                     @Override
                     public void run()
                     {
-                        try {
+                        try
+                        {
                             new CursoDAO().registrarCursoPersonalizado(curso, Perfil.getId());
-                        } catch (IOException e) {
+                        }
+                        catch (IOException e)
+                        {
                             e.printStackTrace();
                             runOnUiThread(
                                     new Runnable() {

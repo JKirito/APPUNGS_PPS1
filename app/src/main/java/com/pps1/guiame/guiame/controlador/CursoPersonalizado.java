@@ -87,12 +87,16 @@ public class CursoPersonalizado extends Activity
                             }
 
 
-                        } catch (IOException e) {
+                        }
+                        catch (IOException e)
+                        {
                             e.printStackTrace();
                             runOnUiThread(
-                                    new Runnable() {
+                                    new Runnable()
+                                    {
                                         @Override
-                                        public void run() {
+                                        public void run()
+                                        {
                                             Toast.makeText(getApplicationContext(),
                                                     "Hubo un error al obtener los Cursos, intente de nuevo.", Toast.LENGTH_SHORT).show();
                                         }
@@ -103,7 +107,8 @@ public class CursoPersonalizado extends Activity
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (cursos == null || cursos.isEmpty()) {
+                                        if (cursos == null || cursos.isEmpty())
+                                        {
                                             Toast.makeText(getApplicationContext(),
                                                     "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
                                             return;
@@ -124,7 +129,8 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("agregarCursoBBBBBB", agregandoCurso + "");
-                if (Perfil.isUserOn() && agregandoCurso) {
+                if (Perfil.isUserOn() && agregandoCurso)
+                {
                     final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
                     Thread tr = new Thread() {
@@ -140,7 +146,8 @@ public class CursoPersonalizado extends Activity
                         }
                     };
                     tr.start();
-                } else
+                }
+                else
                 {
                     geoLocalizarAula(position);
                 }
@@ -194,7 +201,8 @@ public class CursoPersonalizado extends Activity
                 final Aula aula;
                 try {
                     aula = new AulaDAO().getAula(itemSeleccionado.getAula());
-                } catch (IOException e) {
+                } catch (IOException e)
+                {
                     e.printStackTrace();
                     runOnUiThread(
                             new Runnable() {
@@ -229,7 +237,6 @@ public class CursoPersonalizado extends Activity
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
                 dialog.dismiss();
-                //finish();
             }
         };
         tr.start();

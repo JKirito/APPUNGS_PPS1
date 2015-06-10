@@ -2,11 +2,8 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
 
-import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
-
-import org.json.JSONArray;
 
 import java.io.IOException;
 import java.util.HashMap;

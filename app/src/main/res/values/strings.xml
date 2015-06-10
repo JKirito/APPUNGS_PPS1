@@ -8,7 +8,6 @@
     <string name="nombre">Nombre y Apellido</string>
     <string name="contraseña">Contraseña</string>
     <string name="repetirContraseña">Repita la contraseña</string>
-    <string name="buscar">Buscar</string>
 
     <string name="numeroAula">Ingrese número de aula</string>
     <string name="nombreCurso"> Ingrese nombre de la materia</string>
@@ -19,6 +18,8 @@
 
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="buscar">Buscar</string>
+    <string name="localizarCurso">Localizar</string>
 
     <string name="iniciarSesion">Iniciar Sesion</string>
     <string name="ingresar">Ingresar</string>
@@ -32,8 +33,9 @@
     <string name="buscarCurso">Buscar curso</string>
     <string name="guardarCurso">Guardar curso</string>
     <string name="borrarCurso">Borrar curso</string>
+
     <string name="verDetalles">Ver detalles</string>
-    <string name="localizarCurso">Localizar</string>
+
     <string name="agregarNuevoCurso">Agregar nuevo curso</string>
     <string name="guiaBorrarCurso">Seleccione el curso a borrar</string>
 
@@ -45,14 +47,7 @@
     <string name="title_activity_agregar_aula">Agregar aula</string>
     <string name="title_activity_registro">Registro de cuenta</string>
     <string name="title_activity_curso_personalizado">Curso Personalizado</string>
-
     <string name="title_activity_nombre_curso_personalizado">Nombre personalizado</string>
-    <string name="title_activity_curso_aborrar">CursoABorrar</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_curso_abuscar">CursoABuscar</string>
     <string name="title_activity_perfil">Perfil</string>
-    <string name="title_activity_d">d</string>
 
 </resources>

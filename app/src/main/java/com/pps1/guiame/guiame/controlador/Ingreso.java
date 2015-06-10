@@ -1,8 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
@@ -28,7 +26,6 @@ public class Ingreso extends ActionBarActivity
     private EditText txtContraseña;
     private Button btnAceptar;
     private Button btnCancelar;
-    //ProgressDialog dialog;
     Aviso aviso;
 
     @Override
@@ -125,7 +122,6 @@ public class Ingreso extends ActionBarActivity
             }
         });
     }
-
 
     @Override
     public void onBackPressed()
