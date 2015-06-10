@@ -84,6 +84,9 @@ public class Listador
     public ArrayList<Curso> obtDatosJSONMateriasUsuario(String response)
     {
         ArrayList<Curso> listado= new ArrayList<Curso>();
+        if(response == null || response.equals("null"))
+            return listado;
+        Log.d("response En obtDatos",response);
         try
         {
             JSONArray json= new JSONArray(response);
@@ -168,7 +171,10 @@ public class Listador
             for (int i=0; i<json.length();i++)
             {
                 String aula = json.getJSONObject(i).getString("numero");
-                a = new Aula(aula,0.0,0.0);
+                String ubicacion = json.getJSONObject(i).getString("ubicacion");
+                Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
+                Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
+                a = new Aula(aula,latitud,longitud);
                 listado.add(a);
             }
         }

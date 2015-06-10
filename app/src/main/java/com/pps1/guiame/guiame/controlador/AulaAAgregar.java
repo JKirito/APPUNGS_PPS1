@@ -1,6 +1,5 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -21,9 +20,8 @@ import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
-import com.pps1.guiame.guiame.dto.Curso;
-import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.utils.Aviso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class AulaAAgregar extends ActionBarActivity
     private Object Settings;
     private ListView listaAulas;
     ArrayAdapter<Aula> adaptadorAulas;
-    ProgressDialog dialog;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,9 +47,7 @@ public class AulaAAgregar extends ActionBarActivity
 
         btnBuscarAula = (Button)findViewById(R.id.btnBuscarAula);
         txtNumeroAula = (EditText)findViewById(R.id.txtAula);
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
         //y se la pasamos al agregador para que actualice la tabla aulas con esa posicion.
@@ -60,54 +56,31 @@ public class AulaAAgregar extends ActionBarActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                dialog.setMessage("Agregando aula...");
-                dialog.show();
-
                 final Aula aulaSeleccionada = (Aula) listaAulas.getAdapter().getItem(position);
-                final Location posicion = getPosicionAdmin();
-                aulaSeleccionada.setLatitud(posicion.getLatitude());
-                aulaSeleccionada.setLongitud(posicion.getLongitude());
+                //final Location posicion = getPosicionAdmin();
+                //aulaSeleccionada.setLatitud(posicion.getLatitude());
+                //aulaSeleccionada.setLongitud(posicion.getLongitude());
 
-                if(aulaSeleccionada == null)
+                Toast.makeText(getApplicationContext(),"Posicionando Aula...", Toast.LENGTH_SHORT).show();
+
+                //Verifico que el aula esté bien y la ubico en el mapa
+                if(aulaSeleccionada == null || aulaSeleccionada.getLatitud() == null || aulaSeleccionada.getLongitud() == null)
                 {
-                    Toast.makeText(getApplicationContext(),"Ingrese aula", Toast.LENGTH_SHORT).show();
+                    Log.d("numeroAula", aulaSeleccionada.getNumAula());
+                    String msj = aulaSeleccionada == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
+                    Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
+                    aviso.dismiss();
                     return;
                 }
-                if(posicion == null)
-                {
-                    Toast.makeText(getApplicationContext(),"No se pudo obtener las coordenadas. Verifique que tiene activado el GPS", Toast.LENGTH_LONG).show();
-                    return;
-                }
 
-                Thread thread = new Thread(new Runnable(){
-                    @Override
-                    public void run()
-                    {
-                        try
-                        {
-                            new AulaDAO().geolocalizarAula(aulaSeleccionada);
-                            runOnUiThread(
-                                    new Runnable()
-                                    {
-                                        @Override
-                                        public void run()
-                                        {
-                                            Toast.makeText(getApplicationContext(),"Aula agregada", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                aviso.dismiss();
 
-                            Intent intent = new Intent(AulaAAgregar.this, Principal.class);
-                            startActivity(intent);
-                            dialog.dismiss();
-                            finish();
-                        }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-                thread.start();
+                Bundle bundleBuscAula = new Bundle();
+                bundleBuscAula.putSerializable("Aula", aulaSeleccionada);
+
+                Intent intent = new Intent(getApplicationContext(), MapaAula.class);
+                intent.putExtras(bundleBuscAula);
+                startActivity(intent);
 
             }
         });
@@ -116,20 +89,17 @@ public class AulaAAgregar extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 final String numeroAula = txtNumeroAula.getText().toString().trim();
-                dialog.setMessage("Buscando...");
-                dialog.show();
+                aviso.setMessage("Buscando...");
+                aviso.show();
 
                 Thread tr = new Thread() {
                     @Override
                     public void run() {
                         final ArrayList<Aula> aulas;
                         Listador listador = new Listador(numeroAula);
-                        try
-                        {
+                        try {
                             aulas = listador.getListadoAulas();
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                             runOnUiThread(
                                     new Runnable() {
@@ -154,7 +124,7 @@ public class AulaAAgregar extends ActionBarActivity
                                     }
                                 });
 
-                        dialog.dismiss();
+                        aviso.dismiss();
                     }
                 };
                 tr.start();
@@ -222,15 +192,15 @@ public class AulaAAgregar extends ActionBarActivity
 //        }
 //        else
 //        {
-            locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
-            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
-            Location loc=locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (loc == null)
-            {
-                locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
-                loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            }
-            return loc;
+        locManager=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+        Location loc= locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (loc == null)
+        {
+            locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locListener);
+            loc=locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        return loc;
 //        }
 //        return null;
     }
@@ -240,5 +210,12 @@ public class AulaAAgregar extends ActionBarActivity
         Intent start = new Intent(AulaAAgregar.this,Principal.class);
         startActivity(start);
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(adaptadorAulas != null)
+            this.startActivity(this.getIntent());
     }
 }

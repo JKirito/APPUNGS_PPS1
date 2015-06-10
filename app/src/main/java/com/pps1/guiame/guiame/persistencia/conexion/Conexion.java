@@ -16,6 +16,7 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,11 @@ public class Conexion
                 params.add(new BasicNameValuePair(nombreVariable, datos.get(nombreVariable)));
             }
             httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-            response = httpClient.execute(httpPost, localContext);
+            try {
+                response = httpClient.execute(httpPost, localContext);
+            } catch (UnknownHostException e) {
+                throw new UnknownHostException("No se ha podido conectar al servidor");
+            }
 
             HttpEntity entity = response.getEntity();
             resultado = EntityUtils.toString(entity, "UTF-8");
