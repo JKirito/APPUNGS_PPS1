@@ -234,6 +234,7 @@ public class AulaAAgregar extends ActionBarActivity
 //        return null;
     }
 
+    //Si se vuelve atras se vuelve a la pantalla principal
     public void onBackPressed()
     {
         Intent start = new Intent(AulaAAgregar.this,Principal.class);
