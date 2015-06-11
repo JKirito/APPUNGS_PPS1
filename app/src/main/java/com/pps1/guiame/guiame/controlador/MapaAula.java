@@ -149,7 +149,7 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
             mapa.addMarker(new MarkerOptions()
-                    .position(CoordenadasEdificiosUNGS.JARDIN)
+                    .position(CoordenadasEdificiosUNGS.ESCUELA_INFANTIL)
                     .title("Jardín")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
