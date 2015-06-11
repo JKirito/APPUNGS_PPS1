@@ -110,6 +110,19 @@ public class AulaAAgregar extends ActionBarActivity
                                         }
                                     });
                             return;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            final String msjError = e.getMessage();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    msjError, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            aviso.dismiss();
+                            return;
                         }
                         runOnUiThread(
                                 new Runnable() {

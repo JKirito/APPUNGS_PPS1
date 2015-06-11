@@ -39,7 +39,7 @@ public class Listador
     }
 
 
-    public ArrayList<Curso> getListadoCursosUsuario() throws IOException {
+    public ArrayList<Curso> getListadoCursosUsuario() throws Exception {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id",idUsuario.toString());
@@ -52,7 +52,7 @@ public class Listador
         return listadoCursos;
     }
 
-    public ArrayList<Aula> getListadoAulas() throws IOException
+    public ArrayList<Aula> getListadoAulas() throws Exception
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
@@ -62,7 +62,7 @@ public class Listador
     }
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
-    public ArrayList<Curso> getListadoCursosJuntos() throws IOException
+    public ArrayList<Curso> getListadoCursosJuntos() throws Exception
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
@@ -73,7 +73,7 @@ public class Listador
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     //Cada item tendra un aula
-    public ArrayList<Curso> getListadoCursos() throws IOException {
+    public ArrayList<Curso> getListadoCursos() throws Exception {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_CURSO);

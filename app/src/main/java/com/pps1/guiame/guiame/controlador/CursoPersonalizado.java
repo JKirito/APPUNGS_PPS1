@@ -23,6 +23,7 @@ import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
+import com.pps1.guiame.guiame.utils.Aviso;
 import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
@@ -34,7 +35,8 @@ public class CursoPersonalizado extends Activity
     private ListView listaCursosJuntos;
     private EditText txtNombreMateria;
     ArrayAdapter<Curso> adaptadorCursos;
-    ProgressDialog dialog;
+    //ProgressDialog aviso;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,9 +52,7 @@ public class CursoPersonalizado extends Activity
 
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
         final boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
         Log.d("agregarCurso", agregandoCurso + "");
 
@@ -67,8 +67,8 @@ public class CursoPersonalizado extends Activity
                     return;
                 }
 
-                dialog.setMessage("Buscando...");
-                dialog.show();
+                aviso.setMessage("Buscando...");
+                aviso.show();
 
                 Thread tr = new Thread() {
                     @Override
@@ -77,38 +77,43 @@ public class CursoPersonalizado extends Activity
                         Listador listador = new Listador(Perfil.getId(), nombreMat);
                         try {
                             Log.d("agregarCursoAAAA", agregandoCurso + "");
-                            if (Perfil.isUserOn() && agregandoCurso)
-                            {
+                            if (Perfil.isUserOn() && agregandoCurso) {
                                 cursos = listador.getListadoCursosJuntos();
-                            }
-                            else
-                            {
+                            } else {
                                 cursos = listador.getListadoCursos();
                             }
 
 
-                        }
-                        catch (IOException e)
-                        {
+                        } catch (IOException e) {
                             e.printStackTrace();
                             runOnUiThread(
-                                    new Runnable()
-                                    {
+                                    new Runnable() {
                                         @Override
-                                        public void run()
-                                        {
+                                        public void run() {
                                             Toast.makeText(getApplicationContext(),
                                                     "Hubo un error al obtener los Cursos, intente de nuevo.", Toast.LENGTH_SHORT).show();
                                         }
                                     });
+                            return;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            final String msjError = e.getMessage();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    msjError, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            aviso.dismiss();
                             return;
                         }
                         runOnUiThread(
                                 new Runnable() {
                                     @Override
                                     public void run() {
-                                        if (cursos == null || cursos.isEmpty())
-                                        {
+                                        if (cursos == null || cursos.isEmpty()) {
                                             Toast.makeText(getApplicationContext(),
                                                     "No se han encontrado cursos. Pruebe escribir otro nombre", Toast.LENGTH_LONG).show();
                                             return;
@@ -117,7 +122,7 @@ public class CursoPersonalizado extends Activity
                                     }
                                 });
 
-                        dialog.dismiss();
+                        aviso.dismiss();
                     }
                 };
                 tr.start();
@@ -129,8 +134,7 @@ public class CursoPersonalizado extends Activity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("agregarCursoBBBBBB", agregandoCurso + "");
-                if (Perfil.isUserOn() && agregandoCurso)
-                {
+                if (Perfil.isUserOn() && agregandoCurso) {
                     final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
 
                     Thread tr = new Thread() {
@@ -146,13 +150,11 @@ public class CursoPersonalizado extends Activity
                         }
                     };
                     tr.start();
-                }
-                else
-                {
+                } else {
                     geoLocalizarAula(position);
                 }
 
-        }
+            }
         });
 
     }
@@ -191,8 +193,8 @@ public class CursoPersonalizado extends Activity
     private void geoLocalizarAula(int posicionItemSeleccionado)
     {
         final Curso itemSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(posicionItemSeleccionado);
-        dialog.setMessage("Buscando aula...");
-        dialog.show();
+        aviso.setMessage("Buscando aula...");
+        aviso.show();
         Thread tr = new Thread()
         {
             @Override
@@ -213,6 +215,19 @@ public class CursoPersonalizado extends Activity
                                 }
                             });
                     return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    final String msjError = e.getMessage();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            msjError, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    aviso.dismiss();
+                    return;
                 }
                 if(aula == null || aula.getLatitud() == null || aula.getLongitud() == null)
                 {
@@ -224,7 +239,7 @@ public class CursoPersonalizado extends Activity
                                 {
                                     String msj = aula == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
                                     Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
+                                    aviso.dismiss();
                                 }
                             });
                     return;
@@ -236,7 +251,7 @@ public class CursoPersonalizado extends Activity
                 Intent intent = new Intent(getApplicationContext(), Mapa.class);
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
-                dialog.dismiss();
+                aviso.dismiss();
             }
         };
         tr.start();

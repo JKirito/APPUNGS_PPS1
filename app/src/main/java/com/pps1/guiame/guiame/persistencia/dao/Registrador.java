@@ -29,7 +29,7 @@ public class Registrador
         this.pass2 = pass2;
     }
 
-    public void registrarDatos() throws IOException {
+    public void registrarDatos() throws Exception {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("nombre",nombreYApellido);

@@ -47,7 +47,7 @@ public class Verificador
         this.pass = pass;
     }
 
-    public static List<String> validarDatosRegistro() throws IOException {
+    public static List<String> validarDatosRegistro() throws Exception {
         List<String> errores = new ArrayList<String>();
         if(nombreYApellido == null || nombreYApellido.replaceAll("/s","").length() == 0)
         {

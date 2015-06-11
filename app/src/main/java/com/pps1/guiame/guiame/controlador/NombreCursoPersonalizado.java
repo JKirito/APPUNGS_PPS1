@@ -1,7 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
+import com.pps1.guiame.guiame.utils.Aviso;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class NombreCursoPersonalizado extends Activity
 {
     private EditText txtNombreMateria;
     private Button btnGuardarCurso;
-    ProgressDialog dialog;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -32,17 +32,15 @@ public class NombreCursoPersonalizado extends Activity
         getIntent().getExtras().clear();
         txtNombreMateria.setText(curso.getNombre());
         setTitle("Personalizar nombre de curso");
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
 
         btnGuardarCurso.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                dialog.setMessage("Guardando...");
-                dialog.show();
+                aviso.setMessage("Guardando...");
+                aviso.show();
 
                 curso.setNombre(txtNombreMateria.getText().toString());
                 Thread tr = new Thread()
@@ -66,6 +64,19 @@ public class NombreCursoPersonalizado extends Activity
                                         }
                                     });
                             return;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            final String msjError = e.getMessage();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    msjError, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            aviso.dismiss();
+                            return;
                         }
                         runOnUiThread(
                                 new Runnable() {
@@ -77,7 +88,7 @@ public class NombreCursoPersonalizado extends Activity
                                 });
                         Intent intent = new Intent(getApplicationContext(), Principal.class);
                         startActivity(intent);
-                        dialog.dismiss();
+                        aviso.dismiss();
                         finish();
                     }
                 };

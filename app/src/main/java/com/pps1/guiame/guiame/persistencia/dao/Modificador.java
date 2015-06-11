@@ -27,7 +27,7 @@ public class Modificador {
         this.pass2 = pass2;
     }
 
-    public void actualizarDatos() throws IOException {
+    public void actualizarDatos() throws Exception {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id", Integer.toString(Perfil.getId()));
