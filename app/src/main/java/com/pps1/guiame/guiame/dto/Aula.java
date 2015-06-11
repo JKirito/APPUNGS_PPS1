@@ -38,4 +38,25 @@ public class Aula implements Serializable
     public String toString() {
         return numAula;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Aula aula = (Aula) o;
+
+        if (!numAula.equals(aula.numAula)) return false;
+        if (!latitud.equals(aula.latitud)) return false;
+        return longitud.equals(aula.longitud);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = numAula.hashCode();
+        result = 31 * result + latitud.hashCode();
+        result = 31 * result + longitud.hashCode();
+        return result;
+    }
 }

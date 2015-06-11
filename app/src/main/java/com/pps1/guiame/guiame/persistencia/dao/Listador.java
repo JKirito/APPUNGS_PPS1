@@ -39,7 +39,7 @@ public class Listador
     }
 
 
-    public ArrayList<Curso> getListadoCursosUsuario() throws IOException {
+    public ArrayList<Curso> getListadoCursosUsuario() throws Exception {
         //La key del map deben ser los nombres de los campos en la tabla
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("id",idUsuario.toString());
@@ -52,7 +52,7 @@ public class Listador
         return listadoCursos;
     }
 
-    public ArrayList<Aula> getListadoAulas() throws IOException
+    public ArrayList<Aula> getListadoAulas() throws Exception
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
@@ -62,7 +62,7 @@ public class Listador
     }
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
-    public ArrayList<Curso> getListadoCursosJuntos() throws IOException
+    public ArrayList<Curso> getListadoCursosJuntos() throws Exception
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
@@ -73,7 +73,7 @@ public class Listador
 
     //Devolvemos una lista con los cursos que coinciden con el nombre de la materia que ingreso el usuario
     //Cada item tendra un aula
-    public ArrayList<Curso> getListadoCursos() throws IOException {
+    public ArrayList<Curso> getListadoCursos() throws Exception {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("texto", textoParaFiltrar);
         String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_CURSO);
@@ -84,6 +84,9 @@ public class Listador
     public ArrayList<Curso> obtDatosJSONMateriasUsuario(String response)
     {
         ArrayList<Curso> listado= new ArrayList<Curso>();
+        if(response == null || response.equals("null"))
+            return listado;
+        Log.d("response En obtDatos",response);
         try
         {
             JSONArray json= new JSONArray(response);
@@ -168,7 +171,10 @@ public class Listador
             for (int i=0; i<json.length();i++)
             {
                 String aula = json.getJSONObject(i).getString("numero");
-                a = new Aula(aula,0.0,0.0);
+                String ubicacion = json.getJSONObject(i).getString("ubicacion");
+                Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
+                Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
+                a = new Aula(aula,latitud,longitud);
                 listado.add(a);
             }
         }

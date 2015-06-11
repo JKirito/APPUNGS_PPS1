@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class Principal extends Activity
 {
-    //ProgressDialog dialog;
+    //ProgressDialog aviso;
     Aviso aviso;
     private Button btnRegistrarse;
     private Button btnIngresar;
@@ -85,16 +85,18 @@ public class Principal extends Activity
                             final ArrayList<Curso> cursos;
                             try {
                                 cursos = listador.getListadoCursosUsuario();
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
+                                final String msjError = e.getMessage();
                                 runOnUiThread(
                                         new Runnable() {
                                             @Override
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
-                                                        "Hubo un error al obtener los Cursos, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                                        msjError, Toast.LENGTH_SHORT).show();
                                             }
                                         });
+                                aviso.dismiss();
                                 return;
                             }
                             Bundle bundleMaterias = new Bundle();
@@ -102,7 +104,7 @@ public class Principal extends Activity
                             Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                             intent.putExtras(bundleMaterias);
                             startActivity(intent);
-                            aviso.dismiss(); //Cierra el dialog
+                            aviso.dismiss(); //Cierra el aviso
                             finish();
                         }
                     };

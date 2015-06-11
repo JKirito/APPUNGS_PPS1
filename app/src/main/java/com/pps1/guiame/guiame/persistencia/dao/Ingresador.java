@@ -38,7 +38,7 @@ public class Ingresador extends ActionBarActivity
 
 
 
-    public void guardarDatosUsuario() throws IOException {
+    public void guardarDatosUsuario() throws Exception {
         String response = this.resultadoJSON();
         try
         {
@@ -64,7 +64,7 @@ public class Ingresador extends ActionBarActivity
         }
     }
 
-    public String resultadoJSON() throws IOException {
+    public String resultadoJSON() throws Exception {
         Map<String,String> datos = new HashMap<String,String>();
         datos.put("dni", dni);
         datos.put("contrasena",pass);

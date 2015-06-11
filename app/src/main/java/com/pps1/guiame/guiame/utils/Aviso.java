@@ -12,6 +12,8 @@ public class Aviso extends ProgressDialog
     {
         super(context);
         this.miActivity = context;
+        this.setCancelable(false);
+        this.setCanceledOnTouchOutside(false);
     }
 
     @Override

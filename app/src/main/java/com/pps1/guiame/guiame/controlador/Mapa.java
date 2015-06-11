@@ -24,7 +24,6 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     private LatLng latLngAula;
     private Button btnModulos;
     private boolean verInfoModulos = true;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -143,7 +142,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
 
             mapa.addMarker(new MarkerOptions()
                     .position(CoordenadasEdificiosUNGS.ESCUELA_INFANTIL)
-                    .title("Escuela Infantil")
+                    .title("Jardín")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
@@ -182,8 +181,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     @Override
     public void onMapClick(LatLng puntoPulsado)
     {
-        mapa.addMarker(new MarkerOptions().position(puntoPulsado).icon(BitmapDescriptorFactory
-        .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
+        //mapa.addMarker(new MarkerOptions().position(puntoPulsado).icon(BitmapDescriptorFactory
+        //.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
     }
 }

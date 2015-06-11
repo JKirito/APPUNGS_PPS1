@@ -16,7 +16,7 @@ public class AulaDAO
     private final String PHP_NAME_GEOLOCALIZADOR_AULA = "geolocalizarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
 
-    public void geolocalizarAula(Aula aula) throws IOException
+    public void geolocalizarAula(Aula aula) throws Exception
     {
         String ubicacion = aula.getLatitud()+","+aula.getLongitud();
         //La key del map deben ser los nombres de los campos en la tabla
@@ -27,7 +27,7 @@ public class AulaDAO
         Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
     }
 
-    public Aula getAula(String numAula) throws IOException {
+    public Aula getAula(String numAula) throws Exception {
         Map<String, String> data = new HashMap<String, String>();
         data.put("aula", numAula);
 

@@ -20,10 +20,8 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -60,7 +58,11 @@ public class Conexion
         return resultado;
     }
 
-    public static String enviarPost(Map<String, String> datos, String phpName) throws IOException {
+    public static String enviarPost(Map<String, String> datos, String phpName) throws Exception {
+
+        if(!tieneConexion()){
+            throw new Exception("Necesita estar conectado a internet");
+        }
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpContext localContext = new BasicHttpContext();
@@ -75,7 +77,11 @@ public class Conexion
                 params.add(new BasicNameValuePair(nombreVariable, datos.get(nombreVariable)));
             }
             httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-            response = httpClient.execute(httpPost, localContext);
+            try {
+                response = httpClient.execute(httpPost, localContext);
+            } catch (UnknownHostException e) {
+                throw new UnknownHostException("No se ha podido conectar al servidor");
+            }
 
             HttpEntity entity = response.getEntity();
             resultado = EntityUtils.toString(entity, "UTF-8");
@@ -84,27 +90,12 @@ public class Conexion
         return resultado;
     }
 
-    //Para revisar conexiones
     public static Boolean tieneConexion()
     {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) Configuracion.contextoIngreso.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();}
-
-    public static Boolean estaConectado()
-    {
-        try
-        {
-            Process proceso = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
-            int estaOn = proceso.waitFor();
-            boolean conectado = (estaOn==0);
-            return conectado;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return false;
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
+
 }

@@ -13,6 +13,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.persistencia.dao.Modificador;
 import com.pps1.guiame.guiame.persistencia.dao.Registrador;
 import com.pps1.guiame.guiame.persistencia.dao.Verificador;
+import com.pps1.guiame.guiame.utils.Aviso;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Registro extends ActionBarActivity
     private EditText mail;
     private EditText pass;
     private EditText pass2;
-    ProgressDialog dialog;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,9 +42,9 @@ public class Registro extends ActionBarActivity
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
 
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
+        aviso.setCancelable(false);
+        aviso.setCanceledOnTouchOutside(false);
 
         if(Perfil.isUserOn())
         {
@@ -76,8 +77,8 @@ public class Registro extends ActionBarActivity
                 if(Perfil.isUserOn())
                 {
                     final Modificador modificador = new Modificador(nombreApellido.getText().toString(),dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
-                    dialog.setMessage("Guardando cambios...");
-                    dialog.show();
+                    aviso.setMessage("Guardando cambios...");
+                    aviso.show();
 
                     Thread thread = new Thread(new Runnable(){
                         @Override
@@ -102,7 +103,7 @@ public class Registro extends ActionBarActivity
                                                 {
                                                     Toast.makeText(getApplicationContext(),
                                                             errors, Toast.LENGTH_SHORT).show();
-                                                    dialog.dismiss(); //Cierra el dialog
+                                                    aviso.dismiss(); //Cierra el aviso
                                                 }
                                             });
 
@@ -119,7 +120,7 @@ public class Registro extends ActionBarActivity
                                             @Override
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(), "Se actualizaron los datos correctamente. Por favor ingrese de nuevo.", Toast.LENGTH_LONG).show();
-                                                dialog.dismiss(); //Cierra el dialog
+                                                aviso.dismiss(); //Cierra el aviso
                                             }
                                         });
                                 finish();
@@ -127,6 +128,17 @@ public class Registro extends ActionBarActivity
                             catch (Exception e)
                             {
                                 e.printStackTrace();
+                                final String msjError = e.getMessage();
+                                runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(),
+                                                        msjError, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                aviso.dismiss();
+                                return;
                             }
                         }
                     });
@@ -135,8 +147,8 @@ public class Registro extends ActionBarActivity
                 else
                 {
                     final Registrador registrador = new Registrador(nombreApellido.getText().toString(), dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
-                    dialog.setMessage("Registrando usuario...");
-                    dialog.show();
+                    aviso.setMessage("Registrando usuario...");
+                    aviso.show();
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -159,7 +171,7 @@ public class Registro extends ActionBarActivity
                                                 {
                                                     Toast.makeText(getApplicationContext(),
                                                             errors, Toast.LENGTH_SHORT).show();
-                                                    dialog.dismiss(); //Cierra el dialog
+                                                    aviso.dismiss(); //Cierra el aviso
                                                 }
                                             });
 
@@ -175,7 +187,7 @@ public class Registro extends ActionBarActivity
                                             @Override
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
-                                                dialog.dismiss(); //Cierra el dialog
+                                                aviso.dismiss(); //Cierra el aviso
                                             }
                                         });
                                 finish();
@@ -183,6 +195,17 @@ public class Registro extends ActionBarActivity
                             catch (Exception e)
                             {
                                 e.printStackTrace();
+                                final String msjError = e.getMessage();
+                                runOnUiThread(
+                                        new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(getApplicationContext(),
+                                                        msjError, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                aviso.dismiss();
+                                return;
                             }
                         }
                     });

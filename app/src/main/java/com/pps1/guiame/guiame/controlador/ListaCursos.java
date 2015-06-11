@@ -26,6 +26,7 @@ import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
+import com.pps1.guiame.guiame.utils.Aviso;
 import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
@@ -37,7 +38,8 @@ public class ListaCursos extends ActionBarActivity
     private ListView listaCursos;
     ArrayAdapter<Curso> adaptador;
     EditText searchBox;
-    ProgressDialog dialog;
+    //ProgressDialog aviso;
+    Aviso aviso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,9 +52,7 @@ public class ListaCursos extends ActionBarActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN); //Escondemos el teclado
         String nombreUsuario = Perfil.getNombre() != null ? " " + Perfil.getNombre() : "";
         setTitle(this.getString(R.string.title_activity_lista) + nombreUsuario + "!");
-        dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        aviso = new Aviso(this);
 
         Thread tr = new Thread()
         {
@@ -173,7 +173,6 @@ public class ListaCursos extends ActionBarActivity
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_opciones_lista, menu);
-        Log.d("detalles", "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     }
 
     @Override
@@ -208,8 +207,8 @@ public class ListaCursos extends ActionBarActivity
     {
         final int posicionItemSeleccionado = posItemSeleccionado;
         final Curso curso = (Curso) listaCursos.getItemAtPosition(posicionItemSeleccionado);
-        dialog.setMessage("Eliminando curso...");
-        dialog.show();
+        aviso.setMessage("Eliminando curso...");
+        aviso.show();
         Thread tr = new Thread()
         {
             Integer idCurso = curso.getId();
@@ -230,6 +229,19 @@ public class ListaCursos extends ActionBarActivity
                                 }
                             });
                     return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    final String msjError = e.getMessage();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            msjError, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    aviso.dismiss();
+                    return;
                 }
                 runOnUiThread(
                         new Runnable() {
@@ -246,7 +258,7 @@ public class ListaCursos extends ActionBarActivity
                                     adaptador.remove(c);
                                 }
                                 adaptador.notifyDataSetChanged();
-                                dialog.dismiss(); //Cierra el dialog de EliminarCurso
+                                aviso.dismiss(); //Cierra el aviso de EliminarCurso
                                 Toast.makeText(getApplicationContext(),
                                         "Se elimino el curso correctamente", Toast.LENGTH_LONG).show();
                             }
@@ -259,8 +271,8 @@ public class ListaCursos extends ActionBarActivity
     private void geoLocalizarAula(int posicionItemSeleccionado)
     {
         final Curso itemSeleccionado = (Curso) listaCursos.getAdapter().getItem(posicionItemSeleccionado);
-        dialog.setMessage("Buscando aula...");
-        dialog.show();
+        aviso.setMessage("Buscando aula...");
+        aviso.show();
         Thread tr = new Thread() {
             @Override
             public void run() {
@@ -278,6 +290,19 @@ public class ListaCursos extends ActionBarActivity
                                 }
                             });
                     return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    final String msjError = e.getMessage();
+                    runOnUiThread(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(),
+                                            msjError, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    aviso.dismiss();
+                    return;
                 }
                 if(aula == null || aula.getLatitud() == null || aula.getLongitud() == null)
                 {
@@ -289,7 +314,7 @@ public class ListaCursos extends ActionBarActivity
                                 {
                                     String msj = aula == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
                                     Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
+                                    aviso.dismiss();
                                 }
                             });
                     return;
@@ -301,7 +326,7 @@ public class ListaCursos extends ActionBarActivity
                 Intent intent = new Intent(getApplicationContext(), Mapa.class);
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
-                dialog.dismiss();
+                aviso.dismiss();
                 //finish();
             }
         };

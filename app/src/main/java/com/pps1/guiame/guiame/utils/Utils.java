@@ -2,6 +2,7 @@ package com.pps1.guiame.guiame.utils;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.util.Log;
 
 import com.pps1.guiame.guiame.dto.Curso;
 
@@ -15,16 +16,44 @@ public class Utils
         }
 
         String ubicacion = "";
-        Boolean numAsignado= false;
-        int i = 1; //No es la posicion sino el entero
-        while(!numAsignado)
+
+        //Si no tiene número al ppio, asumo que es una del estilo "LABO 7012"
+        if(Character.isLetter(aula.charAt(0)))
         {
-            if(aula.startsWith(String.valueOf(i))) //Si el aula empieza con el numero... (1 al 7)
+            //Veo cada palabra si alguna es numérica
+            String[] nombreAula = aula.split(" ");
+            for(String N : nombreAula)
             {
-                ubicacion = "Modulo " + i;
-                numAsignado = true;
+                boolean isDigito = true;
+                for(int i = 0; i<N.length(); i++)
+                {
+                    //Si tiene alguna letra, paso a la próxima palabra
+                    if(Character.isLetter(N.charAt(i)))
+                    {
+                        isDigito = false;
+                        break;
+                    }
+
+                    //
+                    if(Character.isDigit(N.charAt(i)))
+                        continue;
+
+                }
+                if(isDigito)
+                {
+                    aula = N;
+                    break;
+                }
             }
-            i++;
+        //Si sigue teniendo letra, devuelvo lo que tenga
+        if(Character.isLetter(aula.charAt(0)))
+            return aula;
+        }
+
+        //Si el primer digito es numerico, entonces es el numeor del modulo
+        if(Character.isDigit(aula.charAt(0)))
+        {
+                ubicacion = "Modulo " + aula.charAt(0);
         }
 
         if(aula.charAt(1) == '0')
@@ -39,12 +68,8 @@ public class Utils
         {
             ubicacion += " en el segundo piso";
         }
-        //Si no tiene número, asumo que es una del estilo "oficina docente"
-        else if(Character.isLetter(aula.charAt(0)))
-        {
-            ubicacion = aula;
-        }
 
+        Log.d("aulaDevuelve", ubicacion);
         return ubicacion;
     }
 

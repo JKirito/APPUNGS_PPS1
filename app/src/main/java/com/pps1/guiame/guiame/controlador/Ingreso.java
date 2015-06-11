@@ -61,9 +61,6 @@ public class Ingreso extends ActionBarActivity
                 final Ingresador ingresador = new Ingresador(dni, pass);
                 final Verificador verificador = new Verificador (dni, pass);
 
-                    Log.d("Esta conectado a wifi", Boolean.toString(Conexion.tieneConexion()));
-                    Log.d("Funciona internet", Boolean.toString(Conexion.estaConectado()));
-
                 Thread thread = new Thread(new Runnable(){
                     @Override
                     public void run()
@@ -81,7 +78,7 @@ public class Ingreso extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(),
                                                         errores.get(0), Toast.LENGTH_SHORT).show();
-                                                aviso.dismiss(); //Cierra el dialog
+                                                aviso.dismiss(); //Cierra el aviso
                                             }
                                         });
 
@@ -98,7 +95,7 @@ public class Ingreso extends ActionBarActivity
                                 Intent intent = new Intent(getApplicationContext(), ListaCursos.class);
                                 intent.putExtras(bundleMaterias);
                                 startActivity(intent);
-                                aviso.dismiss(); //Cierra el dialog
+                                aviso.dismiss(); //Cierra el aviso
                             }
                             else
                             {
@@ -112,6 +109,17 @@ public class Ingreso extends ActionBarActivity
                         catch (Exception e)
                         {
                             e.printStackTrace();
+                            final String msjError = e.getMessage();
+                            runOnUiThread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(),
+                                                    msjError, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                            aviso.dismiss();
+                            return;
                         }
                     }
                 });
