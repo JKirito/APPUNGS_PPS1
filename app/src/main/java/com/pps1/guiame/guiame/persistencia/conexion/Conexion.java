@@ -16,7 +16,6 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -81,4 +80,26 @@ public class Conexion
         return resultado;
     }
 
+    public static Boolean tieneConexion()
+    {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) Configuracion.contextoIngreso.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();}
+
+    public static Boolean estaConectado()
+    {
+        try
+        {
+            Process proceso = java.lang.Runtime.getRuntime().exec("ping -c 1 www.google.com");
+            int estaOn = proceso.waitFor();
+            boolean conectado = (estaOn==0);
+            return conectado;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

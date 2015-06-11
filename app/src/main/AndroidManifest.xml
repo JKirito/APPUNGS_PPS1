@@ -97,6 +97,10 @@
             android:name=".controlador.NombreCursoPersonalizado"
             android:label="@string/title_activity_nombre_curso_personalizado" >
         </activity>
+        <activity
+            android:name=".controlador.MapaAula"
+            android:label="@string/title_activity_mapa" >
+        </activity>
     </application>
 
 </manifest>
