@@ -8,7 +8,6 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

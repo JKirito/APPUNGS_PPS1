@@ -5,7 +5,6 @@ import android.util.Log;
 import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 

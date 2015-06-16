@@ -1,6 +1,5 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +13,7 @@ import com.pps1.guiame.guiame.persistencia.dao.Modificador;
 import com.pps1.guiame.guiame.persistencia.dao.Registrador;
 import com.pps1.guiame.guiame.persistencia.dao.Verificador;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 
 import java.util.List;
 
@@ -33,6 +33,8 @@ public class Registro extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        Configuracion.context = this;
+
         nombreApellido = (EditText) findViewById(R.id.txtNombre);
         dni = (EditText) findViewById(R.id.txtDni);
         mail = (EditText) findViewById(R.id.txtMail);
@@ -216,18 +218,6 @@ public class Registro extends ActionBarActivity
 
         });
     }
-
-   /* @Override
-    public void onResume()
-    {
-        super.onResume();
-
-        nombreApellido.setText("");
-        dni.setText("");
-        mail.setText("");
-        pass.setText("");
-        pass2.setText("");
-    }*/
 
    @Override
    public void onBackPressed()

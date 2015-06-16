@@ -12,6 +12,7 @@ import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 
 import java.io.IOException;
 
@@ -26,6 +27,8 @@ public class NombreCursoPersonalizado extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nombre_curso_personalizado);
+        Configuracion.context = this;
+
         txtNombreMateria = (EditText)findViewById(R.id.txtNombreMateria);
         btnGuardarCurso = (Button)findViewById(R.id.btnGuardarNombre);
         final Curso curso = (Curso) getIntent().getExtras().get("Curso");

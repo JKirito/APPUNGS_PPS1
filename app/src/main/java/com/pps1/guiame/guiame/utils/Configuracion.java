@@ -1,8 +1,8 @@
 package com.pps1.guiame.guiame.utils;
 
-import com.pps1.guiame.guiame.controlador.Ingreso;
+import android.content.Context;
 
 public final class Configuracion
 {
-    public static Ingreso contextoIngreso = null;
+    public static Context context;
 }

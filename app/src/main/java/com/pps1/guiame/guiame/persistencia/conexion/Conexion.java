@@ -20,7 +20,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
-import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,7 @@ public class Conexion
     public static Boolean tieneConexion()
     {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) Configuracion.contextoIngreso.getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) Configuracion.context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
