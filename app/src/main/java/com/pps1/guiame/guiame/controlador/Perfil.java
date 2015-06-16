@@ -88,18 +88,14 @@ public class Perfil
         {
             int aulaIndex = diaHorario.indexOf(txtAula);
             String aula = diaHorario.substring(aulaIndex + txtAula.length()).trim();
-            Log.d("aula", aula);
             String diaHora = diaHorario.replace(txtDia, "").replace(txtAula,"").substring(0, aulaIndex);
-            Log.d("diaHora", diaHora);
             if(aulasDias.containsKey(aula))
                 aulasDias.put(aula, aulasDias.get(aula)+", "+diaHora);
             else
                 aulasDias.put(aula, diaHora);
         }
-        Log.d("aaaaaaaaaaaaaa", "--------");
         for(String aula : aulasDias.keySet())
         {
-            Log.d("AU", aula);
             Curso C = new Curso(curso.getId(), curso.getNombre(), curso.getComision(), aula, curso.getDocente(), aulasDias.get(aula));
             cursosUsuario.add(C);
         }
@@ -108,7 +104,6 @@ public class Perfil
     public static void eliminarCurso(Curso curso)
     {
         ArrayList<Curso> cursosEliminar = new ArrayList<Curso>();
-        Log.d("antes", getCursosUsuario().size() + "");
         for(Curso C : getCursosUsuario())
         {
             if(C.getId().equals(curso.getId()))
@@ -118,7 +113,6 @@ public class Perfil
         getCursosUsuario().removeAll(cursosEliminar);
         if( getCursosUsuario().isEmpty())
             cursosUsuario = null;
-        Log.d("despues", cursosUsuario != null ? getCursosUsuario().size() + "" : "null!");
     }
 
 
