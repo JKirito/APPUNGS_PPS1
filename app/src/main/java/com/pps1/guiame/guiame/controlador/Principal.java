@@ -11,11 +11,9 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.utils.Aviso;
 import com.pps1.guiame.guiame.utils.Configuracion;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Principal extends Activity

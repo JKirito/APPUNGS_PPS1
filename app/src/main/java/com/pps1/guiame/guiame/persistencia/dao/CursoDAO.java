@@ -8,7 +8,6 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class CursoDAO
     public void registrarCursoPersonalizado(Curso curso, Integer idUsuario) throws Exception {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("idUsuario",idUsuario.toString());
-        datos.put("idCurso",curso.getId().toString());
+        datos.put("idCurso", curso.getId().toString());
         datos.put("nombre", curso.getNombre().toString());
 
         String result = Conexion.enviarPost(datos, PHP_NAME_CURSO_PERSONAL);

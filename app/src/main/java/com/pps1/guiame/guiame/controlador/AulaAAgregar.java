@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
-import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.utils.Aviso;
 import com.pps1.guiame.guiame.utils.Configuracion;
 

@@ -2,7 +2,6 @@ package com.pps1.guiame.guiame.controlador;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
