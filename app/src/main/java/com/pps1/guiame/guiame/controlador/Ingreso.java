@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
+import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Ingresador;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.persistencia.dao.Verificador;
@@ -36,7 +37,7 @@ public class Ingreso extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingreso);
-        Configuracion.contextoIngreso = this;
+        Configuracion.context = this;
 
         //Obtenemos una referencia a los controles de la interfaz
         txtDni = (EditText)findViewById(R.id.txtDni);
@@ -86,8 +87,7 @@ public class Ingreso extends ActionBarActivity
                             }
 
                             ingresador.guardarDatosUsuario();
-                            Listador listador = new Listador(Perfil.getId());
-                            final ArrayList<Curso> cursos = listador.getListadoCursosUsuario();
+                            final ArrayList<Curso> cursos = new CursoDAO().getListadoCursosUsuario(Perfil.getId());
                             if(!cursos.isEmpty())
                             {
                                 Bundle bundleMaterias = new Bundle();

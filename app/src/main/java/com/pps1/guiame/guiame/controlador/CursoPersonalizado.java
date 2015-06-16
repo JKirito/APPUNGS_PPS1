@@ -24,6 +24,7 @@ import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
@@ -43,6 +44,7 @@ public class CursoPersonalizado extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_curso_personalizado);
+        Configuracion.context = this;
 
         listaCursosJuntos = (ListView) findViewById(R.id.listaCursosJuntos);
         registerForContextMenu(listaCursosJuntos);

@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class AulaAAgregar extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_aula);
+        Configuracion.context = this;
 
         btnBuscarAula = (Button)findViewById(R.id.btnBuscarAula);
         txtNumeroAula = (EditText)findViewById(R.id.txtAula);
@@ -81,7 +84,6 @@ public class AulaAAgregar extends ActionBarActivity
                 Intent intent = new Intent(getApplicationContext(), MapaAula.class);
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
-
             }
         });
 
@@ -96,9 +98,9 @@ public class AulaAAgregar extends ActionBarActivity
                     @Override
                     public void run() {
                         final ArrayList<Aula> aulas;
-                        Listador listador = new Listador(numeroAula);
+
                         try {
-                            aulas = listador.getListadoAulas();
+                            aulas = new AulaDAO().getListadoAulas(numeroAula);
                         } catch (IOException e) {
                             e.printStackTrace();
                             runOnUiThread(

@@ -90,4 +90,20 @@ public class Curso implements Serializable {
         //Sino,el aula entonces está en el horario, se usa para mostrar todos los datos en un item
         return this.nombre + " (" + this.comision.split(" ")[1] + ") " + " - " + this.diasYHorarios;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Curso)) return false;
+
+        Curso curso = (Curso) o;
+
+        return getId().equals(curso.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getId().hashCode();
+        return result;
+    }
 }

@@ -10,8 +10,10 @@ import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.dto.Curso;
+import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import com.pps1.guiame.guiame.persistencia.dao.Listador;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +33,8 @@ public class Principal extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_principal);
+        Configuracion.context = this;
+
         btnRegistrarse = (Button)findViewById(R.id.btnRegistrarse);
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscar);
@@ -81,10 +85,9 @@ public class Principal extends Activity
                     {
                         @Override
                         public void run(){
-                            Listador listador = new Listador(Perfil.getId());
                             final ArrayList<Curso> cursos;
                             try {
-                                cursos = listador.getListadoCursosUsuario();
+                                cursos = new CursoDAO().getListadoCursosUsuario(Perfil.getId());
                             } catch (Exception e) {
                                 e.printStackTrace();
                                 final String msjError = e.getMessage();

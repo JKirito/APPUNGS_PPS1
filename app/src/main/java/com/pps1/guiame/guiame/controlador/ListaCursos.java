@@ -27,6 +27,7 @@ import com.pps1.guiame.guiame.dto.Curso;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.persistencia.dao.CursoDAO;
 import com.pps1.guiame.guiame.utils.Aviso;
+import com.pps1.guiame.guiame.utils.Configuracion;
 import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class ListaCursos extends ActionBarActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_cursos);
+        Configuracion.context = this;
+
         listaCursos = (ListView) findViewById(R.id.listaMaterias);
         registerForContextMenu(listaCursos);
         listaCursos.setAdapter(adaptador);
@@ -228,6 +231,7 @@ public class ListaCursos extends ActionBarActivity
                                             "Hubo un error al eliminar el Curso, intente de nuevo.", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    aviso.dismiss();
                     return;
                 } catch (Exception e) {
                     e.printStackTrace();

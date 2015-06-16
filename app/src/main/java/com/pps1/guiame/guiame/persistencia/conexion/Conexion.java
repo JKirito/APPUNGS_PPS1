@@ -93,7 +93,7 @@ public class Conexion
     public static Boolean tieneConexion()
     {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) Configuracion.contextoIngreso.getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) Configuracion.context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }

@@ -7,7 +7,7 @@ import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
 import org.json.JSONArray;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +15,7 @@ public class AulaDAO
 {
     private final String PHP_NAME_GEOLOCALIZADOR_AULA = "geolocalizarAula.php";
     private final String PHPNAME_OBTENERCOORDENADA = "obtenerCoordenada.php";
+    private final String PHP_NAME_LISTADOR_AULAS = "listarAulas.php";
 
     public void geolocalizarAula(Aula aula) throws Exception
     {
@@ -25,6 +26,15 @@ public class AulaDAO
         datos.put("ubicacion", ubicacion);
 
         Conexion.enviarPost(datos, PHP_NAME_GEOLOCALIZADOR_AULA);
+    }
+
+    public ArrayList<Aula> getListadoAulas(String textoParaFiltrar) throws Exception
+    {
+        Map<String, String> datos = new HashMap<String, String>();
+        datos.put("texto", textoParaFiltrar);
+        String result = Conexion.enviarPost(datos, PHP_NAME_LISTADOR_AULAS);
+
+        return getListadoAulasFromJSON(result);
     }
 
     public Aula getAula(String numAula) throws Exception {
@@ -51,5 +61,29 @@ public class AulaDAO
         Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
         Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
         return new Aula(numAula, latitud, longitud);
+    }
+
+    public ArrayList<Aula> getListadoAulasFromJSON(String response)
+    {
+        ArrayList<Aula> listado= new ArrayList<Aula>();
+        try
+        {
+            JSONArray json= new JSONArray(response);
+            Aula a;
+            for (int i=0; i<json.length();i++)
+            {
+                String aula = json.getJSONObject(i).getString("numero");
+                String ubicacion = json.getJSONObject(i).getString("ubicacion");
+                Double latitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[0]) : null;
+                Double longitud = ubicacion != null && !ubicacion.isEmpty() ? Double.valueOf(ubicacion.split(",")[1]) : null;
+                a = new Aula(aula,latitud,longitud);
+                listado.add(a);
+            }
+        }
+        catch (Exception e)
+        {
+            Log.d("EXCEP getListAulasJSON", e+"");
+        }
+        return listado;
     }
 }

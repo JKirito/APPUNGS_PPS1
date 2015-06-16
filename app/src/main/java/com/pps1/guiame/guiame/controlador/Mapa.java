@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.datos.CoordenadasEdificiosUNGS;
 import com.pps1.guiame.guiame.dto.Aula;
+import com.pps1.guiame.guiame.utils.Configuracion;
 import com.pps1.guiame.guiame.utils.Utils;
 
 public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListener
@@ -29,6 +30,7 @@ public class Mapa extends FragmentActivity implements GoogleMap.OnMapClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
+        Configuracion.context = this;
 
         btnModulos = (Button)findViewById(R.id.btnModulos);
 
