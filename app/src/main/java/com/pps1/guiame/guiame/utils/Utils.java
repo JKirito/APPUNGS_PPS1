@@ -73,7 +73,7 @@ public class Utils
         return ubicacion;
     }
 
-    public static void verDetalles(Curso curso, AlertDialog.Builder builder)
+    public static void verDetallesCurso(Curso curso, AlertDialog.Builder builder)
     {
         builder.setTitle("Detalles");
         builder.setMessage("Prof.:" + curso.getDocente());
@@ -87,5 +87,18 @@ public class Utils
         builder.show();
     }
 
+    public static void verDetallesInfo(String titulo, String info, AlertDialog.Builder builder)
+    {
+        builder.setTitle(titulo);
+        builder.setMessage(info);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int id)
+            {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
 
 }

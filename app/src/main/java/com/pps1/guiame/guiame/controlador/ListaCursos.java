@@ -189,7 +189,7 @@ public class ListaCursos extends ActionBarActivity
             case R.id.menuVerDetalles:
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListaCursos.this);
                 final Curso curso = (Curso) listaCursos.getItemAtPosition(info.position);
-                Utils.verDetalles(curso, builder);
+                Utils.verDetallesCurso(curso, builder);
                 return true;
             default:
                 return super.onContextItemSelected(item);
