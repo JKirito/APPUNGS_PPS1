@@ -1,5 +1,7 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.util.Log;
+
 import com.pps1.guiame.guiame.dto.Curso;
 
 import java.util.ArrayList;
@@ -79,6 +81,7 @@ public class Perfil
             cursosUsuario = new ArrayList<Curso>();
 
         String[] diasHorariosAulas = curso.getDiasYHorarios().split(",");
+
         final String txtAula = "Aula:";
         final String txtDia = "Dias:";
         Map<String, String> aulasDias = new HashMap<String, String>();
@@ -86,7 +89,7 @@ public class Perfil
         {
             int aulaIndex = diaHorario.indexOf(txtAula);
             String aula = diaHorario.substring(aulaIndex + txtAula.length()).trim();
-            String diaHora = diaHorario.replace(txtDia, "").replace(txtAula,"").substring(0, aulaIndex);
+            String diaHora = diaHorario.substring(0, aulaIndex).replace(txtDia, "");
             if(aulasDias.containsKey(aula))
                 aulasDias.put(aula, aulasDias.get(aula)+", "+diaHora);
             else

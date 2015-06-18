@@ -45,7 +45,7 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
         mapa.getUiSettings().setZoomControlsEnabled(true); //configurar las acciones del interfaz de usuario
         mapa.getUiSettings().setCompassEnabled(true);
         CameraPosition posicionCamara = new CameraPosition.Builder()
-                .target(CoordenadasEdificiosUNGS.UNGS) //Centra el mapa según posicion UNGS
+                .target(CoordenadasEdificiosUNGS.UNGS_CAMPUS) //Centra el mapa según posicion UNGS_ENTRADA_PPAL
                 .zoom(17)                   //zoom min=2 max=21
                 .bearing(150) // Orientaciòn de la camara al norte
                 .build();    // Crea la nueva posición de la camara
@@ -66,10 +66,10 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
     {
         if(verInfoModulos)
         {
-            //Agrego marcador de la UNGS
+            //Agrego marcador de la UNGS_ENTRADA_PPAL
             mapa.addMarker(new MarkerOptions()
-                    .position(CoordenadasEdificiosUNGS.UNGS)
-                    .title("UNGS")
+                    .position(CoordenadasEdificiosUNGS.UNGS_ENTRADA_PPAL)
+                    .title("UNGS_ENTRADA_PPAL")
                     .snippet("Entrada Principal")
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ungs)).anchor(0.2f, 0.2f));
 
@@ -147,7 +147,13 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
 
             mapa.addMarker(new MarkerOptions()
                     .position(CoordenadasEdificiosUNGS.ESCUELA_INFANTIL)
-                    .title("Jardín")
+                    .title("Escuela Infantil")
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+
+            mapa.addMarker(new MarkerOptions()
+                    .position(CoordenadasEdificiosUNGS.ENTRADA_ESTACIONAMIENTO)
+                    .title("Entrada Estacionamiento")
                     .icon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
@@ -179,8 +185,8 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
 
     public void moveCamera(View view)
     {
-        //se ubica en el mapa segun UNGS con zoom de 17. min=2 max=21
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(CoordenadasEdificiosUNGS.UNGS, 17));
+        //se ubica en el mapa segun UNGS_ENTRADA_PPAL con zoom de 17. min=2 max=21
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(CoordenadasEdificiosUNGS.UNGS_ENTRADA_PPAL, 17));
     }
 
     @Override

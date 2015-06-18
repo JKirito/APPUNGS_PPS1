@@ -54,6 +54,7 @@ public class CursoPersonalizado extends Activity
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
         aviso = new Aviso(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CursoPersonalizado.this);
         final boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
         Log.d("agregarCurso", agregandoCurso + "");
 
@@ -135,9 +136,13 @@ public class CursoPersonalizado extends Activity
         ((ListView) findViewById(R.id.listaCursosJuntos)).setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("agregarCursoBBBBBB", agregandoCurso + "");
                 if (Perfil.isUserOn() && agregandoCurso) {
                     final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
+                    //Verifico que no tenga agregado el curso actual
+                    if(Perfil.getCursosUsuario().contains(cursoSeleccionado)){
+                        Utils.verDetallesInfo("Un momento!", "Ya agregaste este curso!", builder);
+                        return;
+                    }
 
                     Thread tr = new Thread() {
                         @Override
@@ -176,7 +181,7 @@ public class CursoPersonalizado extends Activity
             case R.id.menuVerDetalles:
                 AlertDialog.Builder builder = new AlertDialog.Builder(CursoPersonalizado.this);
                 final Curso curso = (Curso) listaCursosJuntos.getItemAtPosition(info.position);
-                Utils.verDetalles(curso, builder);
+                Utils.verDetallesCurso(curso, builder);
                 return true;
             default:
                 return super.onContextItemSelected(item);
