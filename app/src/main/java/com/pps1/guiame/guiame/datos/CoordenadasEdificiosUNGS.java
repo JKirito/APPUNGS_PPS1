@@ -13,7 +13,8 @@ public class CoordenadasEdificiosUNGS
      * Ejemplo "-34.521451, -58.699691" es latitud = -34.521451, longitud = -58.699691
      */
 
-    public static final LatLng UNGS = new LatLng(-34.521712, -58.701063);
+    public static final LatLng UNGS_ENTRADA_PPAL = new LatLng(-34.521712, -58.701063);
+    public static final LatLng UNGS_CAMPUS = new LatLng(-34.522036, -58.700557);
     public static final LatLng ICO = new LatLng(-34.522347, -58.701210);
     public static final LatLng IDH = new LatLng(-34.522411, -58.701039);
     public static final LatLng IDEI = new LatLng(-34.522409, -58.700542);
@@ -25,6 +26,7 @@ public class CoordenadasEdificiosUNGS
     public static final LatLng MOD_7 = new LatLng(-34.522699, -58.700496);
     public static final LatLng MOD_9 = new LatLng(-34.521964, -58.701254);
     public static final LatLng ESCUELA_INFANTIL = new LatLng(-34.521190, -58.699881);
-    public static final LatLng CAMPO_DEPORTES = new LatLng(-34.522652, -58.698026);
+    public static final LatLng CAMPO_DEPORTES = new LatLng(-34.522434, -58.698039);
     public static final LatLng ANFITEATRO = new LatLng(-34.521131, -58.700064);
+    public static final LatLng ENTRADA_ESTACIONAMIENTO = new LatLng(-34.523437, -58.700407);
 }

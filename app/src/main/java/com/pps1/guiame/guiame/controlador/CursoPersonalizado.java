@@ -54,6 +54,7 @@ public class CursoPersonalizado extends Activity
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscarCurso);
         txtNombreMateria = (EditText)findViewById(R.id.txtMateriaNombre);
         aviso = new Aviso(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(CursoPersonalizado.this);
         final boolean agregandoCurso = getIntent().getBooleanExtra("AgregarCurso", false);
         Log.d("agregarCurso", agregandoCurso + "");
 
@@ -139,7 +140,6 @@ public class CursoPersonalizado extends Activity
                     final Curso cursoSeleccionado = (Curso) listaCursosJuntos.getAdapter().getItem(position);
                     //Verifico que no tenga agregado el curso actual
                     if(Perfil.getCursosUsuario().contains(cursoSeleccionado)){
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CursoPersonalizado.this);
                         Utils.verDetallesInfo("Un momento!", "Ya agregaste este curso!", builder);
                         return;
                     }

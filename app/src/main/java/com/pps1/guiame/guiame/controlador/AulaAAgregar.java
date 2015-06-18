@@ -1,5 +1,6 @@
 package com.pps1.guiame.guiame.controlador;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -23,6 +24,7 @@ import com.pps1.guiame.guiame.dto.Aula;
 import com.pps1.guiame.guiame.persistencia.dao.AulaDAO;
 import com.pps1.guiame.guiame.utils.Aviso;
 import com.pps1.guiame.guiame.utils.Configuracion;
+import com.pps1.guiame.guiame.utils.Utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class AulaAAgregar extends ActionBarActivity
         btnBuscarAula = (Button)findViewById(R.id.btnBuscarAula);
         txtNumeroAula = (EditText)findViewById(R.id.txtAula);
         aviso = new Aviso(this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AulaAAgregar.this);
 
         //Obtenemos el numero de aula y la posicion del administrador. Con eso creamos un Aula
         //y se la pasamos al agregador para que actualice la tabla aulas con esa posicion.
@@ -65,6 +68,7 @@ public class AulaAAgregar extends ActionBarActivity
 
                 Toast.makeText(getApplicationContext(),"Posicionando Aula...", Toast.LENGTH_SHORT).show();
 
+                /*
                 //Verifico que el aula esté bien y la ubico en el mapa
                 if(aulaSeleccionada == null || aulaSeleccionada.getLatitud() == null || aulaSeleccionada.getLongitud() == null)
                 {
@@ -74,8 +78,7 @@ public class AulaAAgregar extends ActionBarActivity
                     aviso.dismiss();
                     return;
                 }
-
-                aviso.dismiss();
+                */
 
                 Bundle bundleBuscAula = new Bundle();
                 bundleBuscAula.putSerializable("Aula", aulaSeleccionada);
@@ -83,6 +86,7 @@ public class AulaAAgregar extends ActionBarActivity
                 Intent intent = new Intent(getApplicationContext(), MapaAula.class);
                 intent.putExtras(bundleBuscAula);
                 startActivity(intent);
+                aviso.dismiss();
             }
         });
 
@@ -106,8 +110,8 @@ public class AulaAAgregar extends ActionBarActivity
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(),
-                                                    "Hubo un error al obtener las aulas, intente de nuevo.", Toast.LENGTH_SHORT).show();
+                                            aviso.dismiss();
+                                            Utils.verDetallesInfo("Ups!", "Hubo un error al obtener las aulas, intente de nuevo", builder);
                                         }
                                     });
                             return;
@@ -118,11 +122,10 @@ public class AulaAAgregar extends ActionBarActivity
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(),
-                                                    msjError, Toast.LENGTH_SHORT).show();
+                                            aviso.dismiss();
+                                            Utils.verDetallesInfo("Esto es embarazoso", "Hubo un error al obtener las aulas, intente de nuevo", builder);
                                         }
                                     });
-                            aviso.dismiss();
                             return;
                         }
                         runOnUiThread(
