@@ -192,21 +192,6 @@ public class Registro extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
                                                 aviso.dismiss(); //Cierra el aviso
-                                                /*if (android.os.Build.VERSION.SDK_INT > 8)
-                                                {
-                                                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                                                            .permitAll().build();
-                                                    StrictMode.setThreadPolicy(policy);
-                                                    Enviador enviador = new Enviador(mail.getText().toString());
-                                                    try
-                                                    {
-                                                        enviador.enviarMailBienvenida();
-                                                    }
-                                                    catch (Exception e)
-                                                    {
-                                                        e.printStackTrace();
-                                                    }
-                                                }*/
                                             }
                                         });
                                 finish();
