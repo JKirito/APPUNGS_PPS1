@@ -1,12 +1,7 @@
 package com.pps1.guiame.guiame.persistencia.dao;
 
 import android.util.Log;
-
-import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
-
-import org.json.JSONArray;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,12 +10,17 @@ public class Enviador
     private String mail;
     private String nombreYApellido;
     private final String PHP_NAME_ENVIADOR_SALUDO= "/mail/saludo.php";
-    private final String PHP_NAME_ENVIADOR_RECUPERACION= "/mail/recuperacion.php";
+    private final String PHP_NAME_ENVIADOR_RECUPERACION= "/mail/recuperarContra.php";
 
     public Enviador(String nombreYApellido,String mail)
     {
         this.mail= mail;
         this.nombreYApellido = nombreYApellido;
+    }
+
+    public Enviador(String mail)
+    {
+        this.mail= mail;
     }
 
     public void enviarMailBienvenida() throws Exception
@@ -32,7 +32,7 @@ public class Enviador
         Log.d("result mailBienvenida", result);
     }
 
-    public void enviarMailRecupaContraseña() throws Exception
+    public void enviarMailRecuperarContraseña() throws Exception
     {
         Map<String, String> datos = new HashMap<String, String>();
         datos.put("mail",mail);

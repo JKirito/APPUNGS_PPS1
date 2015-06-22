@@ -34,15 +34,21 @@ public class Recuperacion extends Activity
             @Override
             public void onClick(View v)
             {
-
+                Enviador enviador = new Enviador(txtMailContrasena.getText().toString());
+                try
+                {
+                    enviador.enviarMailRecuperarContraseña();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
 
-        btnCancelarEnvio.setOnClickListener(new View.OnClickListener()
-        {
+        btnCancelarEnvio.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //Creamos el Intent
                 Intent intent = new Intent(Recuperacion.this, Principal.class);
                 startActivity(intent);
