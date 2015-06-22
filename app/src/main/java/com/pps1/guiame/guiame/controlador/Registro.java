@@ -2,6 +2,7 @@ package com.pps1.guiame.guiame.controlador;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
+import com.pps1.guiame.guiame.persistencia.dao.Enviador;
 import com.pps1.guiame.guiame.persistencia.dao.Modificador;
 import com.pps1.guiame.guiame.persistencia.dao.Registrador;
 import com.pps1.guiame.guiame.persistencia.dao.Verificador;
@@ -190,6 +192,21 @@ public class Registro extends ActionBarActivity
                                             public void run() {
                                                 Toast.makeText(getApplicationContext(), "Se registró correctamente! :)", Toast.LENGTH_LONG).show();
                                                 aviso.dismiss(); //Cierra el aviso
+                                                /*if (android.os.Build.VERSION.SDK_INT > 8)
+                                                {
+                                                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                                                            .permitAll().build();
+                                                    StrictMode.setThreadPolicy(policy);
+                                                    Enviador enviador = new Enviador(mail.getText().toString());
+                                                    try
+                                                    {
+                                                        enviador.enviarMailBienvenida();
+                                                    }
+                                                    catch (Exception e)
+                                                    {
+                                                        e.printStackTrace();
+                                                    }
+                                                }*/
                                             }
                                         });
                                 finish();
@@ -208,6 +225,15 @@ public class Registro extends ActionBarActivity
                                         });
                                 aviso.dismiss();
                                 return;
+                            }
+                            Enviador enviador = new Enviador(nombreApellido.getText().toString(),mail.getText().toString());
+                            try
+                            {
+                                enviador.enviarMailBienvenida();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
                             }
                         }
                     });

@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp" >
 
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -15,44 +16,40 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
 
+
+        <TextView
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/hintContrasena"
+            android:id="@+id/textView" />
+
         <EditText
-            android:id="@+id/txtDni"
+            android:id="@+id/txtMailContrasena"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@color/white"
-            android:hint="@string/dni"
+            android:inputType="textEmailAddress"
+            android:hint="@string/mail"
             android:padding="10dp"
             android:singleLine="true"
             android:textColor="@color/input_login"
-            android:textColorHint="@color/hint_claro"
-            android:inputType="number"/>
+            android:textColorHint="@color/hint_claro"/>
 
-        <EditText
-            android:id="@+id/txtContraseña"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:background="@color/white"
-            android:hint="@string/contraseña"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:singleLine="true"
-            android:textColor="@color/input_login"
-            android:textColorHint="@color/hint_claro" />
 
         <Button
-            android:id="@+id/btnAceptar"
+            android:id="@+id/btnRecuperar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dip"
             android:background="@color/boton"
-            android:text="@string/aceptar"
+            android:text="@string/recuperarContrasena"
             android:textColor="@color/white" />
 
-
         <Button
-            android:id="@+id/btnCancelar"
+            android:id="@+id/btnCancelarEnvio"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dip"
@@ -61,12 +58,5 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/olvideContrasena"
-        android:id="@+id/lblOlvideContrasena"
-        android:layout_marginTop="20dip"
-        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

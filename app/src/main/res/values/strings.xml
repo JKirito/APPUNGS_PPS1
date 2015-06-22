@@ -20,6 +20,9 @@
     <string name="cancelar">Cancelar</string>
     <string name="buscar">Buscar</string>
     <string name="localizarCurso">Localizar</string>
+    <string name="olvideContrasena">Olvidé mi contraseña</string>
+    <string name="hintContrasena">Ingrese el mail con el que registró su cuenta de usuario:</string>
+    <string name="recuperarContrasena">Recuperar contraseña</string>
 
     <string name="iniciarSesion">Iniciar Sesion</string>
     <string name="ingresar">Ingresar</string>
@@ -49,5 +52,9 @@
     <string name="title_activity_curso_personalizado">Curso Personalizado</string>
     <string name="title_activity_nombre_curso_personalizado">Nombre personalizado</string>
     <string name="title_activity_perfil">Perfil</string>
+    <string name="title_activity_recuperacion">Recuperacion</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

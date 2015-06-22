@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pps1.guiame.guiame.R;
@@ -25,6 +26,7 @@ public class Ingreso extends ActionBarActivity
 
     private EditText txtDni;
     private EditText txtContraseña;
+    private TextView lblOlvideContraseña;
     private Button btnAceptar;
     private Button btnCancelar;
     Aviso aviso;
@@ -39,6 +41,7 @@ public class Ingreso extends ActionBarActivity
         //Obtenemos una referencia a los controles de la interfaz
         txtDni = (EditText)findViewById(R.id.txtDni);
         txtContraseña = (EditText)findViewById(R.id.txtContraseña);
+        lblOlvideContraseña = (TextView)findViewById(R.id.lblOlvideContrasena);
         btnAceptar = (Button)findViewById(R.id.btnAceptar);
         btnCancelar = (Button)findViewById(R.id.btnCancelar);
         aviso = new Aviso(this);
@@ -124,11 +127,25 @@ public class Ingreso extends ActionBarActivity
             }
         });
 
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        btnCancelar.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 //Creamos el Intent
                 Intent intent = new Intent(Ingreso.this, Principal.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        lblOlvideContraseña.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                //Creamos el Intent
+                Intent intent = new Intent(Ingreso.this, Recuperacion.class);
                 startActivity(intent);
                 finish();
             }
