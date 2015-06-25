@@ -221,6 +221,7 @@ public class CursoPersonalizado extends Activity
                                             "Hubo un error al obtener el aula, intente de nuevo.", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                    aviso.dismiss();
                     return;
                 } catch (Exception e) {
                     e.printStackTrace();

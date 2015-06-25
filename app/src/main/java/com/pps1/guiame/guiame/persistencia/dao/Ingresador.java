@@ -37,30 +37,21 @@ public class Ingresador extends ActionBarActivity
 
 
 
-    public void guardarDatosUsuario() throws Exception {
-        String response = this.resultadoJSON();
-        try
-        {
-            JSONArray json= new JSONArray(response);
-            String cantidadRegistrados= json.getJSONObject(0).getString("COUNT(*)");
-            String nombre = json.getJSONObject(0).getString("nombre");
-            int admin = json.getJSONObject(0).getInt("admin");
-            int id = json.getJSONObject(0).getInt("id");
-            String mail = json.getJSONObject(0).getString("mail");
-            nombre = nombre != null ? nombre.split(" ")[0] : "";
-
-                // Guardo datos en sessionManager
-                Perfil.setUsuario(dni);
-                Perfil.setPassword(pass);
-                Perfil.setNombre(nombre);
-                Perfil.setAdmin(admin);
-                Perfil.setId(id);
-                Perfil.setMail(mail);
-        }
-        catch (Exception e)
-        {
-            // TODO: handle exception
-        }
+    public void guardarDatosUsuario(String datosUsuarioJSON) throws Exception {
+        JSONArray json = new JSONArray(datosUsuarioJSON);
+        //String cantidadRegistrados= json.getJSONObject(0).getString("COUNT(*)");
+        String nombre = json.getJSONObject(0).getString("nombre");
+        int admin = json.getJSONObject(0).getInt("admin");
+        int id = json.getJSONObject(0).getInt("id");
+        String mail = json.getJSONObject(0).getString("mail");
+        nombre = nombre != null ? nombre.split(" ")[0] : "";
+        // Guardo datos en sessionManager
+        Perfil.setUsuario(dni);
+        Perfil.setPassword(pass);
+        Perfil.setNombre(nombre);
+        Perfil.setAdmin(admin);
+        Perfil.setId(id);
+        Perfil.setMail(mail);
     }
 
     public String resultadoJSON() throws Exception {

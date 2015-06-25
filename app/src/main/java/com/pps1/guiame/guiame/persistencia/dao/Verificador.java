@@ -3,7 +3,7 @@ package com.pps1.guiame.guiame.persistencia.dao;
 
 import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
-import com.pps1.guiame.guiame.utils.MailValidator;
+import com.pps1.guiame.guiame.utils.ValidadorMail;
 
 import org.json.JSONArray;
 
@@ -70,7 +70,7 @@ public class Verificador
             errores.add(MSJ_DNI_INVALIDO_SOLONUM);
         }
 
-        if(mail == null || !MailValidator.validateEmail(mail))
+        if(mail == null || !ValidadorMail.validarEmail(mail))
         {
             errores.add(MSJ_MAIL_INVALIDO);
         }
@@ -98,10 +98,11 @@ public class Verificador
             {
                 Map<String, String> datos = new HashMap<String, String>();
                 datos.put("dni",dni);
+                datos.put("mail",mail);
                 String result = Conexion.enviarPost(datos, PHP_NAME_VERIFICARUSUARIO);
                 if(isUsuarioExistente(result))
                 {
-                    errores.add("Ya existe un usuario con ese dni");
+                    errores.add("Ya existe un usuario con ese dni o mail");
                 }
             }
         }

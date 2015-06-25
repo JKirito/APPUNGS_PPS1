@@ -1,7 +1,5 @@
 package com.pps1.guiame.guiame.controlador;
 
-import android.util.Log;
-
 import com.pps1.guiame.guiame.dto.Curso;
 
 import java.util.ArrayList;

@@ -20,6 +20,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
+import java.net.ConnectException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +81,15 @@ public class Conexion
                 response = httpClient.execute(httpPost, localContext);
             } catch (UnknownHostException e) {
                 throw new UnknownHostException("No se ha podido conectar al servidor");
+            } catch (ConnectException ee) {
+                throw new ConnectException("Parece que la conexión está \"aalgo\" lenta! :(");
             }
 
             HttpEntity entity = response.getEntity();
             resultado = EntityUtils.toString(entity, "UTF-8");
+            if(resultado.contains("!DOCTYPE html PUBLIC")) {
+                throw new Exception("Se ha producido un error al acceder al servidor. Contacte al soporte técnico para detalles");
+            }
             Log.d("RESULTADO",resultado);
 
         return resultado;

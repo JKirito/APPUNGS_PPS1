@@ -3,7 +3,7 @@ package com.pps1.guiame.guiame.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MailValidator
+public class ValidadorMail
 {
 
     private static final String PATTERN_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -15,7 +15,7 @@ public class MailValidator
      * @param email email for validation
      * @return true valid email, otherwise false
      */
-    public static boolean validateEmail(String email)
+    public static boolean validarEmail(String email)
     {
 
         // Compiles the given regular expression into a pattern.

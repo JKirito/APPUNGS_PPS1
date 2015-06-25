@@ -30,7 +30,7 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa);
+        setContentView(R.layout.activity_mapa_aula);
         Configuracion.context = this;
 
         btnModulos = (Button)findViewById(R.id.btnModulos);
@@ -69,7 +69,7 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
             //Agrego marcador de la UNGS_ENTRADA_PPAL
             mapa.addMarker(new MarkerOptions()
                     .position(CoordenadasEdificiosUNGS.UNGS_ENTRADA_PPAL)
-                    .title("UNGS_ENTRADA_PPAL")
+                    .title("UNGS")
                     .snippet("Entrada Principal")
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ungs)).anchor(0.2f, 0.2f));
 

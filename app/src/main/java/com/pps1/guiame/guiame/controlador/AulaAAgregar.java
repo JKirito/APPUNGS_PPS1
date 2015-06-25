@@ -62,23 +62,20 @@ public class AulaAAgregar extends ActionBarActivity
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
                 final Aula aulaSeleccionada = (Aula) listaAulas.getAdapter().getItem(position);
-                //final Location posicion = getPosicionAdmin();
-                //aulaSeleccionada.setLatitud(posicion.getLatitude());
-                //aulaSeleccionada.setLongitud(posicion.getLongitude());
-
-                Toast.makeText(getApplicationContext(),"Posicionando Aula...", Toast.LENGTH_SHORT).show();
+                aviso.setMessage("Buscando...");
+                aviso.show();
 
                 /*
                 //Verifico que el aula esté bien y la ubico en el mapa
                 if(aulaSeleccionada == null || aulaSeleccionada.getLatitud() == null || aulaSeleccionada.getLongitud() == null)
                 {
-                    Log.d("numeroAula", aulaSeleccionada.getNumAula());
-                    String msj = aulaSeleccionada == null ? "No se ha podido localizar el aula" : "No se tiene su ubicación :(";
+                    String msj = aulaSeleccionada == null ? "AULA NUL!!!" : "aula existe, sólo que no se tiene su ubicación :(";
                     Toast.makeText(getApplicationContext(), msj, Toast.LENGTH_SHORT).show();
                     aviso.dismiss();
                     return;
                 }
                 */
+
 
                 Bundle bundleBuscAula = new Bundle();
                 bundleBuscAula.putSerializable("Aula", aulaSeleccionada);

@@ -68,8 +68,8 @@ public class Ingreso extends ActionBarActivity
                     {
                         try
                         {
-                            String resultados = ingresador.resultadoJSON();
-                            final List<String> errores = verificador.validarUsuario(resultados);
+                            String datosUsurioJSON = ingresador.resultadoJSON();
+                            final List<String> errores = verificador.validarUsuario(datosUsurioJSON);
 
                             if(errores.size() > 0)
                             {
@@ -86,7 +86,7 @@ public class Ingreso extends ActionBarActivity
                                 return;
                             }
 
-                            ingresador.guardarDatosUsuario();
+                            ingresador.guardarDatosUsuario(datosUsurioJSON);
                             final ArrayList<Curso> cursos = new CursoDAO().getListadoCursosUsuario(Perfil.getId());
                             if(!cursos.isEmpty())
                             {
