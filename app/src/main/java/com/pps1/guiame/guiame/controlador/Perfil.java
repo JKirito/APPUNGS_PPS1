@@ -16,6 +16,7 @@ public class Perfil
     private static int admin;
     private static int id;
     private static List<Curso> cursosUsuario;
+    private static String nombreYApellido;
 
 
     public static String getUsuario()
@@ -44,6 +45,14 @@ public class Perfil
 
     public static void setNombre(String nombre) {
         Perfil.nombre = nombre;
+    }
+
+    public static String getNombreYApellido() {
+        return nombreYApellido;
+    }
+
+    public static void setNombreYApellido(String nombreYApellido) {
+        Perfil.nombreYApellido = nombreYApellido;
     }
 
     public static void setAdmin(int admin){
@@ -143,4 +152,5 @@ public class Perfil
             return true;
         return false;
     }
+
 }

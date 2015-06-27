@@ -52,7 +52,7 @@ public class Registro extends ActionBarActivity
         if(Perfil.isUserOn())
         {
             setTitle("Modificacion de perfil");
-            nombreApellido.setText(Perfil.getNombre());
+            nombreApellido.setText(Perfil.getNombreYApellido());
             dni.setText(Perfil.getUsuario());
             mail.setText(Perfil.getMail());
             pass.setText(Perfil.getPassword());
@@ -112,7 +112,6 @@ public class Registro extends ActionBarActivity
 
                                     return;
                                 }
-
                                 modificador.actualizarDatos();
                                 Perfil.logout();
 
@@ -152,6 +151,7 @@ public class Registro extends ActionBarActivity
                     final Registrador registrador = new Registrador(nombreApellido.getText().toString(), dni.getText().toString(), mail.getText().toString(), pass.getText().toString(), pass2.getText().toString());
                     aviso.setMessage("Registrando usuario...");
                     aviso.show();
+                    final boolean[] registroOK = {false};
                     Thread thread = new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -183,6 +183,8 @@ public class Registro extends ActionBarActivity
 
                                 registrador.registrarDatos();
 
+                                registroOK[0] = true;
+
                                 Intent intent = new Intent(Registro.this, Ingreso.class);
                                 startActivity(intent);
                                 runOnUiThread(
@@ -208,6 +210,11 @@ public class Registro extends ActionBarActivity
                                             }
                                         });
                                 aviso.dismiss();
+                                return;
+                            }
+                            //Si hubo un problema al registrar usuario, que no mande mail
+                            if(!registroOK[0])
+                            {
                                 return;
                             }
                             Enviador enviador = new Enviador(nombreApellido.getText().toString(),mail.getText().toString());

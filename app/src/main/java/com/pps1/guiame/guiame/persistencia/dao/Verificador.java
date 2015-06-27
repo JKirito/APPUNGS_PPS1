@@ -48,11 +48,11 @@ public class Verificador
 
     public static List<String> validarDatosRegistro() throws Exception {
         List<String> errores = new ArrayList<String>();
-        if(nombreYApellido == null || nombreYApellido.replaceAll("/s","").length() == 0)
+        if(nombreYApellido == null || nombreYApellido.replaceAll("\\s","").length() == 0)
         {
             errores.add(MSJ_NOM_APELLINVALIDO);
         }
-        if(nombreYApellido != null && nombreYApellido.replaceAll("/s","").length() <= 5)
+        if(nombreYApellido != null && nombreYApellido.replaceAll("\\s","").length() <= 5)
         {
             errores.add(MSJ_NOM_APELL_CORTO);
         }

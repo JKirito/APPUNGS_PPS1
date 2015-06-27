@@ -65,7 +65,7 @@ public class Recuperacion extends Activity
                                             @Override
                                             public void run() {
                                                 aviso.dismiss();
-                                                Utils.verDetallesInfo("Hey!", "El mail ingresado no existe!", builder);
+                                                Utils.verDetallesInfo("Recorcholis!", "El mail ingresado no existe!", builder);
                                             }
                                         });
 

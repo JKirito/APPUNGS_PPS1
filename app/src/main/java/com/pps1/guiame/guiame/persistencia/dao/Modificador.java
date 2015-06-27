@@ -1,7 +1,5 @@
 package com.pps1.guiame.guiame.persistencia.dao;
 
-import android.util.Log;
-
 import com.pps1.guiame.guiame.controlador.Perfil;
 import com.pps1.guiame.guiame.persistencia.conexion.Conexion;
 
@@ -35,10 +33,6 @@ public class Modificador {
         datos.put("dni", dni);
         datos.put("contrasena", pass);
 
-        Log.d("mail!!!!!!", mail);
-        Log.d("dni!!!!!!", dni);
-        Log.d("contrasena!!!!!!", pass);
-
-        String result = Conexion.enviarPost(datos, PHP_NAME_MODIFICADOR);
+        Conexion.enviarPost(datos, PHP_NAME_MODIFICADOR);
     }
 }

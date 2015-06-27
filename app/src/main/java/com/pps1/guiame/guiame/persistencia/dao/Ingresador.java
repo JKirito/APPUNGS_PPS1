@@ -40,15 +40,16 @@ public class Ingresador extends ActionBarActivity
     public void guardarDatosUsuario(String datosUsuarioJSON) throws Exception {
         JSONArray json = new JSONArray(datosUsuarioJSON);
         //String cantidadRegistrados= json.getJSONObject(0).getString("COUNT(*)");
-        String nombre = json.getJSONObject(0).getString("nombre");
+        String nombreYApellido = json.getJSONObject(0).getString("nombre");
         int admin = json.getJSONObject(0).getInt("admin");
         int id = json.getJSONObject(0).getInt("id");
         String mail = json.getJSONObject(0).getString("mail");
-        nombre = nombre != null ? nombre.split(" ")[0] : "";
+        String nombre = (nombreYApellido != null && nombreYApellido.split(" ").length > 1) ? nombreYApellido.split(" ")[0] : nombreYApellido != null ? nombreYApellido : "";
         // Guardo datos en sessionManager
         Perfil.setUsuario(dni);
         Perfil.setPassword(pass);
         Perfil.setNombre(nombre);
+        Perfil.setNombreYApellido(nombreYApellido);
         Perfil.setAdmin(admin);
         Perfil.setId(id);
         Perfil.setMail(mail);

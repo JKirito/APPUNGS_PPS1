@@ -3,7 +3,6 @@ package com.pps1.guiame.guiame.controlador;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -64,8 +63,6 @@ public class Principal extends Activity
             @Override
             public void onClick(View v)
             {
-                Log.d("USER", Perfil.getUsuario() + "");
-                Log.d("PASSW", Perfil.getPassword() + "");
                 // si NO está logeado, que vaya a la pantalla de ingreso
                 if(Perfil.getUsuario() == null || Perfil.getUsuario().isEmpty() ||
                         Perfil.getPassword() == null || Perfil.getPassword().isEmpty())
