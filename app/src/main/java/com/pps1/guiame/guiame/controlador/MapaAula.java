@@ -2,8 +2,10 @@ package com.pps1.guiame.guiame.controlador;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pps1.guiame.guiame.Manifest;
 import com.pps1.guiame.guiame.R;
 import com.pps1.guiame.guiame.datos.CoordenadasEdificiosUNGS;
 import com.pps1.guiame.guiame.dto.Aula;
@@ -41,7 +44,16 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
         mapa = ((SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map)).getMap();
         mapa.setMapType(GoogleMap.MAP_TYPE_SATELLITE); //tipo de mapa, elegido: satelital
-        mapa.setMyLocationEnabled(true); //visualizacion de la posicion con un triangulo azul
+        try {
+            mapa.setMyLocationEnabled(true); //visualizacion de la posicion con un triangulo azul
+        } catch (SecurityException e) {
+            Log.e("PERMISSION_EXCEPTION", "PERMISSION_NOT_GRANTED");
+            Toast.makeText(getApplicationContext(),
+                    "No tiene los permisos suficientes", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         mapa.getUiSettings().setZoomControlsEnabled(true); //configurar las acciones del interfaz de usuario
         mapa.getUiSettings().setCompassEnabled(true);
         CameraPosition posicionCamara = new CameraPosition.Builder()
@@ -166,7 +178,8 @@ public class MapaAula extends FragmentActivity implements GoogleMap.OnMapClickLi
             this.verInfoModulos = true;
             mapa.clear();
             this.btnModulos.setText(getString(R.string.verModulos));
-            agregarMarkerAula(latLngAula, aula);
+            if(latLngAula != null)
+                agregarMarkerAula(latLngAula, aula);
         }
 
     }

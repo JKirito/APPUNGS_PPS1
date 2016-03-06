@@ -71,36 +71,40 @@
             android:value="@integer/google_play_services_version" />
         <!-- key release -->
         <!--
-                   <meta-data
-                   android:name="com.google.android.maps.v2.API_KEY"
-                   android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />
+                           <meta-data
+                           android:name="com.google.android.maps.v2.API_KEY"
+                           android:value="AIzaSyCkYQUBvJonEc__n8ZFgLIjOCfPDju1BQs" />
         -->
 
 
-        <!-- key debug -->
+                <!-- key debug -->
 
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY"
+                    android:value="AIzaSyBFtNLNGSiRvn0SPVnuGoWwLXoP6zwjcHs" />
 
-        <activity
-            android:name=".controlador.AulaAAgregar"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_agregar_aula" >
-        </activity>
-        <activity
-            android:name=".controlador.CursoPersonalizado"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_curso_personalizado" >
-        </activity>
-        <activity
-            android:name=".controlador.NombreCursoPersonalizado"
-            android:label="@string/title_activity_nombre_curso_personalizado" >
-        </activity>
-        <activity
-            android:name=".controlador.MapaAula"
-            android:label="@string/title_activity_mapa" >
-        </activity>
-    </application>
+                <activity
+                    android:name=".controlador.AulaAAgregar"
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:label="@string/title_activity_agregar_aula" >
+                </activity>
+                <activity
+                    android:name=".controlador.CursoPersonalizado"
+                    android:configChanges="orientation|keyboardHidden|screenSize"
+                    android:label="@string/title_activity_curso_personalizado" >
+                </activity>
+                <activity
+                    android:name=".controlador.NombreCursoPersonalizado"
+                    android:label="@string/title_activity_nombre_curso_personalizado" >
+                </activity>
+                <activity
+                    android:name=".controlador.MapaAula"
+                    android:label="@string/title_activity_mapa" >
+                </activity>
+                <activity
+                    android:name=".controlador.Recuperacion"
+                    android:label="@string/title_activity_mapa" >
+                </activity>
+            </application>
 
-</manifest>
+        </manifest>
