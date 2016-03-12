@@ -2,6 +2,7 @@
     <string name="app_name">Guiame</string>
     <string name="Salir">Salir</string>
     <string name="AgregarAula">Agregar Aula</string>
+    <string name="DescargarInfo">Descargar Información</string>
 
     <string name="dni">Dni</string>
     <string name="mail">Mail</string>
@@ -54,5 +55,6 @@
     <string name="title_activity_perfil">Perfil</string>
     <string name="title_activity_recuperacion">Recuperacion</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_descarga_info">DescargaInfo</string>
 
 </resources>

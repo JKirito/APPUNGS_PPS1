@@ -23,6 +23,7 @@ public class Principal extends Activity
     private Button btnIngresar;
     private Button btnBuscarCurso;
     private Button btnAgregarAula;
+    private Button btnDescargarInfo;
     private Button btnSalir;
 
     @Override
@@ -36,6 +37,7 @@ public class Principal extends Activity
         btnIngresar = (Button)findViewById(R.id.btnIngresar);
         btnBuscarCurso = (Button)findViewById(R.id.btnBuscar);
         btnAgregarAula = (Button)findViewById(R.id.btnAgregarAula);
+        btnDescargarInfo = (Button)findViewById(R.id.btnDescargarInfo);
         btnSalir = (Button) findViewById((R.id.btnSalir));
 
         aviso = new Aviso(this);
@@ -43,17 +45,15 @@ public class Principal extends Activity
         aviso.setCanceledOnTouchOutside(false);
         habilitarBotones();
 
-        btnRegistrarse.setOnClickListener(new View.OnClickListener()
-        {
+        btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //Creamos el Intent
                 Intent intent =
                         new Intent(Principal.this, Registro.class);
                 startActivity(intent);
                 finish(); //Agregamos esto para hacer que se cierre este activity al crear otro,
-                          // sino quedan solapados
+                // sino quedan solapados
 
             }
         });
@@ -137,6 +137,19 @@ public class Principal extends Activity
             tr.start();
             }
         });
+
+        btnDescargarInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Creamos el Intent
+                Intent intent =
+                        new Intent(Principal.this, DescargaInfo.class);
+                startActivity(intent);
+                finish(); //Agregamos esto para hacer que se cierre este activity al crear otro,
+                // sino quedan solapados
+            }
+        });
+
         btnSalir.setOnClickListener(new View.OnClickListener()
         {
             @Override
